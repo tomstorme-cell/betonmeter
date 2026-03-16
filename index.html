@@ -2,3092 +2,777 @@
 <html lang="nl">
 <head>
   <meta charset="UTF-8">
-  <title>Betonmeter – Overzicht gemeenten</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Betonmeter Vlaanderen – Ruimtebeslag &amp; Verharding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a2e; background: #f5f7fa; padding: 32px 24px; }
-    .page-header { background: linear-gradient(135deg,#1a3a5c,#2e6b9e); color:#fff; padding:28px 32px; border-radius:12px; margin-bottom:28px; }
-    .page-header h1 { font-size: 1.7rem; }
-    .page-header p  { opacity:.85; margin-top:6px; font-size:.95rem; }
-    .brv-pills { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
-    .brv-pill  { padding:5px 12px; border-radius:20px; font-size:11.5px; font-weight:600; }
-    .p-rood    { background:#fee2e2; color:#991b1b; }
-    .p-oranje  { background:#fef3c7; color:#92400e; }
-    .p-groen   { background:#d1fae5; color:#065f46; }
-    .controls  { margin-bottom:16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-    input[type=search] { padding:8px 14px; border:1px solid #cbd5e1; border-radius:8px; font-size:14px; width:280px; }
-    .count { color:#64748b; font-size:13px; }
-    table  { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 2px 8px rgba(0,0,0,.07); }
-    thead th { background:#1a3a5c; color:#fff; padding:10px 14px; text-align:left; font-size:12.5px; white-space:nowrap; }
-    tbody tr:nth-child(even) { background:#f8fafc; }
-    tbody tr:hover { background:#eff6ff; }
-    tbody td { padding:9px 14px; border-bottom:1px solid #e2e8f0; font-size:13px; }
-    a  { color:#2e6b9e; text-decoration:none; }
-    a:hover { text-decoration:underline; }
-    .badge { display:inline-block; padding:2px 9px; border-radius:12px; font-size:11px; font-weight:600; }
-    .badge-goed   { background:#d1fae5; color:#065f46; }
-    .badge-matig  { background:#fef3c7; color:#92400e; }
-    .badge-slecht { background:#fee2e2; color:#991b1b; }
-    .badge-neutral{ background:#e2e8f0; color:#475569; }
-    .footer { text-align:center; color:#94a3b8; font-size:12px; margin-top:28px; }
-    .note { background:#eff6ff; border-left:3px solid #2e6b9e; padding:12px 16px; border-radius:0 8px 8px 0; margin-bottom:20px; font-size:13px; color:#1e3a5f; line-height:1.6; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', Arial, sans-serif; font-size: 15px; color: #1a1a2e; background: #f5f7fa; overflow-x: hidden; }
+
+    /* ── NAVIGATION ─────────────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      padding: 18px 40px; display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.3s, box-shadow 0.3s, padding 0.3s;
+      background: transparent;
+    }
+    .nav.solid {
+      background: #fff;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+      padding: 12px 40px;
+    }
+    .nav-logo { display: flex; flex-direction: column; }
+    .nav-logo .logo-main {
+      font-size: 1.15rem; font-weight: 800; color: #fff; letter-spacing: -0.5px;
+      transition: color 0.3s;
+    }
+    .nav.solid .logo-main { color: #0f1e30; }
+    .nav-logo .logo-sub {
+      font-size: 0.65rem; font-weight: 600; color: rgba(255,255,255,0.65);
+      letter-spacing: 1.5px; text-transform: uppercase; margin-top: 1px;
+      transition: color 0.3s;
+    }
+    .nav.solid .logo-sub { color: #64748b; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 600; text-decoration: none;
+      color: rgba(255,255,255,0.88); letter-spacing: 0.5px; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav.solid .nav-links a { color: #1a3a5c; }
+    .nav-links a:hover { color: #00d084; }
+    .nav-links a.nav-cta {
+      background: #00d084; color: #0f1e30; padding: 7px 18px; border-radius: 6px;
+      font-weight: 700;
+    }
+    .nav.solid .nav-links a.nav-cta { background: #00d084; color: #0f1e30; }
+    .nav-links a.nav-cta:hover { background: #00b872; color: #fff; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px; background: #fff;
+      border-radius: 2px; transition: background 0.3s;
+    }
+    .nav.solid .hamburger span { background: #0f1e30; }
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: #0f1e30; z-index: 999; flex-direction: column;
+      align-items: center; justify-content: center; gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 1.3rem; font-weight: 700; color: #fff; text-decoration: none;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .mobile-menu a:hover { color: #00d084; }
+    .mobile-close {
+      position: absolute; top: 20px; right: 28px; font-size: 2rem; color: #fff;
+      background: none; border: none; cursor: pointer; line-height: 1;
+    }
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── HERO ─────────────────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh; background: #0f1e30; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 120px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+    .hero-inner { max-width: 820px; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block; background: rgba(0,208,132,0.15); color: #00d084;
+      border: 1px solid rgba(0,208,132,0.35); border-radius: 20px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 6px 16px; margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 900;
+      line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px;
+    }
+    .hero h1 span { color: #00d084; }
+    .hero-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.15rem); color: rgba(255,255,255,0.75);
+      line-height: 1.7; max-width: 640px; margin: 0 auto 48px;
+    }
+
+    /* Stat counters */
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+      margin-bottom: 52px;
+    }
+    @media (max-width: 700px) {
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    .stat-block {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 12px; padding: 22px 16px;
+    }
+    .stat-num {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 900; color: #00d084;
+      line-height: 1;
+    }
+    .stat-lbl { font-size: 0.72rem; color: rgba(255,255,255,0.6); margin-top: 6px; line-height: 1.4; }
+
+    /* Hero search */
+    .hero-search-wrap { position: relative; max-width: 560px; margin: 0 auto; }
+    .hero-search {
+      width: 100%; padding: 18px 24px; font-size: 1rem; font-family: 'Montserrat', sans-serif;
+      border: 2px solid rgba(255,255,255,0.20); border-radius: 12px;
+      background: rgba(255,255,255,0.08); color: #fff; outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .hero-search::placeholder { color: rgba(255,255,255,0.45); }
+    .hero-search:focus { border-color: #00d084; background: rgba(255,255,255,0.12); }
+    .autocomplete-dropdown {
+      position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+      background: #fff; border-radius: 10px; box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      max-height: 280px; overflow-y: auto; z-index: 100; display: none;
+    }
+    .autocomplete-dropdown.open { display: block; }
+    .ac-item {
+      padding: 12px 18px; cursor: pointer; font-size: 0.9rem;
+      color: #1a3a5c; display: flex; justify-content: space-between; align-items: center;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .ac-item:last-child { border-bottom: none; }
+    .ac-item:hover { background: #f0fdf4; color: #00a166; }
+    .ac-item .ac-perc { font-size: 0.78rem; color: #64748b; font-weight: 600; }
+
+    /* ── WAT IS BETONMETER ────────────────────────────────────────────────── */
+    .section { padding: 96px 24px; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: #00d084; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800;
+      color: #0f1e30; line-height: 1.15; margin-bottom: 48px;
+    }
+    .cards-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    @media (max-width: 860px) { .cards-3 { grid-template-columns: 1fr; } }
+    .info-card {
+      background: #fff; border-radius: 14px; padding: 32px 28px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06); border-top: 4px solid #00d084;
+    }
+    .info-card .card-icon { font-size: 2.2rem; margin-bottom: 16px; }
+    .info-card h3 { font-size: 1.05rem; font-weight: 700; color: #0f1e30; margin-bottom: 10px; }
+    .info-card p { font-size: 0.88rem; color: #475569; line-height: 1.75; }
+
+    /* ── 4 THEMA'S ─────────────────────────────────────────────────────────── */
+    .section-gray { background: #f5f7fa; }
+    .cards-2x2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    @media (max-width: 700px) { .cards-2x2 { grid-template-columns: 1fr; } }
+    .thema-card {
+      background: #fff; border-radius: 14px; padding: 32px 28px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      border-top: 5px solid #00d084;
+      display: flex; flex-direction: column;
+    }
+    .thema-card .thema-top { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+    .thema-card .thema-icon { font-size: 2rem; }
+    .thema-card h3 { font-size: 1.1rem; font-weight: 800; color: #0f1e30; }
+    .thema-card p { font-size: 0.88rem; color: #475569; line-height: 1.7; flex: 1; }
+    .thema-card .thema-link {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 20px;
+      font-size: 0.82rem; font-weight: 700; text-decoration: none;
+      color: #0f1e30; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .thema-card .thema-link:hover { opacity: 0.7; }
+
+    /* ── VLAANDEREN IN CIJFERS ────────────────────────────────────────────── */
+    .section-dark { background: #1a3a5c; color: #fff; }
+    .section-dark .section-tag { color: #00d084; }
+    .section-dark .section-title { color: #fff; }
+    .cijfers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    @media (max-width: 860px) { .cijfers-grid { grid-template-columns: 1fr; } }
+    .cijfer-block {
+      background: rgba(255,255,255,0.06); border-radius: 14px; padding: 32px 24px;
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+    .cijfer-block h4 {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 18px;
+    }
+    .cijfer-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .cijfer-row:last-child { border-bottom: none; }
+    .cijfer-row .gem-naam { font-size: 0.88rem; font-weight: 600; color: #fff; }
+    .cijfer-row .gem-perc { font-size: 0.95rem; font-weight: 800; }
+    .cijfer-row .gem-perc.high { color: #ff6900; }
+    .cijfer-row .gem-perc.low { color: #00d084; }
+    .cijfer-row .gem-perc.avg { color: #0693e3; }
+    .cijfer-block .big-avg {
+      font-size: 3.5rem; font-weight: 900; color: #0693e3;
+      line-height: 1; margin: 8px 0 6px;
+    }
+    .cijfer-block .big-avg-lbl { font-size: 0.85rem; color: rgba(255,255,255,0.65); }
+
+    /* ── BRV REDUCTIETRAJECT ─────────────────────────────────────────────── */
+    .timeline {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 16px; margin-bottom: 48px; position: relative;
+    }
+    @media (max-width: 700px) { .timeline { flex-direction: column; } }
+    .timeline::before {
+      content: '';
+      position: absolute; top: 48px; left: 80px; right: 80px; height: 3px;
+      background: linear-gradient(to right, #cf2e2e, #ff6900, #00d084);
+      z-index: 0;
+    }
+    @media (max-width: 700px) { .timeline::before { display: none; } }
+    .milestone { flex: 1; text-align: center; position: relative; z-index: 1; }
+    .milestone-dot {
+      width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; border: 4px solid #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    }
+    .milestone-dot.red { background: #cf2e2e; }
+    .milestone-dot.orange { background: #ff6900; }
+    .milestone-dot.green { background: #00d084; }
+    .milestone-pill {
+      display: inline-block; padding: 5px 16px; border-radius: 20px;
+      font-size: 0.85rem; font-weight: 700; margin-bottom: 10px;
+    }
+    .milestone-pill.red { background: #fee2e2; color: #991b1b; }
+    .milestone-pill.orange { background: #fff3e0; color: #b54800; }
+    .milestone-pill.green { background: #d1fae5; color: #065f46; }
+    .milestone h4 { font-size: 1rem; font-weight: 800; color: #0f1e30; margin-bottom: 6px; }
+    .milestone p { font-size: 0.82rem; color: #64748b; line-height: 1.55; max-width: 200px; margin: 0 auto; }
+    .brv-progress-wrap { margin-top: 16px; }
+    .brv-progress-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.78rem; font-weight: 600; color: #64748b; margin-bottom: 8px;
+    }
+    .brv-progress-bar {
+      height: 14px; background: #e2e8f0; border-radius: 7px; overflow: hidden;
+    }
+    .brv-progress-fill {
+      height: 100%; width: 50%;
+      background: linear-gradient(to right, #cf2e2e, #ff6900, #00d084);
+      border-radius: 7px;
+    }
+
+    /* ── GEMEENTEN GRID ──────────────────────────────────────────────────── */
+    .section-light { background: #f0f4f8; }
+    .search-bar-wrap { max-width: 540px; margin: 0 auto 32px; position: relative; }
+    .search-bar-main {
+      width: 100%; padding: 16px 20px; font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem; border: 2px solid #cbd5e1; border-radius: 10px;
+      outline: none; transition: border-color 0.2s;
+    }
+    .search-bar-main:focus { border-color: #00d084; }
+    .alpha-filter {
+      display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+      margin-bottom: 28px;
+    }
+    .alpha-btn {
+      padding: 5px 11px; border: 1px solid #cbd5e1; border-radius: 6px;
+      background: #fff; font-family: 'Montserrat', sans-serif;
+      font-size: 0.78rem; font-weight: 600; cursor: pointer; color: #475569;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .alpha-btn:hover, .alpha-btn.active {
+      background: #00d084; color: #0f1e30; border-color: #00d084;
+    }
+    .gem-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px;
+    }
+    .gem-card {
+      background: #fff; border-radius: 10px; padding: 18px 16px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06); text-decoration: none;
+      display: flex; flex-direction: column; gap: 6px;
+      border-left: 4px solid #e2e8f0; transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .gem-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-color: #00d084; }
+    .gem-card .gem-naam { font-weight: 700; font-size: 0.88rem; color: #0f1e30; }
+    .gem-card .gem-meta { display: flex; align-items: center; gap: 8px; }
+    .gem-card .gem-verh { font-size: 0.78rem; color: #475569; font-weight: 600; }
+    .gem-badge {
+      display: inline-block; padding: 1px 7px; border-radius: 8px;
+      font-size: 0.68rem; font-weight: 700;
+    }
+    .gem-badge.goed { background: #d1fae5; color: #065f46; }
+    .gem-badge.matig { background: #fef3c7; color: #92400e; }
+    .gem-badge.slecht { background: #fee2e2; color: #991b1b; }
+    .gem-badge.neutral { background: #e2e8f0; color: #475569; }
+    .gem-hidden { display: none; }
+    .no-results { text-align: center; color: #94a3b8; padding: 40px; font-style: italic; display: none; }
+    .grid-count { text-align: center; margin-bottom: 16px; color: #64748b; font-size: 0.85rem; font-weight: 600; }
+
+    /* ── FOOTER ─────────────────────────────────────────────────────────── */
+    .footer { background: #0f1e30; color: rgba(255,255,255,0.7); padding: 56px 24px 36px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-top { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 32px; margin-bottom: 40px; }
+    .footer-logo .logo-main { font-size: 1.1rem; font-weight: 800; color: #fff; }
+    .footer-logo .logo-sub { font-size: 0.65rem; color: rgba(255,255,255,0.45); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 3px; }
+    .footer-logo .logo-tagline { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin-top: 10px; max-width: 280px; line-height: 1.6; }
+    .footer-links h5 { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 14px; }
+    .footer-links a { display: block; font-size: 0.88rem; color: rgba(255,255,255,0.7); text-decoration: none; margin-bottom: 8px; }
+    .footer-links a:hover { color: #00d084; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+    .footer-bottom .copy { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+
+    /* ── UTILITIES ───────────────────────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; }
+    .mt-0 { margin-top: 0 !important; }
   </style>
 </head>
 <body>
-  <div class="page-header">
-    <h1>Betonmeter – Overzicht Vlaamse Gemeenten</h1>
-    <p>Gemeenterapport ruimtebeslag en verharding · Referentiejaar 2022 · 300 gemeenten</p>
-    <div class="brv-pills">
-      <span class="brv-pill p-rood">Historisch (2013–2015): 6 ha/dag</span>
-      <span class="brv-pill p-oranje">BRV-doel 2025: max. 3 ha/dag</span>
-      <span class="brv-pill p-groen">BRV-doel 2040: 0 ha/dag (ruimteneutraliteit)</span>
+
+<!-- ══ NAVIGATION ══════════════════════════════════════════════════════════ -->
+<nav class="nav" id="mainNav">
+  <div class="nav-logo">
+    <span class="logo-main">Betonmeter Vlaanderen</span>
+    <span class="logo-sub">DRUM &times; HOGENT</span>
+  </div>
+  <div class="nav-links">
+    <a href="#">Betontoestand</a>
+    <a href="#">Betonevolutie</a>
+    <a href="#">Betonrisico</a>
+    <a href="#">Reductieopgave</a>
+    <a href="gemeenten.html" class="nav-cta">Gemeenten</a>
+  </div>
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu openen">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">&times;</button>
+  <a href="#">Betontoestand</a>
+  <a href="#">Betonevolutie</a>
+  <a href="#">Betonrisico</a>
+  <a href="#">Reductieopgave</a>
+  <a href="gemeenten.html">Gemeenten</a>
+</div>
+
+<!-- ══ HERO ════════════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">300 Vlaamse Gemeenten &middot; Referentiejaar 2022</div>
+    <h1>Betonmeter <span>Vlaanderen</span></h1>
+    <p class="hero-subtitle">
+      300 gemeentelijke rapporten over ruimtebeslag, verharding en de weg naar ruimteneutraliteit
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat-block">
+        <div class="stat-num" data-target="33" data-suffix="%">0%</div>
+        <div class="stat-lbl">Aandeel ruimtebeslag Vlaanderen</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" data-target="6" data-suffix="×">0×</div>
+        <div class="stat-lbl">Hoger dan EU-gemiddelde (6%)</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" data-target-text="57.000 ha">57.000 ha</div>
+        <div class="stat-lbl">Totaal ruimtebeslag-risico</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num" data-target="2040" data-suffix="">0</div>
+        <div class="stat-lbl">BRV-doel: ruimteneutraliteit</div>
+      </div>
+    </div>
+
+    <div class="hero-search-wrap">
+      <input type="search" class="hero-search" id="heroSearch" placeholder="&#128269; Zoek jouw gemeente…" autocomplete="off">
+      <div class="autocomplete-dropdown" id="heroDropdown"></div>
     </div>
   </div>
+</section>
 
-  <div class="note">
-    Vlaanderen telt 33% ruimtebeslag – een Europees record tegenover het EU-gemiddelde van 6% (EEA, 2019).
-    Ca. 37% van dit ruimtebeslag ligt in zachte bestemmingen (zonevreemd).
-    Klik op een gemeente voor het volledige rapport.
-    Bronnen: HOGENT Rapport 1, 4 &amp; 6 (PWO-project Beleidsrelevante cartografische instrumenten voor een duurzame ruimtelijke planning in Vlaanderen).
+<!-- ══ WAT IS DE BETONMETER ════════════════════════════════════════════════ -->
+<section class="section" style="background:#fff;">
+  <div class="section-inner">
+    <div class="section-tag">Over het project</div>
+    <h2 class="section-title">Wat is de Betonmeter?</h2>
+    <div class="cards-3">
+      <div class="info-card">
+        <div class="card-icon">&#127959;</div>
+        <h3>Ruimtebeslag</h3>
+        <p>Ruimtebeslag is de oppervlakte ingenomen door bebouwing, verharding en aanverwante functies. Vlaanderen telt 33% ruimtebeslag &ndash; een Europees record tegenover het EU-gemiddelde van 6% (EEA, 2019).</p>
+      </div>
+      <div class="info-card" style="border-top-color:#ff6900;">
+        <div class="card-icon">&#127968;</div>
+        <h3>Verharding</h3>
+        <p>Verharding omvat alle kunstmatige, ondoorlaatbare oppervlakten: wegen, parkings, pleinen, bedrijfsterreinen. Het Vlaams gemiddelde bedraagt 16,3%, met uitschieters tot 55,8% (Drogenbos).</p>
+      </div>
+      <div class="info-card" style="border-top-color:#9b51e0;">
+        <div class="card-icon">&#128203;</div>
+        <h3>BRV-doelstelling</h3>
+        <p>Het Beleidsplan Ruimte Vlaanderen bepaalt: max. 3 ha/dag bijkomend ruimtebeslag in 2025 en ruimteneutraliteit (0 ha/dag) in 2040. Historisch tempo: 6 ha/dag (2013&ndash;2015).</p>
+      </div>
+    </div>
   </div>
+</section>
 
-  <div class="controls">
-    <input type="search" id="zoek" placeholder="Zoek gemeente…" oninput="filterTabel(this.value)">
-    <span class="count" id="countLbl">300 gemeenten</span>
+<!-- ══ 4 THEMA'S ═══════════════════════════════════════════════════════════ -->
+<section class="section section-gray">
+  <div class="section-inner">
+    <div class="section-tag">Analyse</div>
+    <h2 class="section-title">4 Thema&#39;s per gemeente</h2>
+    <div class="cards-2x2">
+      <div class="thema-card" style="border-top-color:#00d084;">
+        <div class="thema-top">
+          <span class="thema-icon">&#128200;</span>
+          <h3>Betontoestand</h3>
+        </div>
+        <p>Huidige toestand van verharding en ruimtebeslag per gemeente. Omvat oppervlaktes, aandelen en vergelijking met Vlaamse spreiding.</p>
+        <a href="#" class="thema-link" style="color:#00d084;">Bekijk indicatoren &rarr;</a>
+      </div>
+      <div class="thema-card" style="border-top-color:#ff6900;">
+        <div class="thema-top">
+          <span class="thema-icon">&#128201;</span>
+          <h3>Betonevolutie</h3>
+        </div>
+        <p>Tempo van bijkomend ruimtebeslag en verharding over de periode 2013&ndash;2022. Meet hoe snel gemeenten &lsquo;verbetonnen&rsquo;.</p>
+        <a href="#" class="thema-link" style="color:#ff6900;">Bekijk indicatoren &rarr;</a>
+      </div>
+      <div class="thema-card" style="border-top-color:#9b51e0;">
+        <div class="thema-top">
+          <span class="thema-icon">&#9888;</span>
+          <h3>Betonrisico</h3>
+        </div>
+        <p>Oppervlakte met harde bestemming die nog niet bebouwd is. Het totale risico voor Vlaanderen bedraagt ca. 179.000 ha (HOGENT Rapport 1).</p>
+        <a href="#" class="thema-link" style="color:#9b51e0;">Bekijk indicatoren &rarr;</a>
+      </div>
+      <div class="thema-card" style="border-top-color:#cf2e2e;">
+        <div class="thema-top">
+          <span class="thema-icon">&#127987;</span>
+          <h3>Reductieopgave</h3>
+        </div>
+        <p>De inspanning die elke gemeente moet leveren om bij te dragen aan de BRV-doelstelling: gemeentelijk quotum, neutralisatie-opgave en onthardingsopgave.</p>
+        <a href="#" class="thema-link" style="color:#cf2e2e;">Bekijk indicatoren &rarr;</a>
+      </div>
+    </div>
   </div>
+</section>
 
-  <table id="tabel">
-    <thead>
-      <tr>
-        <th>Gemeente</th>
-        <th>NIS</th>
-        <th>Opp. (ha)</th>
-        <th>Aandeel verharding</th>
-        <th>RBR-risico (ha)</th>
-        <th>Min. neutralisatie (ha)</th>
-        <th>Percentiel verharding</th>
-        <th>Beoordeling</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a href="Roeselare/rapport.html">Roeselare</a></td>
-        <td style="color:#64748b">36015</td>
-        <td>6.040</td>
-        <td><strong>34,8%</strong></td>
-        <td>311</td>
-        <td>247</td>
-        <td>P96</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lommel/rapport.html">Lommel</a></td>
-        <td style="color:#64748b">72020</td>
-        <td>10.228</td>
-        <td><strong>15,7%</strong></td>
-        <td>689</td>
-        <td>389</td>
-        <td>P57</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Beringen/rapport.html">Beringen</a></td>
-        <td style="color:#64748b">71004</td>
-        <td>7.856</td>
-        <td><strong>18,8%</strong></td>
-        <td>630</td>
-        <td>392</td>
-        <td>P75</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Gent/rapport.html">Gent</a></td>
-        <td style="color:#64748b">44021</td>
-        <td>15.777</td>
-        <td><strong>36,8%</strong></td>
-        <td>1.079</td>
-        <td>737</td>
-        <td>P98</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Evergem/rapport.html">Evergem</a></td>
-        <td style="color:#64748b">44019</td>
-        <td>7.538</td>
-        <td><strong>17,6%</strong></td>
-        <td>806</td>
-        <td>541</td>
-        <td>P69</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lokeren/rapport.html">Lokeren</a></td>
-        <td style="color:#64748b">46014</td>
-        <td>6.824</td>
-        <td><strong>18,7%</strong></td>
-        <td>271</td>
-        <td>124</td>
-        <td>P74</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Damme/rapport.html">Damme</a></td>
-        <td style="color:#64748b">31006</td>
-        <td>9.036</td>
-        <td><strong>6,1%</strong></td>
-        <td>76</td>
-        <td>-29</td>
-        <td>P3</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Staden/rapport.html">Staden</a></td>
-        <td style="color:#64748b">36019</td>
-        <td>4.682</td>
-        <td><strong>15,7%</strong></td>
-        <td>56</td>
-        <td>11</td>
-        <td>P58</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Antwerpen/rapport.html">Antwerpen</a></td>
-        <td style="color:#64748b">11002</td>
-        <td>20.432</td>
-        <td><strong>41,5%</strong></td>
-        <td>1.422</td>
-        <td>741</td>
-        <td>P99</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Deinze/rapport.html">Deinze</a></td>
-        <td style="color:#64748b">44083</td>
-        <td>12.803</td>
-        <td><strong>13,9%</strong></td>
-        <td>470</td>
-        <td>200</td>
-        <td>P47</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hoogstraten/rapport.html">Hoogstraten</a></td>
-        <td style="color:#64748b">13014</td>
-        <td>10.540</td>
-        <td><strong>14,0%</strong></td>
-        <td>204</td>
-        <td>67</td>
-        <td>P48</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Dilsen-Stokkem/rapport.html">Dilsen-Stokkem</a></td>
-        <td style="color:#64748b">72041</td>
-        <td>6.589</td>
-        <td><strong>12,3%</strong></td>
-        <td>271</td>
-        <td>116</td>
-        <td>P36</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Poperinge/rapport.html">Poperinge</a></td>
-        <td style="color:#64748b">33021</td>
-        <td>12.037</td>
-        <td><strong>8,5%</strong></td>
-        <td>136</td>
-        <td>4</td>
-        <td>P11</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Sint-Truiden/rapport.html">Sint-Truiden</a></td>
-        <td style="color:#64748b">71053</td>
-        <td>10.712</td>
-        <td><strong>14,1%</strong></td>
-        <td>477</td>
-        <td>245</td>
-        <td>P48</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Beveren/rapport.html">Beveren</a></td>
-        <td style="color:#64748b">46003</td>
-        <td>15.269</td>
-        <td><strong>21,5%</strong></td>
-        <td>1.747</td>
-        <td>1.009</td>
-        <td>P80</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Bree/rapport.html">Bree</a></td>
-        <td style="color:#64748b">72004</td>
-        <td>6.498</td>
-        <td><strong>12,6%</strong></td>
-        <td>168</td>
-        <td>42</td>
-        <td>P38</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Tessenderlo/rapport.html">Tessenderlo</a></td>
-        <td style="color:#64748b">71057</td>
-        <td>5.164</td>
-        <td><strong>16,7%</strong></td>
-        <td>355</td>
-        <td>185</td>
-        <td>P64</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lanaken/rapport.html">Lanaken</a></td>
-        <td style="color:#64748b">73042</td>
-        <td>5.895</td>
-        <td><strong>15,3%</strong></td>
-        <td>416</td>
-        <td>277</td>
-        <td>P56</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Rijkevorsel/rapport.html">Rijkevorsel</a></td>
-        <td style="color:#64748b">13037</td>
-        <td>4.684</td>
-        <td><strong>13,2%</strong></td>
-        <td>90</td>
-        <td>36</td>
-        <td>P42</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Heist-op-den-Berg/rapport.html">Heist-op-den-Berg</a></td>
-        <td style="color:#64748b">12014</td>
-        <td>8.667</td>
-        <td><strong>16,6%</strong></td>
-        <td>452</td>
-        <td>256</td>
-        <td>P62</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Diksmuide/rapport.html">Diksmuide</a></td>
-        <td style="color:#64748b">32003</td>
-        <td>15.074</td>
-        <td><strong>6,6%</strong></td>
-        <td>180</td>
-        <td>2</td>
-        <td>P4</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Langemark-Poelkapelle/rapport.html">Langemark-Poelkapelle</a></td>
-        <td style="color:#64748b">33040</td>
-        <td>5.307</td>
-        <td><strong>9,2%</strong></td>
-        <td>48</td>
-        <td>-1</td>
-        <td>P15</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Nazareth/rapport.html">Nazareth</a></td>
-        <td style="color:#64748b">44048</td>
-        <td>3.544</td>
-        <td><strong>16,8%</strong></td>
-        <td>263</td>
-        <td>190</td>
-        <td>P64</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Brugge/rapport.html">Brugge</a></td>
-        <td style="color:#64748b">31005</td>
-        <td>14.099</td>
-        <td><strong>27,4%</strong></td>
-        <td>1.755</td>
-        <td>873</td>
-        <td>P89</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Borgloon/rapport.html">Borgloon</a></td>
-        <td style="color:#64748b">73009</td>
-        <td>5.132</td>
-        <td><strong>9,9%</strong></td>
-        <td>195</td>
-        <td>30</td>
-        <td>P20</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Merksplas/rapport.html">Merksplas</a></td>
-        <td style="color:#64748b">13023</td>
-        <td>4.461</td>
-        <td><strong>12,5%</strong></td>
-        <td>166</td>
-        <td>61</td>
-        <td>P37</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Aalter/rapport.html">Aalter</a></td>
-        <td style="color:#64748b">44084</td>
-        <td>11.985</td>
-        <td><strong>11,2%</strong></td>
-        <td>405</td>
-        <td>190</td>
-        <td>P29</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Knokke-Heist/rapport.html">Knokke-Heist</a></td>
-        <td style="color:#64748b">31043</td>
-        <td>6.159</td>
-        <td><strong>14,5%</strong></td>
-        <td>245</td>
-        <td>-10</td>
-        <td>P51</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ravels/rapport.html">Ravels</a></td>
-        <td style="color:#64748b">13035</td>
-        <td>9.514</td>
-        <td><strong>8,7%</strong></td>
-        <td>177</td>
-        <td>24</td>
-        <td>P12</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ieper/rapport.html">Ieper</a></td>
-        <td style="color:#64748b">33011</td>
-        <td>13.146</td>
-        <td><strong>11,9%</strong></td>
-        <td>338</td>
-        <td>115</td>
-        <td>P32</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Oostkamp/rapport.html">Oostkamp</a></td>
-        <td style="color:#64748b">31022</td>
-        <td>8.013</td>
-        <td><strong>12,0%</strong></td>
-        <td>263</td>
-        <td>61</td>
-        <td>P32</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Oudsbergen/rapport.html">Oudsbergen</a></td>
-        <td style="color:#64748b">72042</td>
-        <td>11.637</td>
-        <td><strong>9,2%</strong></td>
-        <td>264</td>
-        <td>67</td>
-        <td>P16</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Mol/rapport.html">Mol</a></td>
-        <td style="color:#64748b">13025</td>
-        <td>11.455</td>
-        <td><strong>11,3%</strong></td>
-        <td>787</td>
-        <td>470</td>
-        <td>P29</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hasselt/rapport.html">Hasselt</a></td>
-        <td style="color:#64748b">71022</td>
-        <td>10.269</td>
-        <td><strong>21,5%</strong></td>
-        <td>738</td>
-        <td>430</td>
-        <td>P81</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Tongeren/rapport.html">Tongeren</a></td>
-        <td style="color:#64748b">73083</td>
-        <td>8.781</td>
-        <td><strong>11,8%</strong></td>
-        <td>425</td>
-        <td>181</td>
-        <td>P32</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zonnebeke/rapport.html">Zonnebeke</a></td>
-        <td style="color:#64748b">33037</td>
-        <td>6.809</td>
-        <td><strong>10,5%</strong></td>
-        <td>82</td>
-        <td>-7</td>
-        <td>P24</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Geel/rapport.html">Geel</a></td>
-        <td style="color:#64748b">13008</td>
-        <td>11.020</td>
-        <td><strong>14,4%</strong></td>
-        <td>536</td>
-        <td>284</td>
-        <td>P50</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Sint-Katelijne-Waver/rapport.html">Sint-Katelijne-Waver</a></td>
-        <td style="color:#64748b">12035</td>
-        <td>3.616</td>
-        <td><strong>24,1%</strong></td>
-        <td>222</td>
-        <td>118</td>
-        <td>P84</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hooglede/rapport.html">Hooglede</a></td>
-        <td style="color:#64748b">36006</td>
-        <td>3.811</td>
-        <td><strong>15,0%</strong></td>
-        <td>98</td>
-        <td>61</td>
-        <td>P54</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Maaseik/rapport.html">Maaseik</a></td>
-        <td style="color:#64748b">72021</td>
-        <td>7.718</td>
-        <td><strong>11,6%</strong></td>
-        <td>235</td>
-        <td>91</td>
-        <td>P30</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Veurne/rapport.html">Veurne</a></td>
-        <td style="color:#64748b">38025</td>
-        <td>9.721</td>
-        <td><strong>7,4%</strong></td>
-        <td>111</td>
-        <td>-11</td>
-        <td>P6</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ninove/rapport.html">Ninove</a></td>
-        <td style="color:#64748b">41048</td>
-        <td>7.312</td>
-        <td><strong>14,1%</strong></td>
-        <td>302</td>
-        <td>196</td>
-        <td>P49</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Houthalen-Helchteren/rapport.html">Houthalen-Helchteren</a></td>
-        <td style="color:#64748b">72039</td>
-        <td>7.823</td>
-        <td><strong>12,7%</strong></td>
-        <td>590</td>
-        <td>184</td>
-        <td>P39</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="De%20Pinte/rapport.html">De Pinte</a></td>
-        <td style="color:#64748b">44012</td>
-        <td>1.778</td>
-        <td><strong>17,4%</strong></td>
-        <td>70</td>
-        <td>13</td>
-        <td>P68</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Heuvelland/rapport.html">Heuvelland</a></td>
-        <td style="color:#64748b">33039</td>
-        <td>9.479</td>
-        <td><strong>5,8%</strong></td>
-        <td>63</td>
-        <td>-48</td>
-        <td>P2</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kortrijk/rapport.html">Kortrijk</a></td>
-        <td style="color:#64748b">34022</td>
-        <td>8.069</td>
-        <td><strong>27,7%</strong></td>
-        <td>544</td>
-        <td>357</td>
-        <td>P90</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wuustwezel/rapport.html">Wuustwezel</a></td>
-        <td style="color:#64748b">11053</td>
-        <td>8.941</td>
-        <td><strong>9,7%</strong></td>
-        <td>220</td>
-        <td>74</td>
-        <td>P20</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wingene/rapport.html">Wingene</a></td>
-        <td style="color:#64748b">37018</td>
-        <td>6.854</td>
-        <td><strong>11,7%</strong></td>
-        <td>114</td>
-        <td>34</td>
-        <td>P31</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zemst/rapport.html">Zemst</a></td>
-        <td style="color:#64748b">23096</td>
-        <td>4.323</td>
-        <td><strong>14,7%</strong></td>
-        <td>229</td>
-        <td>86</td>
-        <td>P52</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Bilzen/rapport.html">Bilzen</a></td>
-        <td style="color:#64748b">73006</td>
-        <td>7.598</td>
-        <td><strong>14,5%</strong></td>
-        <td>435</td>
-        <td>238</td>
-        <td>P51</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Maldegem/rapport.html">Maldegem</a></td>
-        <td style="color:#64748b">43010</td>
-        <td>9.563</td>
-        <td><strong>10,8%</strong></td>
-        <td>222</td>
-        <td>101</td>
-        <td>P26</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Meulebeke/rapport.html">Meulebeke</a></td>
-        <td style="color:#64748b">37007</td>
-        <td>2.949</td>
-        <td><strong>17,4%</strong></td>
-        <td>60</td>
-        <td>20</td>
-        <td>P68</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zottegem/rapport.html">Zottegem</a></td>
-        <td style="color:#64748b">41081</td>
-        <td>5.746</td>
-        <td><strong>13,4%</strong></td>
-        <td>230</td>
-        <td>77</td>
-        <td>P43</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Peer/rapport.html">Peer</a></td>
-        <td style="color:#64748b">72030</td>
-        <td>8.724</td>
-        <td><strong>9,0%</strong></td>
-        <td>129</td>
-        <td>24</td>
-        <td>P13</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Beernem/rapport.html">Beernem</a></td>
-        <td style="color:#64748b">31003</td>
-        <td>7.242</td>
-        <td><strong>9,4%</strong></td>
-        <td>438</td>
-        <td>67</td>
-        <td>P18</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Genk/rapport.html">Genk</a></td>
-        <td style="color:#64748b">71016</td>
-        <td>8.757</td>
-        <td><strong>26,2%</strong></td>
-        <td>1.282</td>
-        <td>663</td>
-        <td>P88</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Assenede/rapport.html">Assenede</a></td>
-        <td style="color:#64748b">43002</td>
-        <td>8.750</td>
-        <td><strong>7,4%</strong></td>
-        <td>119</td>
-        <td>33</td>
-        <td>P6</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Jabbeke/rapport.html">Jabbeke</a></td>
-        <td style="color:#64748b">31012</td>
-        <td>5.386</td>
-        <td><strong>11,5%</strong></td>
-        <td>64</td>
-        <td>-4</td>
-        <td>P30</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wevelgem/rapport.html">Wevelgem</a></td>
-        <td style="color:#64748b">34041</td>
-        <td>3.914</td>
-        <td><strong>28,1%</strong></td>
-        <td>200</td>
-        <td>113</td>
-        <td>P91</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zwevegem/rapport.html">Zwevegem</a></td>
-        <td style="color:#64748b">34042</td>
-        <td>6.361</td>
-        <td><strong>14,0%</strong></td>
-        <td>179</td>
-        <td>90</td>
-        <td>P47</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Sint-Niklaas/rapport.html">Sint-Niklaas</a></td>
-        <td style="color:#64748b">46021</td>
-        <td>8.420</td>
-        <td><strong>21,6%</strong></td>
-        <td>468</td>
-        <td>309</td>
-        <td>P81</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Pelt/rapport.html">Pelt</a></td>
-        <td style="color:#64748b">72043</td>
-        <td>8.378</td>
-        <td><strong>16,2%</strong></td>
-        <td>420</td>
-        <td>215</td>
-        <td>P58</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Brecht/rapport.html">Brecht</a></td>
-        <td style="color:#64748b">11009</td>
-        <td>9.147</td>
-        <td><strong>10,9%</strong></td>
-        <td>298</td>
-        <td>153</td>
-        <td>P27</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ardooie/rapport.html">Ardooie</a></td>
-        <td style="color:#64748b">37020</td>
-        <td>3.492</td>
-        <td><strong>17,4%</strong></td>
-        <td>41</td>
-        <td>10</td>
-        <td>P68</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lievegem/rapport.html">Lievegem</a></td>
-        <td style="color:#64748b">44085</td>
-        <td>8.078</td>
-        <td><strong>11,2%</strong></td>
-        <td>314</td>
-        <td>117</td>
-        <td>P28</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Alveringem/rapport.html">Alveringem</a></td>
-        <td style="color:#64748b">38002</td>
-        <td>8.071</td>
-        <td><strong>5,1%</strong></td>
-        <td>31</td>
-        <td>-40</td>
-        <td>P1</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kortemark/rapport.html">Kortemark</a></td>
-        <td style="color:#64748b">32011</td>
-        <td>5.543</td>
-        <td><strong>12,2%</strong></td>
-        <td>67</td>
-        <td>14</td>
-        <td>P34</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Dessel/rapport.html">Dessel</a></td>
-        <td style="color:#64748b">13006</td>
-        <td>2.745</td>
-        <td><strong>14,8%</strong></td>
-        <td>241</td>
-        <td>177</td>
-        <td>P53</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Geraardsbergen/rapport.html">Geraardsbergen</a></td>
-        <td style="color:#64748b">41018</td>
-        <td>8.006</td>
-        <td><strong>11,4%</strong></td>
-        <td>380</td>
-        <td>177</td>
-        <td>P30</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Middelkerke/rapport.html">Middelkerke</a></td>
-        <td style="color:#64748b">35011</td>
-        <td>7.904</td>
-        <td><strong>10,0%</strong></td>
-        <td>110</td>
-        <td>17</td>
-        <td>P21</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Aalst/rapport.html">Aalst</a></td>
-        <td style="color:#64748b">41002</td>
-        <td>7.866</td>
-        <td><strong>23,8%</strong></td>
-        <td>625</td>
-        <td>348</td>
-        <td>P84</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Westerlo/rapport.html">Westerlo</a></td>
-        <td style="color:#64748b">13049</td>
-        <td>5.547</td>
-        <td><strong>17,5%</strong></td>
-        <td>313</td>
-        <td>158</td>
-        <td>P69</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Herentals/rapport.html">Herentals</a></td>
-        <td style="color:#64748b">13011</td>
-        <td>4.795</td>
-        <td><strong>19,4%</strong></td>
-        <td>305</td>
-        <td>154</td>
-        <td>P77</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Maasmechelen/rapport.html">Maasmechelen</a></td>
-        <td style="color:#64748b">73107</td>
-        <td>7.685</td>
-        <td><strong>15,4%</strong></td>
-        <td>584</td>
-        <td>418</td>
-        <td>P56</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hechtel-Eksel/rapport.html">Hechtel-Eksel</a></td>
-        <td style="color:#64748b">72038</td>
-        <td>7.668</td>
-        <td><strong>6,7%</strong></td>
-        <td>135</td>
-        <td>-3</td>
-        <td>P4</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Brakel/rapport.html">Brakel</a></td>
-        <td style="color:#64748b">45059</td>
-        <td>5.696</td>
-        <td><strong>8,7%</strong></td>
-        <td>102</td>
-        <td>42</td>
-        <td>P12</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Waregem/rapport.html">Waregem</a></td>
-        <td style="color:#64748b">34040</td>
-        <td>4.450</td>
-        <td><strong>34,4%</strong></td>
-        <td>232</td>
-        <td>178</td>
-        <td>P95</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Sint-Laureins/rapport.html">Sint-Laureins</a></td>
-        <td style="color:#64748b">43014</td>
-        <td>7.454</td>
-        <td><strong>5,5%</strong></td>
-        <td>30</td>
-        <td>-42</td>
-        <td>P2</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kruisem/rapport.html">Kruisem</a></td>
-        <td style="color:#64748b">45068</td>
-        <td>7.159</td>
-        <td><strong>11,3%</strong></td>
-        <td>354</td>
-        <td>274</td>
-        <td>P29</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Izegem/rapport.html">Izegem</a></td>
-        <td style="color:#64748b">36008</td>
-        <td>2.564</td>
-        <td><strong>35,8%</strong></td>
-        <td>115</td>
-        <td>67</td>
-        <td>P97</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Tienen/rapport.html">Tienen</a></td>
-        <td style="color:#64748b">24107</td>
-        <td>7.277</td>
-        <td><strong>13,6%</strong></td>
-        <td>399</td>
-        <td>243</td>
-        <td>P46</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Asse/rapport.html">Asse</a></td>
-        <td style="color:#64748b">23002</td>
-        <td>5.022</td>
-        <td><strong>17,0%</strong></td>
-        <td>253</td>
-        <td>131</td>
-        <td>P66</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Balen/rapport.html">Balen</a></td>
-        <td style="color:#64748b">13003</td>
-        <td>7.299</td>
-        <td><strong>12,3%</strong></td>
-        <td>443</td>
-        <td>152</td>
-        <td>P35</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kasterlee/rapport.html">Kasterlee</a></td>
-        <td style="color:#64748b">13017</td>
-        <td>7.227</td>
-        <td><strong>10,1%</strong></td>
-        <td>366</td>
-        <td>47</td>
-        <td>P21</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Oudenaarde/rapport.html">Oudenaarde</a></td>
-        <td style="color:#64748b">45035</td>
-        <td>6.892</td>
-        <td><strong>15,9%</strong></td>
-        <td>232</td>
-        <td>123</td>
-        <td>P58</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Tielt/rapport.html">Tielt</a></td>
-        <td style="color:#64748b">37015</td>
-        <td>6.885</td>
-        <td><strong>14,1%</strong></td>
-        <td>147</td>
-        <td>84</td>
-        <td>P49</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Meerhout/rapport.html">Meerhout</a></td>
-        <td style="color:#64748b">13021</td>
-        <td>3.654</td>
-        <td><strong>12,0%</strong></td>
-        <td>62</td>
-        <td>22</td>
-        <td>P33</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Puurs-Sint-Amands/rapport.html">Puurs-Sint-Amands</a></td>
-        <td style="color:#64748b">12041</td>
-        <td>4.914</td>
-        <td><strong>17,5%</strong></td>
-        <td>254</td>
-        <td>117</td>
-        <td>P69</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Mechelen/rapport.html">Mechelen</a></td>
-        <td style="color:#64748b">12025</td>
-        <td>6.579</td>
-        <td><strong>24,9%</strong></td>
-        <td>300</td>
-        <td>113</td>
-        <td>P86</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Oud-Heverlee/rapport.html">Oud-Heverlee</a></td>
-        <td style="color:#64748b">24086</td>
-        <td>3.118</td>
-        <td><strong>9,4%</strong></td>
-        <td>70</td>
-        <td>36</td>
-        <td>P17</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lo-Reninge/rapport.html">Lo-Reninge</a></td>
-        <td style="color:#64748b">32030</td>
-        <td>6.340</td>
-        <td><strong>5,0%</strong></td>
-        <td>19</td>
-        <td>-39</td>
-        <td>P1</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Aarschot/rapport.html">Aarschot</a></td>
-        <td style="color:#64748b">24001</td>
-        <td>6.305</td>
-        <td><strong>16,2%</strong></td>
-        <td>228</td>
-        <td>92</td>
-        <td>P60</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Oosterzele/rapport.html">Oosterzele</a></td>
-        <td style="color:#64748b">44052</td>
-        <td>4.357</td>
-        <td><strong>11,1%</strong></td>
-        <td>171</td>
-        <td>71</td>
-        <td>P28</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Houthulst/rapport.html">Houthulst</a></td>
-        <td style="color:#64748b">32006</td>
-        <td>5.602</td>
-        <td><strong>9,1%</strong></td>
-        <td>64</td>
-        <td>9</td>
-        <td>P15</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lochristi/rapport.html">Lochristi</a></td>
-        <td style="color:#64748b">44034</td>
-        <td>6.066</td>
-        <td><strong>16,9%</strong></td>
-        <td>163</td>
-        <td>78</td>
-        <td>P65</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lille/rapport.html">Lille</a></td>
-        <td style="color:#64748b">13019</td>
-        <td>5.962</td>
-        <td><strong>10,7%</strong></td>
-        <td>299</td>
-        <td>100</td>
-        <td>P25</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kalmthout/rapport.html">Kalmthout</a></td>
-        <td style="color:#64748b">11022</td>
-        <td>5.941</td>
-        <td><strong>9,5%</strong></td>
-        <td>190</td>
-        <td>101</td>
-        <td>P18</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Bocholt/rapport.html">Bocholt</a></td>
-        <td style="color:#64748b">72003</td>
-        <td>5.929</td>
-        <td><strong>10,5%</strong></td>
-        <td>136</td>
-        <td>40</td>
-        <td>P24</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Diest/rapport.html">Diest</a></td>
-        <td style="color:#64748b">24020</td>
-        <td>5.872</td>
-        <td><strong>13,2%</strong></td>
-        <td>326</td>
-        <td>119</td>
-        <td>P42</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lummen/rapport.html">Lummen</a></td>
-        <td style="color:#64748b">71037</td>
-        <td>5.370</td>
-        <td><strong>12,9%</strong></td>
-        <td>254</td>
-        <td>156</td>
-        <td>P40</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Beerse/rapport.html">Beerse</a></td>
-        <td style="color:#64748b">13004</td>
-        <td>3.736</td>
-        <td><strong>19,2%</strong></td>
-        <td>201</td>
-        <td>160</td>
-        <td>P76</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zedelgem/rapport.html">Zedelgem</a></td>
-        <td style="color:#64748b">31040</td>
-        <td>6.066</td>
-        <td><strong>15,2%</strong></td>
-        <td>226</td>
-        <td>78</td>
-        <td>P55</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Overijse/rapport.html">Overijse</a></td>
-        <td style="color:#64748b">23062</td>
-        <td>4.499</td>
-        <td><strong>14,7%</strong></td>
-        <td>135</td>
-        <td>55</td>
-        <td>P52</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Riemst/rapport.html">Riemst</a></td>
-        <td style="color:#64748b">73066</td>
-        <td>5.806</td>
-        <td><strong>10,6%</strong></td>
-        <td>170</td>
-        <td>100</td>
-        <td>P25</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Leuven/rapport.html">Leuven</a></td>
-        <td style="color:#64748b">24062</td>
-        <td>5.751</td>
-        <td><strong>30,7%</strong></td>
-        <td>522</td>
-        <td>241</td>
-        <td>P93</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Turnhout/rapport.html">Turnhout</a></td>
-        <td style="color:#64748b">13040</td>
-        <td>5.671</td>
-        <td><strong>19,1%</strong></td>
-        <td>252</td>
-        <td>145</td>
-        <td>P75</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Gingelom/rapport.html">Gingelom</a></td>
-        <td style="color:#64748b">71017</td>
-        <td>5.634</td>
-        <td><strong>6,5%</strong></td>
-        <td>106</td>
-        <td>40</td>
-        <td>P4</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Anzegem/rapport.html">Anzegem</a></td>
-        <td style="color:#64748b">34002</td>
-        <td>4.235</td>
-        <td><strong>14,7%</strong></td>
-        <td>128</td>
-        <td>77</td>
-        <td>P52</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Putte/rapport.html">Putte</a></td>
-        <td style="color:#64748b">12029</td>
-        <td>3.516</td>
-        <td><strong>16,9%</strong></td>
-        <td>117</td>
-        <td>50</td>
-        <td>P65</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Sint-Gillis-Waas/rapport.html">Sint-Gillis-Waas</a></td>
-        <td style="color:#64748b">46020</td>
-        <td>5.549</td>
-        <td><strong>12,3%</strong></td>
-        <td>99</td>
-        <td>19</td>
-        <td>P35</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wielsbeke/rapport.html">Wielsbeke</a></td>
-        <td style="color:#64748b">37017</td>
-        <td>2.191</td>
-        <td><strong>27,6%</strong></td>
-        <td>156</td>
-        <td>123</td>
-        <td>P90</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Arendonk/rapport.html">Arendonk</a></td>
-        <td style="color:#64748b">13001</td>
-        <td>5.515</td>
-        <td><strong>10,2%</strong></td>
-        <td>116</td>
-        <td>3</td>
-        <td>P22</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Alken/rapport.html">Alken</a></td>
-        <td style="color:#64748b">73001</td>
-        <td>2.824</td>
-        <td><strong>16,5%</strong></td>
-        <td>89</td>
-        <td>52</td>
-        <td>P62</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Moorslede/rapport.html">Moorslede</a></td>
-        <td style="color:#64748b">36012</td>
-        <td>3.545</td>
-        <td><strong>13,5%</strong></td>
-        <td>57</td>
-        <td>12</td>
-        <td>P45</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Heusden-Zolder/rapport.html">Heusden-Zolder</a></td>
-        <td style="color:#64748b">71070</td>
-        <td>5.340</td>
-        <td><strong>19,3%</strong></td>
-        <td>445</td>
-        <td>218</td>
-        <td>P76</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Landen/rapport.html">Landen</a></td>
-        <td style="color:#64748b">24059</td>
-        <td>5.330</td>
-        <td><strong>9,3%</strong></td>
-        <td>211</td>
-        <td>87</td>
-        <td>P16</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Heers/rapport.html">Heers</a></td>
-        <td style="color:#64748b">73022</td>
-        <td>5.306</td>
-        <td><strong>6,2%</strong></td>
-        <td>125</td>
-        <td>17</td>
-        <td>P3</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ham/rapport.html">Ham</a></td>
-        <td style="color:#64748b">71069</td>
-        <td>3.279</td>
-        <td><strong>15,7%</strong></td>
-        <td>185</td>
-        <td>134</td>
-        <td>P57</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Malle/rapport.html">Malle</a></td>
-        <td style="color:#64748b">11057</td>
-        <td>5.190</td>
-        <td><strong>12,0%</strong></td>
-        <td>252</td>
-        <td>185</td>
-        <td>P33</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Keerbergen/rapport.html">Keerbergen</a></td>
-        <td style="color:#64748b">24048</td>
-        <td>1.854</td>
-        <td><strong>18,1%</strong></td>
-        <td>117</td>
-        <td>88</td>
-        <td>P72</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Dendermonde/rapport.html">Dendermonde</a></td>
-        <td style="color:#64748b">42006</td>
-        <td>5.652</td>
-        <td><strong>22,4%</strong></td>
-        <td>315</td>
-        <td>186</td>
-        <td>P82</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zonhoven/rapport.html">Zonhoven</a></td>
-        <td style="color:#64748b">71066</td>
-        <td>3.967</td>
-        <td><strong>17,7%</strong></td>
-        <td>251</td>
-        <td>172</td>
-        <td>P70</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zulte/rapport.html">Zulte</a></td>
-        <td style="color:#64748b">44081</td>
-        <td>3.276</td>
-        <td><strong>18,7%</strong></td>
-        <td>172</td>
-        <td>132</td>
-        <td>P74</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Herselt/rapport.html">Herselt</a></td>
-        <td style="color:#64748b">13013</td>
-        <td>5.237</td>
-        <td><strong>10,3%</strong></td>
-        <td>139</td>
-        <td>28</td>
-        <td>P23</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kinrooi/rapport.html">Kinrooi</a></td>
-        <td style="color:#64748b">72018</td>
-        <td>5.480</td>
-        <td><strong>10,9%</strong></td>
-        <td>93</td>
-        <td>14</td>
-        <td>P27</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Scherpenheuvel-Zichem/rapport.html">Scherpenheuvel-Zichem</a></td>
-        <td style="color:#64748b">24134</td>
-        <td>5.115</td>
-        <td><strong>13,7%</strong></td>
-        <td>163</td>
-        <td>59</td>
-        <td>P46</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Deerlijk/rapport.html">Deerlijk</a></td>
-        <td style="color:#64748b">34009</td>
-        <td>1.697</td>
-        <td><strong>29,6%</strong></td>
-        <td>91</td>
-        <td>67</td>
-        <td>P92</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Essen/rapport.html">Essen</a></td>
-        <td style="color:#64748b">11016</td>
-        <td>4.757</td>
-        <td><strong>12,2%</strong></td>
-        <td>200</td>
-        <td>82</td>
-        <td>P34</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Grobbendonk/rapport.html">Grobbendonk</a></td>
-        <td style="color:#64748b">13010</td>
-        <td>2.837</td>
-        <td><strong>17,1%</strong></td>
-        <td>125</td>
-        <td>76</td>
-        <td>P67</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Voeren/rapport.html">Voeren</a></td>
-        <td style="color:#64748b">73109</td>
-        <td>5.061</td>
-        <td><strong>4,9%</strong></td>
-        <td>59</td>
-        <td>-5</td>
-        <td>P1</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Koksijde/rapport.html">Koksijde</a></td>
-        <td style="color:#64748b">38014</td>
-        <td>5.036</td>
-        <td><strong>14,1%</strong></td>
-        <td>144</td>
-        <td>48</td>
-        <td>P49</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zoutleeuw/rapport.html">Zoutleeuw</a></td>
-        <td style="color:#64748b">24130</td>
-        <td>4.685</td>
-        <td><strong>7,6%</strong></td>
-        <td>93</td>
-        <td>-0</td>
-        <td>P7</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lier/rapport.html">Lier</a></td>
-        <td style="color:#64748b">12021</td>
-        <td>4.985</td>
-        <td><strong>20,3%</strong></td>
-        <td>296</td>
-        <td>157</td>
-        <td>P78</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kortenaken/rapport.html">Kortenaken</a></td>
-        <td style="color:#64748b">24054</td>
-        <td>4.944</td>
-        <td><strong>7,8%</strong></td>
-        <td>50</td>
-        <td>-1</td>
-        <td>P8</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Bornem/rapport.html">Bornem</a></td>
-        <td style="color:#64748b">12007</td>
-        <td>4.619</td>
-        <td><strong>13,4%</strong></td>
-        <td>93</td>
-        <td>20</td>
-        <td>P43</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Oostende/rapport.html">Oostende</a></td>
-        <td style="color:#64748b">35013</td>
-        <td>4.095</td>
-        <td><strong>34,6%</strong></td>
-        <td>316</td>
-        <td>225</td>
-        <td>P95</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zuienkerke/rapport.html">Zuienkerke</a></td>
-        <td style="color:#64748b">31042</td>
-        <td>4.890</td>
-        <td><strong>4,1%</strong></td>
-        <td>20</td>
-        <td>-26</td>
-        <td>P0</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Grimbergen/rapport.html">Grimbergen</a></td>
-        <td style="color:#64748b">23025</td>
-        <td>3.867</td>
-        <td><strong>21,5%</strong></td>
-        <td>175</td>
-        <td>55</td>
-        <td>P81</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Retie/rapport.html">Retie</a></td>
-        <td style="color:#64748b">13036</td>
-        <td>4.850</td>
-        <td><strong>9,3%</strong></td>
-        <td>275</td>
-        <td>12</td>
-        <td>P17</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Herzele/rapport.html">Herzele</a></td>
-        <td style="color:#64748b">41027</td>
-        <td>4.791</td>
-        <td><strong>10,6%</strong></td>
-        <td>103</td>
-        <td>54</td>
-        <td>P25</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kaprijke/rapport.html">Kaprijke</a></td>
-        <td style="color:#64748b">43007</td>
-        <td>3.364</td>
-        <td><strong>9,1%</strong></td>
-        <td>155</td>
-        <td>124</td>
-        <td>P14</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Erpe-Mere/rapport.html">Erpe-Mere</a></td>
-        <td style="color:#64748b">41082</td>
-        <td>3.441</td>
-        <td><strong>17,8%</strong></td>
-        <td>154</td>
-        <td>102</td>
-        <td>P70</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Laakdal/rapport.html">Laakdal</a></td>
-        <td style="color:#64748b">13053</td>
-        <td>4.243</td>
-        <td><strong>14,6%</strong></td>
-        <td>172</td>
-        <td>96</td>
-        <td>P51</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Halle/rapport.html">Halle</a></td>
-        <td style="color:#64748b">23027</td>
-        <td>4.498</td>
-        <td><strong>18,7%</strong></td>
-        <td>243</td>
-        <td>77</td>
-        <td>P73</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="De%20Haan/rapport.html">De Haan</a></td>
-        <td style="color:#64748b">35029</td>
-        <td>4.614</td>
-        <td><strong>11,2%</strong></td>
-        <td>90</td>
-        <td>7</td>
-        <td>P28</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Bertem/rapport.html">Bertem</a></td>
-        <td style="color:#64748b">24009</td>
-        <td>2.999</td>
-        <td><strong>9,0%</strong></td>
-        <td>122</td>
-        <td>61</td>
-        <td>P14</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ichtegem/rapport.html">Ichtegem</a></td>
-        <td style="color:#64748b">35006</td>
-        <td>4.578</td>
-        <td><strong>11,7%</strong></td>
-        <td>74</td>
-        <td>0</td>
-        <td>P31</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lede/rapport.html">Lede</a></td>
-        <td style="color:#64748b">41034</td>
-        <td>2.989</td>
-        <td><strong>16,6%</strong></td>
-        <td>103</td>
-        <td>71</td>
-        <td>P63</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zele/rapport.html">Zele</a></td>
-        <td style="color:#64748b">42028</td>
-        <td>3.328</td>
-        <td><strong>19,6%</strong></td>
-        <td>94</td>
-        <td>50</td>
-        <td>P77</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Torhout/rapport.html">Torhout</a></td>
-        <td style="color:#64748b">31033</td>
-        <td>4.533</td>
-        <td><strong>16,3%</strong></td>
-        <td>141</td>
-        <td>31</td>
-        <td>P61</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Stekene/rapport.html">Stekene</a></td>
-        <td style="color:#64748b">46024</td>
-        <td>4.526</td>
-        <td><strong>13,2%</strong></td>
-        <td>112</td>
-        <td>46</td>
-        <td>P41</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Harelbeke/rapport.html">Harelbeke</a></td>
-        <td style="color:#64748b">34013</td>
-        <td>2.940</td>
-        <td><strong>31,2%</strong></td>
-        <td>147</td>
-        <td>78</td>
-        <td>P93</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Roosdaal/rapport.html">Roosdaal</a></td>
-        <td style="color:#64748b">23097</td>
-        <td>2.192</td>
-        <td><strong>15,3%</strong></td>
-        <td>97</td>
-        <td>63</td>
-        <td>P56</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Herne/rapport.html">Herne</a></td>
-        <td style="color:#64748b">23032</td>
-        <td>4.466</td>
-        <td><strong>6,8%</strong></td>
-        <td>42</td>
-        <td>2</td>
-        <td>P5</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Tielt-Winge/rapport.html">Tielt-Winge</a></td>
-        <td style="color:#64748b">24135</td>
-        <td>4.452</td>
-        <td><strong>9,7%</strong></td>
-        <td>66</td>
-        <td>3</td>
-        <td>P20</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zaventem/rapport.html">Zaventem</a></td>
-        <td style="color:#64748b">23094</td>
-        <td>2.773</td>
-        <td><strong>36,1%</strong></td>
-        <td>203</td>
-        <td>56</td>
-        <td>P97</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Vleteren/rapport.html">Vleteren</a></td>
-        <td style="color:#64748b">33041</td>
-        <td>3.858</td>
-        <td><strong>6,7%</strong></td>
-        <td>26</td>
-        <td>-23</td>
-        <td>P5</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wervik/rapport.html">Wervik</a></td>
-        <td style="color:#64748b">33029</td>
-        <td>4.377</td>
-        <td><strong>13,8%</strong></td>
-        <td>92</td>
-        <td>30</td>
-        <td>P47</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hamont-Achel/rapport.html">Hamont-Achel</a></td>
-        <td style="color:#64748b">72037</td>
-        <td>4.373</td>
-        <td><strong>12,9%</strong></td>
-        <td>270</td>
-        <td>66</td>
-        <td>P40</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ranst/rapport.html">Ranst</a></td>
-        <td style="color:#64748b">11035</td>
-        <td>4.367</td>
-        <td><strong>16,2%</strong></td>
-        <td>202</td>
-        <td>150</td>
-        <td>P59</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lubbeek/rapport.html">Lubbeek</a></td>
-        <td style="color:#64748b">24066</td>
-        <td>4.528</td>
-        <td><strong>10,3%</strong></td>
-        <td>91</td>
-        <td>16</td>
-        <td>P23</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Herk-de-Stad/rapport.html">Herk-de-Stad</a></td>
-        <td style="color:#64748b">71024</td>
-        <td>4.303</td>
-        <td><strong>12,0%</strong></td>
-        <td>243</td>
-        <td>190</td>
-        <td>P33</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Gistel/rapport.html">Gistel</a></td>
-        <td style="color:#64748b">35005</td>
-        <td>4.284</td>
-        <td><strong>10,5%</strong></td>
-        <td>67</td>
-        <td>11</td>
-        <td>P24</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Sint-Pieters-Leeuw/rapport.html">Sint-Pieters-Leeuw</a></td>
-        <td style="color:#64748b">23077</td>
-        <td>4.067</td>
-        <td><strong>18,5%</strong></td>
-        <td>129</td>
-        <td>58</td>
-        <td>P73</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Bierbeek/rapport.html">Bierbeek</a></td>
-        <td style="color:#64748b">24011</td>
-        <td>3.897</td>
-        <td><strong>8,2%</strong></td>
-        <td>85</td>
-        <td>25</td>
-        <td>P10</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Pittem/rapport.html">Pittem</a></td>
-        <td style="color:#64748b">37011</td>
-        <td>3.469</td>
-        <td><strong>13,2%</strong></td>
-        <td>44</td>
-        <td>10</td>
-        <td>P42</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Maarkedal/rapport.html">Maarkedal</a></td>
-        <td style="color:#64748b">45064</td>
-        <td>4.616</td>
-        <td><strong>6,7%</strong></td>
-        <td>35</td>
-        <td>-9</td>
-        <td>P5</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Gooik/rapport.html">Gooik</a></td>
-        <td style="color:#64748b">23024</td>
-        <td>4.021</td>
-        <td><strong>8,1%</strong></td>
-        <td>87</td>
-        <td>42</td>
-        <td>P10</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Dilbeek/rapport.html">Dilbeek</a></td>
-        <td style="color:#64748b">23016</td>
-        <td>4.148</td>
-        <td><strong>23,1%</strong></td>
-        <td>294</td>
-        <td>112</td>
-        <td>P83</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hamme/rapport.html">Hamme</a></td>
-        <td style="color:#64748b">42008</td>
-        <td>4.053</td>
-        <td><strong>17,1%</strong></td>
-        <td>112</td>
-        <td>57</td>
-        <td>P67</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zandhoven/rapport.html">Zandhoven</a></td>
-        <td style="color:#64748b">11054</td>
-        <td>4.010</td>
-        <td><strong>12,7%</strong></td>
-        <td>216</td>
-        <td>154</td>
-        <td>P38</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Temse/rapport.html">Temse</a></td>
-        <td style="color:#64748b">46025</td>
-        <td>4.010</td>
-        <td><strong>20,4%</strong></td>
-        <td>206</td>
-        <td>103</td>
-        <td>P79</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Koekelare/rapport.html">Koekelare</a></td>
-        <td style="color:#64748b">32010</td>
-        <td>3.944</td>
-        <td><strong>9,6%</strong></td>
-        <td>30</td>
-        <td>-8</td>
-        <td>P19</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Huldenberg/rapport.html">Huldenberg</a></td>
-        <td style="color:#64748b">24045</td>
-        <td>3.995</td>
-        <td><strong>7,5%</strong></td>
-        <td>129</td>
-        <td>61</td>
-        <td>P7</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Vilvoorde/rapport.html">Vilvoorde</a></td>
-        <td style="color:#64748b">23088</td>
-        <td>2.157</td>
-        <td><strong>36,0%</strong></td>
-        <td>174</td>
-        <td>40</td>
-        <td>P97</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Nijlen/rapport.html">Nijlen</a></td>
-        <td style="color:#64748b">12026</td>
-        <td>3.920</td>
-        <td><strong>15,6%</strong></td>
-        <td>242</td>
-        <td>139</td>
-        <td>P57</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Oud-Turnhout/rapport.html">Oud-Turnhout</a></td>
-        <td style="color:#64748b">13031</td>
-        <td>3.917</td>
-        <td><strong>11,8%</strong></td>
-        <td>147</td>
-        <td>63</td>
-        <td>P31</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Holsbeek/rapport.html">Holsbeek</a></td>
-        <td style="color:#64748b">24043</td>
-        <td>3.878</td>
-        <td><strong>8,4%</strong></td>
-        <td>98</td>
-        <td>0</td>
-        <td>P11</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Londerzeel/rapport.html">Londerzeel</a></td>
-        <td style="color:#64748b">23045</td>
-        <td>3.653</td>
-        <td><strong>16,5%</strong></td>
-        <td>162</td>
-        <td>93</td>
-        <td>P62</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zoersel/rapport.html">Zoersel</a></td>
-        <td style="color:#64748b">11055</td>
-        <td>3.869</td>
-        <td><strong>15,1%</strong></td>
-        <td>213</td>
-        <td>136</td>
-        <td>P55</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Brasschaat/rapport.html">Brasschaat</a></td>
-        <td style="color:#64748b">11008</td>
-        <td>3.858</td>
-        <td><strong>17,0%</strong></td>
-        <td>216</td>
-        <td>90</td>
-        <td>P66</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Tremelo/rapport.html">Tremelo</a></td>
-        <td style="color:#64748b">24109</td>
-        <td>2.189</td>
-        <td><strong>18,5%</strong></td>
-        <td>137</td>
-        <td>89</td>
-        <td>P73</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kluisbergen/rapport.html">Kluisbergen</a></td>
-        <td style="color:#64748b">45060</td>
-        <td>3.063</td>
-        <td><strong>9,2%</strong></td>
-        <td>121</td>
-        <td>77</td>
-        <td>P15</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Berlare/rapport.html">Berlare</a></td>
-        <td style="color:#64748b">42003</td>
-        <td>3.823</td>
-        <td><strong>12,2%</strong></td>
-        <td>111</td>
-        <td>30</td>
-        <td>P35</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Beersel/rapport.html">Beersel</a></td>
-        <td style="color:#64748b">23003</td>
-        <td>3.040</td>
-        <td><strong>20,5%</strong></td>
-        <td>194</td>
-        <td>103</td>
-        <td>P79</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Merchtem/rapport.html">Merchtem</a></td>
-        <td style="color:#64748b">23052</td>
-        <td>3.690</td>
-        <td><strong>12,5%</strong></td>
-        <td>120</td>
-        <td>40</td>
-        <td>P38</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wortegem-Petegem/rapport.html">Wortegem-Petegem</a></td>
-        <td style="color:#64748b">45061</td>
-        <td>4.247</td>
-        <td><strong>7,9%</strong></td>
-        <td>70</td>
-        <td>30</td>
-        <td>P9</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Bekkevoort/rapport.html">Bekkevoort</a></td>
-        <td style="color:#64748b">24008</td>
-        <td>3.728</td>
-        <td><strong>9,0%</strong></td>
-        <td>33</td>
-        <td>-5</td>
-        <td>P14</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Rotselaar/rapport.html">Rotselaar</a></td>
-        <td style="color:#64748b">24094</td>
-        <td>3.722</td>
-        <td><strong>13,5%</strong></td>
-        <td>162</td>
-        <td>84</td>
-        <td>P44</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Diepenbeek/rapport.html">Diepenbeek</a></td>
-        <td style="color:#64748b">71011</td>
-        <td>4.141</td>
-        <td><strong>16,2%</strong></td>
-        <td>598</td>
-        <td>232</td>
-        <td>P59</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wetteren/rapport.html">Wetteren</a></td>
-        <td style="color:#64748b">42025</td>
-        <td>3.702</td>
-        <td><strong>21,0%</strong></td>
-        <td>136</td>
-        <td>65</td>
-        <td>P80</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Merelbeke/rapport.html">Merelbeke</a></td>
-        <td style="color:#64748b">44043</td>
-        <td>3.700</td>
-        <td><strong>18,7%</strong></td>
-        <td>381</td>
-        <td>168</td>
-        <td>P74</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Linter/rapport.html">Linter</a></td>
-        <td style="color:#64748b">24133</td>
-        <td>3.687</td>
-        <td><strong>7,9%</strong></td>
-        <td>46</td>
-        <td>-9</td>
-        <td>P9</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Halen/rapport.html">Halen</a></td>
-        <td style="color:#64748b">71020</td>
-        <td>3.660</td>
-        <td><strong>10,3%</strong></td>
-        <td>113</td>
-        <td>38</td>
-        <td>P23</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Pepingen/rapport.html">Pepingen</a></td>
-        <td style="color:#64748b">23064</td>
-        <td>3.593</td>
-        <td><strong>5,8%</strong></td>
-        <td>41</td>
-        <td>1</td>
-        <td>P3</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kapellen/rapport.html">Kapellen</a></td>
-        <td style="color:#64748b">11023</td>
-        <td>3.722</td>
-        <td><strong>14,3%</strong></td>
-        <td>189</td>
-        <td>86</td>
-        <td>P50</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Geetbets/rapport.html">Geetbets</a></td>
-        <td style="color:#64748b">24028</td>
-        <td>3.552</td>
-        <td><strong>8,2%</strong></td>
-        <td>69</td>
-        <td>-3</td>
-        <td>P10</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Galmaarden/rapport.html">Galmaarden</a></td>
-        <td style="color:#64748b">23023</td>
-        <td>3.529</td>
-        <td><strong>8,4%</strong></td>
-        <td>63</td>
-        <td>28</td>
-        <td>P11</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Meise/rapport.html">Meise</a></td>
-        <td style="color:#64748b">23050</td>
-        <td>3.507</td>
-        <td><strong>15,2%</strong></td>
-        <td>228</td>
-        <td>140</td>
-        <td>P55</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ronse/rapport.html">Ronse</a></td>
-        <td style="color:#64748b">45041</td>
-        <td>3.470</td>
-        <td><strong>17,8%</strong></td>
-        <td>201</td>
-        <td>126</td>
-        <td>P71</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wachtebeke/rapport.html">Wachtebeke</a></td>
-        <td style="color:#64748b">44073</td>
-        <td>3.463</td>
-        <td><strong>8,7%</strong></td>
-        <td>110</td>
-        <td>38</td>
-        <td>P12</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ternat/rapport.html">Ternat</a></td>
-        <td style="color:#64748b">23086</td>
-        <td>2.471</td>
-        <td><strong>19,8%</strong></td>
-        <td>112</td>
-        <td>78</td>
-        <td>P77</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Schilde/rapport.html">Schilde</a></td>
-        <td style="color:#64748b">11039</td>
-        <td>3.609</td>
-        <td><strong>13,6%</strong></td>
-        <td>216</td>
-        <td>90</td>
-        <td>P45</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kortenberg/rapport.html">Kortenberg</a></td>
-        <td style="color:#64748b">24055</td>
-        <td>3.470</td>
-        <td><strong>15,1%</strong></td>
-        <td>100</td>
-        <td>59</td>
-        <td>P54</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Sint-Genesius-Rode/rapport.html">Sint-Genesius-Rode</a></td>
-        <td style="color:#64748b">23101</td>
-        <td>2.275</td>
-        <td><strong>16,6%</strong></td>
-        <td>57</td>
-        <td>14</td>
-        <td>P63</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hoegaarden/rapport.html">Hoegaarden</a></td>
-        <td style="color:#64748b">24041</td>
-        <td>3.413</td>
-        <td><strong>7,6%</strong></td>
-        <td>50</td>
-        <td>7</td>
-        <td>P7</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kuurne/rapport.html">Kuurne</a></td>
-        <td style="color:#64748b">34023</td>
-        <td>1.011</td>
-        <td><strong>42,7%</strong></td>
-        <td>103</td>
-        <td>61</td>
-        <td>P99</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kampenhout/rapport.html">Kampenhout</a></td>
-        <td style="color:#64748b">23038</td>
-        <td>3.365</td>
-        <td><strong>12,4%</strong></td>
-        <td>115</td>
-        <td>51</td>
-        <td>P37</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Tervuren/rapport.html">Tervuren</a></td>
-        <td style="color:#64748b">24104</td>
-        <td>3.362</td>
-        <td><strong>12,9%</strong></td>
-        <td>115</td>
-        <td>66</td>
-        <td>P41</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kruibeke/rapport.html">Kruibeke</a></td>
-        <td style="color:#64748b">46013</td>
-        <td>3.353</td>
-        <td><strong>13,5%</strong></td>
-        <td>62</td>
-        <td>22</td>
-        <td>P45</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Eeklo/rapport.html">Eeklo</a></td>
-        <td style="color:#64748b">43005</td>
-        <td>3.045</td>
-        <td><strong>20,4%</strong></td>
-        <td>182</td>
-        <td>115</td>
-        <td>P79</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Nieuwpoort/rapport.html">Nieuwpoort</a></td>
-        <td style="color:#64748b">38016</td>
-        <td>3.328</td>
-        <td><strong>12,8%</strong></td>
-        <td>100</td>
-        <td>36</td>
-        <td>P39</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Menen/rapport.html">Menen</a></td>
-        <td style="color:#64748b">34027</td>
-        <td>3.316</td>
-        <td><strong>29,2%</strong></td>
-        <td>210</td>
-        <td>123</td>
-        <td>P92</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Opwijk/rapport.html">Opwijk</a></td>
-        <td style="color:#64748b">23060</td>
-        <td>1.992</td>
-        <td><strong>17,9%</strong></td>
-        <td>85</td>
-        <td>53</td>
-        <td>P71</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Herent/rapport.html">Herent</a></td>
-        <td style="color:#64748b">24038</td>
-        <td>3.274</td>
-        <td><strong>16,3%</strong></td>
-        <td>144</td>
-        <td>54</td>
-        <td>P61</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Moerbeke/rapport.html">Moerbeke</a></td>
-        <td style="color:#64748b">44045</td>
-        <td>3.793</td>
-        <td><strong>7,7%</strong></td>
-        <td>65</td>
-        <td>29</td>
-        <td>P8</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Laarne/rapport.html">Laarne</a></td>
-        <td style="color:#64748b">42010</td>
-        <td>3.258</td>
-        <td><strong>13,7%</strong></td>
-        <td>50</td>
-        <td>20</td>
-        <td>P46</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ruiselede/rapport.html">Ruiselede</a></td>
-        <td style="color:#64748b">37012</td>
-        <td>3.062</td>
-        <td><strong>10,3%</strong></td>
-        <td>31</td>
-        <td>2</td>
-        <td>P22</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Oudenburg/rapport.html">Oudenburg</a></td>
-        <td style="color:#64748b">35014</td>
-        <td>3.560</td>
-        <td><strong>10,8%</strong></td>
-        <td>63</td>
-        <td>16</td>
-        <td>P26</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Waasmunster/rapport.html">Waasmunster</a></td>
-        <td style="color:#64748b">42023</td>
-        <td>3.227</td>
-        <td><strong>12,0%</strong></td>
-        <td>145</td>
-        <td>69</td>
-        <td>P34</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zwalm/rapport.html">Zwalm</a></td>
-        <td style="color:#64748b">45065</td>
-        <td>3.388</td>
-        <td><strong>9,3%</strong></td>
-        <td>67</td>
-        <td>33</td>
-        <td>P17</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zutendaal/rapport.html">Zutendaal</a></td>
-        <td style="color:#64748b">71067</td>
-        <td>3.211</td>
-        <td><strong>10,1%</strong></td>
-        <td>93</td>
-        <td>46</td>
-        <td>P21</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hoeselt/rapport.html">Hoeselt</a></td>
-        <td style="color:#64748b">73032</td>
-        <td>3.010</td>
-        <td><strong>12,3%</strong></td>
-        <td>78</td>
-        <td>29</td>
-        <td>P36</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Gavere/rapport.html">Gavere</a></td>
-        <td style="color:#64748b">44020</td>
-        <td>3.160</td>
-        <td><strong>13,4%</strong></td>
-        <td>152</td>
-        <td>89</td>
-        <td>P44</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Boutersem/rapport.html">Boutersem</a></td>
-        <td style="color:#64748b">24016</td>
-        <td>3.114</td>
-        <td><strong>9,5%</strong></td>
-        <td>88</td>
-        <td>25</td>
-        <td>P18</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lennik/rapport.html">Lennik</a></td>
-        <td style="color:#64748b">23104</td>
-        <td>3.112</td>
-        <td><strong>10,2%</strong></td>
-        <td>72</td>
-        <td>25</td>
-        <td>P22</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Haacht/rapport.html">Haacht</a></td>
-        <td style="color:#64748b">24033</td>
-        <td>3.074</td>
-        <td><strong>14,8%</strong></td>
-        <td>90</td>
-        <td>33</td>
-        <td>P53</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kortessem/rapport.html">Kortessem</a></td>
-        <td style="color:#64748b">73040</td>
-        <td>3.399</td>
-        <td><strong>9,6%</strong></td>
-        <td>59</td>
-        <td>8</td>
-        <td>P19</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Haaltert/rapport.html">Haaltert</a></td>
-        <td style="color:#64748b">41024</td>
-        <td>3.052</td>
-        <td><strong>14,9%</strong></td>
-        <td>166</td>
-        <td>100</td>
-        <td>P53</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Willebroek/rapport.html">Willebroek</a></td>
-        <td style="color:#64748b">12040</td>
-        <td>2.737</td>
-        <td><strong>26,1%</strong></td>
-        <td>246</td>
-        <td>101</td>
-        <td>P88</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Begijnendijk/rapport.html">Begijnendijk</a></td>
-        <td style="color:#64748b">24007</td>
-        <td>1.766</td>
-        <td><strong>17,7%</strong></td>
-        <td>47</td>
-        <td>22</td>
-        <td>P70</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Schoten/rapport.html">Schoten</a></td>
-        <td style="color:#64748b">11040</td>
-        <td>2.951</td>
-        <td><strong>22,8%</strong></td>
-        <td>122</td>
-        <td>42</td>
-        <td>P83</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Bonheiden/rapport.html">Bonheiden</a></td>
-        <td style="color:#64748b">12005</td>
-        <td>2.919</td>
-        <td><strong>13,5%</strong></td>
-        <td>136</td>
-        <td>44</td>
-        <td>P44</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ledegem/rapport.html">Ledegem</a></td>
-        <td style="color:#64748b">36010</td>
-        <td>2.483</td>
-        <td><strong>16,7%</strong></td>
-        <td>32</td>
-        <td>1</td>
-        <td>P63</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Nieuwerkerken/rapport.html">Nieuwerkerken</a></td>
-        <td style="color:#64748b">71045</td>
-        <td>2.251</td>
-        <td><strong>13,1%</strong></td>
-        <td>56</td>
-        <td>33</td>
-        <td>P41</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Vorselaar/rapport.html">Vorselaar</a></td>
-        <td style="color:#64748b">13044</td>
-        <td>2.762</td>
-        <td><strong>8,9%</strong></td>
-        <td>107</td>
-        <td>36</td>
-        <td>P13</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lebbeke/rapport.html">Lebbeke</a></td>
-        <td style="color:#64748b">42011</td>
-        <td>2.730</td>
-        <td><strong>18,4%</strong></td>
-        <td>142</td>
-        <td>50</td>
-        <td>P72</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Sint-Lievens-Houtem/rapport.html">Sint-Lievens-Houtem</a></td>
-        <td style="color:#64748b">41063</td>
-        <td>2.705</td>
-        <td><strong>12,8%</strong></td>
-        <td>139</td>
-        <td>59</td>
-        <td>P40</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Glabbeek/rapport.html">Glabbeek</a></td>
-        <td style="color:#64748b">24137</td>
-        <td>2.699</td>
-        <td><strong>9,2%</strong></td>
-        <td>53</td>
-        <td>14</td>
-        <td>P16</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Steenokkerzeel/rapport.html">Steenokkerzeel</a></td>
-        <td style="color:#64748b">23081</td>
-        <td>2.363</td>
-        <td><strong>25,0%</strong></td>
-        <td>85</td>
-        <td>51</td>
-        <td>P87</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wellen/rapport.html">Wellen</a></td>
-        <td style="color:#64748b">73098</td>
-        <td>2.680</td>
-        <td><strong>10,8%</strong></td>
-        <td>65</td>
-        <td>31</td>
-        <td>P26</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Destelbergen/rapport.html">Destelbergen</a></td>
-        <td style="color:#64748b">44013</td>
-        <td>2.671</td>
-        <td><strong>20,2%</strong></td>
-        <td>209</td>
-        <td>67</td>
-        <td>P78</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="De%20Panne/rapport.html">De Panne</a></td>
-        <td style="color:#64748b">38008</td>
-        <td>2.663</td>
-        <td><strong>12,4%</strong></td>
-        <td>105</td>
-        <td>25</td>
-        <td>P37</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lierde/rapport.html">Lierde</a></td>
-        <td style="color:#64748b">45063</td>
-        <td>2.632</td>
-        <td><strong>8,8%</strong></td>
-        <td>39</td>
-        <td>14</td>
-        <td>P13</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Dentergem/rapport.html">Dentergem</a></td>
-        <td style="color:#64748b">37002</td>
-        <td>2.609</td>
-        <td><strong>14,0%</strong></td>
-        <td>47</td>
-        <td>23</td>
-        <td>P48</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Buggenhout/rapport.html">Buggenhout</a></td>
-        <td style="color:#64748b">42004</td>
-        <td>2.564</td>
-        <td><strong>16,7%</strong></td>
-        <td>116</td>
-        <td>58</td>
-        <td>P64</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lichtervelde/rapport.html">Lichtervelde</a></td>
-        <td style="color:#64748b">36011</td>
-        <td>2.616</td>
-        <td><strong>16,3%</strong></td>
-        <td>37</td>
-        <td>13</td>
-        <td>P61</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Berlaar/rapport.html">Berlaar</a></td>
-        <td style="color:#64748b">12002</td>
-        <td>2.453</td>
-        <td><strong>14,4%</strong></td>
-        <td>99</td>
-        <td>63</td>
-        <td>P50</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Machelen/rapport.html">Machelen</a></td>
-        <td style="color:#64748b">23047</td>
-        <td>1.150</td>
-        <td><strong>52,7%</strong></td>
-        <td>153</td>
-        <td>58</td>
-        <td>P100</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kontich/rapport.html">Kontich</a></td>
-        <td style="color:#64748b">11024</td>
-        <td>2.380</td>
-        <td><strong>25,4%</strong></td>
-        <td>150</td>
-        <td>76</td>
-        <td>P87</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Herenthout/rapport.html">Herenthout</a></td>
-        <td style="color:#64748b">13012</td>
-        <td>2.361</td>
-        <td><strong>12,4%</strong></td>
-        <td>39</td>
-        <td>-2</td>
-        <td>P36</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wichelen/rapport.html">Wichelen</a></td>
-        <td style="color:#64748b">42026</td>
-        <td>2.320</td>
-        <td><strong>15,0%</strong></td>
-        <td>47</td>
-        <td>22</td>
-        <td>P54</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Olen/rapport.html">Olen</a></td>
-        <td style="color:#64748b">13029</td>
-        <td>2.312</td>
-        <td><strong>24,3%</strong></td>
-        <td>173</td>
-        <td>113</td>
-        <td>P85</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Duffel/rapport.html">Duffel</a></td>
-        <td style="color:#64748b">12009</td>
-        <td>2.260</td>
-        <td><strong>23,9%</strong></td>
-        <td>169</td>
-        <td>139</td>
-        <td>P84</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Leopoldsburg/rapport.html">Leopoldsburg</a></td>
-        <td style="color:#64748b">71034</td>
-        <td>2.260</td>
-        <td><strong>19,1%</strong></td>
-        <td>144</td>
-        <td>108</td>
-        <td>P76</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="As/rapport.html">As</a></td>
-        <td style="color:#64748b">71002</td>
-        <td>2.213</td>
-        <td><strong>10,8%</strong></td>
-        <td>131</td>
-        <td>72</td>
-        <td>P27</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Avelgem/rapport.html">Avelgem</a></td>
-        <td style="color:#64748b">34003</td>
-        <td>2.212</td>
-        <td><strong>16,2%</strong></td>
-        <td>116</td>
-        <td>80</td>
-        <td>P60</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Stabroek/rapport.html">Stabroek</a></td>
-        <td style="color:#64748b">11044</td>
-        <td>2.142</td>
-        <td><strong>16,2%</strong></td>
-        <td>74</td>
-        <td>35</td>
-        <td>P59</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zelzate/rapport.html">Zelzate</a></td>
-        <td style="color:#64748b">43018</td>
-        <td>1.377</td>
-        <td><strong>25,4%</strong></td>
-        <td>172</td>
-        <td>106</td>
-        <td>P87</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Boechout/rapport.html">Boechout</a></td>
-        <td style="color:#64748b">11004</td>
-        <td>2.071</td>
-        <td><strong>17,0%</strong></td>
-        <td>70</td>
-        <td>8</td>
-        <td>P65</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hoeilaart/rapport.html">Hoeilaart</a></td>
-        <td style="color:#64748b">23033</td>
-        <td>2.053</td>
-        <td><strong>12,8%</strong></td>
-        <td>37</td>
-        <td>13</td>
-        <td>P39</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Zwijndrecht/rapport.html">Zwijndrecht</a></td>
-        <td style="color:#64748b">11056</td>
-        <td>2.025</td>
-        <td><strong>32,2%</strong></td>
-        <td>87</td>
-        <td>59</td>
-        <td>P94</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Rumst/rapport.html">Rumst</a></td>
-        <td style="color:#64748b">11037</td>
-        <td>2.015</td>
-        <td><strong>22,4%</strong></td>
-        <td>123</td>
-        <td>48</td>
-        <td>P83</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Bever/rapport.html">Bever</a></td>
-        <td style="color:#64748b">23009</td>
-        <td>1.924</td>
-        <td><strong>5,2%</strong></td>
-        <td>20</td>
-        <td>3</td>
-        <td>P2</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Blankenberge/rapport.html">Blankenberge</a></td>
-        <td style="color:#64748b">31004</td>
-        <td>1.902</td>
-        <td><strong>18,0%</strong></td>
-        <td>87</td>
-        <td>4</td>
-        <td>P71</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Aartselaar/rapport.html">Aartselaar</a></td>
-        <td style="color:#64748b">11001</td>
-        <td>1.102</td>
-        <td><strong>33,1%</strong></td>
-        <td>49</td>
-        <td>33</td>
-        <td>P94</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Sint-Martens-Latem/rapport.html">Sint-Martens-Latem</a></td>
-        <td style="color:#64748b">44064</td>
-        <td>1.445</td>
-        <td><strong>18,1%</strong></td>
-        <td>119</td>
-        <td>79</td>
-        <td>P72</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hulshout/rapport.html">Hulshout</a></td>
-        <td style="color:#64748b">13016</td>
-        <td>1.738</td>
-        <td><strong>20,4%</strong></td>
-        <td>89</td>
-        <td>59</td>
-        <td>P78</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Affligem/rapport.html">Affligem</a></td>
-        <td style="color:#64748b">23105</td>
-        <td>1.792</td>
-        <td><strong>19,1%</strong></td>
-        <td>117</td>
-        <td>69</td>
-        <td>P75</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Oostrozebeke/rapport.html">Oostrozebeke</a></td>
-        <td style="color:#64748b">37010</td>
-        <td>1.673</td>
-        <td><strong>22,4%</strong></td>
-        <td>73</td>
-        <td>47</td>
-        <td>P82</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Boortmeerbeek/rapport.html">Boortmeerbeek</a></td>
-        <td style="color:#64748b">24014</td>
-        <td>1.877</td>
-        <td><strong>20,7%</strong></td>
-        <td>108</td>
-        <td>71</td>
-        <td>P80</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Ingelmunster/rapport.html">Ingelmunster</a></td>
-        <td style="color:#64748b">36007</td>
-        <td>1.643</td>
-        <td><strong>27,3%</strong></td>
-        <td>76</td>
-        <td>27</td>
-        <td>P89</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kapelle-op-den-Bos/rapport.html">Kapelle-op-den-Bos</a></td>
-        <td style="color:#64748b">23039</td>
-        <td>1.537</td>
-        <td><strong>17,2%</strong></td>
-        <td>45</td>
-        <td>26</td>
-        <td>P67</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Melle/rapport.html">Melle</a></td>
-        <td style="color:#64748b">44040</td>
-        <td>1.534</td>
-        <td><strong>24,7%</strong></td>
-        <td>298</td>
-        <td>175</td>
-        <td>P86</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wommelgem/rapport.html">Wommelgem</a></td>
-        <td style="color:#64748b">11052</td>
-        <td>1.299</td>
-        <td><strong>29,2%</strong></td>
-        <td>79</td>
-        <td>32</td>
-        <td>P91</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Bredene/rapport.html">Bredene</a></td>
-        <td style="color:#64748b">35002</td>
-        <td>1.425</td>
-        <td><strong>27,5%</strong></td>
-        <td>112</td>
-        <td>50</td>
-        <td>P89</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Denderleeuw/rapport.html">Denderleeuw</a></td>
-        <td style="color:#64748b">41011</td>
-        <td>1.387</td>
-        <td><strong>26,0%</strong></td>
-        <td>109</td>
-        <td>58</td>
-        <td>P88</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lendelede/rapport.html">Lendelede</a></td>
-        <td style="color:#64748b">34025</td>
-        <td>1.327</td>
-        <td><strong>17,0%</strong></td>
-        <td>16</td>
-        <td>3</td>
-        <td>P66</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Liedekerke/rapport.html">Liedekerke</a></td>
-        <td style="color:#64748b">23044</td>
-        <td>1.017</td>
-        <td><strong>24,7%</strong></td>
-        <td>42</td>
-        <td>30</td>
-        <td>P86</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Vosselaar/rapport.html">Vosselaar</a></td>
-        <td style="color:#64748b">13046</td>
-        <td>1.183</td>
-        <td><strong>24,1%</strong></td>
-        <td>62</td>
-        <td>35</td>
-        <td>P85</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Horebeke/rapport.html">Horebeke</a></td>
-        <td style="color:#64748b">45062</td>
-        <td>1.125</td>
-        <td><strong>7,9%</strong></td>
-        <td>18</td>
-        <td>4</td>
-        <td>P8</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Spiere-Helkijn/rapport.html">Spiere-Helkijn</a></td>
-        <td style="color:#64748b">34043</td>
-        <td>1.082</td>
-        <td><strong>9,6%</strong></td>
-        <td>24</td>
-        <td>8</td>
-        <td>P19</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Edegem/rapport.html">Edegem</a></td>
-        <td style="color:#64748b">11013</td>
-        <td>872</td>
-        <td><strong>35,4%</strong></td>
-        <td>73</td>
-        <td>16</td>
-        <td>P96</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wemmel/rapport.html">Wemmel</a></td>
-        <td style="color:#64748b">23102</td>
-        <td>877</td>
-        <td><strong>27,8%</strong></td>
-        <td>51</td>
-        <td>21</td>
-        <td>P90</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wijnegem/rapport.html">Wijnegem</a></td>
-        <td style="color:#64748b">11050</td>
-        <td>788</td>
-        <td><strong>32,2%</strong></td>
-        <td>36</td>
-        <td>23</td>
-        <td>P94</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Schelle/rapport.html">Schelle</a></td>
-        <td style="color:#64748b">11038</td>
-        <td>783</td>
-        <td><strong>21,8%</strong></td>
-        <td>55</td>
-        <td>24</td>
-        <td>P82</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Mortsel/rapport.html">Mortsel</a></td>
-        <td style="color:#64748b">11029</td>
-        <td>778</td>
-        <td><strong>41,3%</strong></td>
-        <td>68</td>
-        <td>13</td>
-        <td>P99</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Niel/rapport.html">Niel</a></td>
-        <td style="color:#64748b">11030</td>
-        <td>535</td>
-        <td><strong>30,0%</strong></td>
-        <td>40</td>
-        <td>23</td>
-        <td>P92</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Baarle-Hertog/rapport.html">Baarle-Hertog</a></td>
-        <td style="color:#64748b">13002</td>
-        <td>741</td>
-        <td><strong>13,4%</strong></td>
-        <td>26</td>
-        <td>16</td>
-        <td>P43</td>
-        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Boom/rapport.html">Boom</a></td>
-        <td style="color:#64748b">11005</td>
-        <td>738</td>
-        <td><strong>39,7%</strong></td>
-        <td>56</td>
-        <td>29</td>
-        <td>P98</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Wezembeek-Oppem/rapport.html">Wezembeek-Oppem</a></td>
-        <td style="color:#64748b">23103</td>
-        <td>686</td>
-        <td><strong>31,1%</strong></td>
-        <td>36</td>
-        <td>15</td>
-        <td>P93</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Kraainem/rapport.html">Kraainem</a></td>
-        <td style="color:#64748b">23099</td>
-        <td>584</td>
-        <td><strong>33,6%</strong></td>
-        <td>33</td>
-        <td>6</td>
-        <td>P95</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hove/rapport.html">Hove</a></td>
-        <td style="color:#64748b">11021</td>
-        <td>602</td>
-        <td><strong>24,5%</strong></td>
-        <td>66</td>
-        <td>20</td>
-        <td>P85</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Lint/rapport.html">Lint</a></td>
-        <td style="color:#64748b">11025</td>
-        <td>565</td>
-        <td><strong>28,7%</strong></td>
-        <td>27</td>
-        <td>21</td>
-        <td>P91</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Hemiksem/rapport.html">Hemiksem</a></td>
-        <td style="color:#64748b">11018</td>
-        <td>548</td>
-        <td><strong>37,0%</strong></td>
-        <td>47</td>
-        <td>10</td>
-        <td>P98</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Herstappe/rapport.html">Herstappe</a></td>
-        <td style="color:#64748b">73028</td>
-        <td>135</td>
-        <td><strong>7,3%</strong></td>
-        <td>3</td>
-        <td>2</td>
-        <td>P6</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Linkebeek/rapport.html">Linkebeek</a></td>
-        <td style="color:#64748b">23100</td>
-        <td>419</td>
-        <td><strong>16,3%</strong></td>
-        <td>18</td>
-        <td>5</td>
-        <td>P60</td>
-        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
-      </tr>
-      <tr>
-        <td><a href="Borsbeek/rapport.html">Borsbeek</a></td>
-        <td style="color:#64748b">11007</td>
-        <td>390</td>
-        <td><strong>35,5%</strong></td>
-        <td>8</td>
-        <td>2</td>
-        <td>P96</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr>
-      <tr>
-        <td><a href="Mesen/rapport.html">Mesen</a></td>
-        <td style="color:#64748b">33016</td>
-        <td>360</td>
-        <td><strong>8,1%</strong></td>
-        <td>5</td>
-        <td>2</td>
-        <td>P9</td>
-        <td><span class="badge badge-goed">relatief laag</span></td>
-      </tr>
-      <tr>
-        <td><a href="Drogenbos/rapport.html">Drogenbos</a></td>
-        <td style="color:#64748b">23098</td>
-        <td>250</td>
-        <td><strong>55,8%</strong></td>
-        <td>19</td>
-        <td>10</td>
-        <td>P100</td>
-        <td><span class="badge badge-slecht">relatief hoog</span></td>
-      </tr></tbody>
-  </table>
-
-  <div class="footer">
-    Betonmeter – DRUM · Hogeschool Gent · 16/3/2026 ·
-    Bronnen: HOGENT Rapport 1, 4 &amp; 6
+<!-- ══ VLAANDEREN IN CIJFERS ═══════════════════════════════════════════════ -->
+<section class="section section-dark">
+  <div class="section-inner">
+    <div class="section-tag">Data</div>
+    <h2 class="section-title">Vlaanderen in cijfers</h2>
+    <div class="cijfers-grid">
+      <div class="cijfer-block">
+        <h4>Top 3 hoogste verharding</h4>
+        <div class="cijfer-row">
+          <span class="gem-naam">Drogenbos</span>
+          <span class="gem-perc high">55,8%</span>
+        </div>
+        <div class="cijfer-row">
+          <span class="gem-naam">Machelen</span>
+          <span class="gem-perc high">52,7%</span>
+        </div>
+        <div class="cijfer-row">
+          <span class="gem-naam">Kuurne</span>
+          <span class="gem-perc high">42,7%</span>
+        </div>
+      </div>
+      <div class="cijfer-block">
+        <h4>Top 3 laagste verharding</h4>
+        <div class="cijfer-row">
+          <span class="gem-naam">Zuienkerke</span>
+          <span class="gem-perc low">4,1%</span>
+        </div>
+        <div class="cijfer-row">
+          <span class="gem-naam">Voeren</span>
+          <span class="gem-perc low">4,9%</span>
+        </div>
+        <div class="cijfer-row">
+          <span class="gem-naam">Lo-Reninge</span>
+          <span class="gem-perc low">5,0%</span>
+        </div>
+      </div>
+      <div class="cijfer-block" style="text-align:center;">
+        <h4>Vlaams gemiddelde verharding</h4>
+        <div class="big-avg">16,3%</div>
+        <div class="big-avg-lbl">van het grondgebied is verhard &mdash; wegen, parkings, daken en pleinen</div>
+      </div>
+    </div>
   </div>
+</section>
 
-  <script>
-    function filterTabel(q) {
-      q = q.toLowerCase();
-      let n = 0;
-      document.querySelectorAll('#tabel tbody tr').forEach(row => {
-        const match = row.cells[0].textContent.toLowerCase().includes(q);
-        row.style.display = match ? '' : 'none';
-        if (match) n++;
-      });
-      document.getElementById('countLbl').textContent = n + ' gemeenten';
+<!-- ══ BRV REDUCTIETRAJECT ═════════════════════════════════════════════════ -->
+<section class="section" style="background:#fff;">
+  <div class="section-inner">
+    <div class="section-tag">Beleid</div>
+    <h2 class="section-title">Van 6 naar 0 ha/dag &ndash; het BRV-reductietraject</h2>
+    <div class="timeline">
+      <div class="milestone">
+        <div class="milestone-dot red">&#128205;</div>
+        <div class="milestone-pill red">2013&ndash;2015</div>
+        <h4>6 ha/dag</h4>
+        <p>Historisch gemiddeld tempo van bijkomend ruimtebeslag in Vlaanderen.</p>
+      </div>
+      <div class="milestone">
+        <div class="milestone-dot orange">&#127919;</div>
+        <div class="milestone-pill orange">2025</div>
+        <h4>max. 3 ha/dag</h4>
+        <p>Tussentijdse BRV-doelstelling: halvering van het historische tempo.</p>
+      </div>
+      <div class="milestone">
+        <div class="milestone-dot green">&#9989;</div>
+        <div class="milestone-pill green">2040</div>
+        <h4>0 ha/dag</h4>
+        <p>Ruimteneutraliteit: geen netto bijkomend ruimtebeslag meer in Vlaanderen.</p>
+      </div>
+    </div>
+    <div class="brv-progress-wrap">
+      <div class="brv-progress-label">
+        <span>Historisch: 6 ha/dag</span>
+        <span>Doelstelling 2040: 0 ha/dag</span>
+      </div>
+      <div class="brv-progress-bar">
+        <div class="brv-progress-fill"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GEMEENTEN GRID ═══════════════════════════════════════════════════════ -->
+<section class="section section-light" id="gemeenten">
+  <div class="section-inner">
+    <div class="section-tag">Rapporten</div>
+    <h2 class="section-title mt-0">Zoek het rapport van jouw gemeente</h2>
+    <div class="search-bar-wrap">
+      <input type="search" class="search-bar-main" id="gridSearch" placeholder="&#128269; Zoek gemeente…" autocomplete="off">
+    </div>
+    <div class="alpha-filter" id="alphaFilter"></div>
+    <div class="grid-count" id="gridCount">300 gemeenten</div>
+    <div class="gem-grid" id="gemGrid"></div>
+    <div class="no-results" id="noResults">Geen gemeenten gevonden voor deze zoekopdracht.</div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <div class="logo-main">Betonmeter Vlaanderen</div>
+        <div class="logo-sub">DRUM &times; HOGENT</div>
+        <div class="logo-tagline">Beleidsrelevante cartografische instrumenten voor een duurzame ruimtelijke planning in Vlaanderen</div>
+      </div>
+      <div class="footer-links">
+        <h5>Navigatie</h5>
+        <a href="gemeenten.html">Gemeenten</a>
+        <a href="#">Over het project</a>
+        <a href="#">Bronnen</a>
+      </div>
+      <div class="footer-links">
+        <h5>Thema&#39;s</h5>
+        <a href="#">Betontoestand</a>
+        <a href="#">Betonevolutie</a>
+        <a href="#">Betonrisico</a>
+        <a href="#">Reductieopgave</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>Gebaseerd op HOGENT Rapport 1, 4 &amp; 6 &mdash; PWO-project Beleidsrelevante cartografische instrumenten voor een duurzame ruimtelijke planning in Vlaanderen</p>
+      <span class="copy">&copy; 2024 DRUM &ndash; Hogeschool Gent</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Data ────────────────────────────────────────────────────────────────────
+const GEMEENTE_DATA = [{"naam":"Roeselare","verh_perc":34.835327,"rbr_opp":311.4,"prank":96,"klasse":"slecht","url":"Roeselare/rapport.html"},{"naam":"Lommel","verh_perc":15.714517,"rbr_opp":688.84,"prank":57,"klasse":"matig","url":"Lommel/rapport.html"},{"naam":"Beringen","verh_perc":18.761646,"rbr_opp":630.25,"prank":75,"klasse":"slecht","url":"Beringen/rapport.html"},{"naam":"Gent","verh_perc":36.760506,"rbr_opp":1079.12,"prank":98,"klasse":"slecht","url":"Gent/rapport.html"},{"naam":"Evergem","verh_perc":17.620909,"rbr_opp":806.13,"prank":69,"klasse":"matig","url":"Evergem/rapport.html"},{"naam":"Lokeren","verh_perc":18.674318,"rbr_opp":270.65,"prank":74,"klasse":"matig","url":"Lokeren/rapport.html"},{"naam":"Damme","verh_perc":6.107526,"rbr_opp":75.86,"prank":3,"klasse":"goed","url":"Damme/rapport.html"},{"naam":"Staden","verh_perc":15.721106,"rbr_opp":55.87,"prank":58,"klasse":"matig","url":"Staden/rapport.html"},{"naam":"Antwerpen","verh_perc":41.547047,"rbr_opp":1421.76,"prank":99,"klasse":"slecht","url":"Antwerpen/rapport.html"},{"naam":"Deinze","verh_perc":13.944929,"rbr_opp":470.39,"prank":47,"klasse":"goed","url":"Deinze/rapport.html"},{"naam":"Hoogstraten","verh_perc":14.021736,"rbr_opp":204.28,"prank":48,"klasse":"goed","url":"Hoogstraten/rapport.html"},{"naam":"Dilsen-Stokkem","verh_perc":12.27469,"rbr_opp":270.78,"prank":36,"klasse":"goed","url":"Dilsen-Stokkem/rapport.html"},{"naam":"Poperinge","verh_perc":8.54302,"rbr_opp":135.54,"prank":11,"klasse":"goed","url":"Poperinge/rapport.html"},{"naam":"Sint-Truiden","verh_perc":14.053896,"rbr_opp":476.9,"prank":48,"klasse":"goed","url":"Sint-Truiden/rapport.html"},{"naam":"Beveren","verh_perc":21.452713,"rbr_opp":1746.95,"prank":80,"klasse":"slecht","url":"Beveren/rapport.html"},{"naam":"Bree","verh_perc":12.603192,"rbr_opp":167.69,"prank":38,"klasse":"goed","url":"Bree/rapport.html"},{"naam":"Tessenderlo","verh_perc":16.677288,"rbr_opp":354.83,"prank":64,"klasse":"matig","url":"Tessenderlo/rapport.html"},{"naam":"Lanaken","verh_perc":15.279193,"rbr_opp":416.22,"prank":56,"klasse":"matig","url":"Lanaken/rapport.html"},{"naam":"Rijkevorsel","verh_perc":13.215336,"rbr_opp":89.93,"prank":42,"klasse":"goed","url":"Rijkevorsel/rapport.html"},{"naam":"Heist-op-den-Berg","verh_perc":16.596992,"rbr_opp":451.56,"prank":62,"klasse":"matig","url":"Heist-op-den-Berg/rapport.html"},{"naam":"Diksmuide","verh_perc":6.628021,"rbr_opp":180.15,"prank":4,"klasse":"goed","url":"Diksmuide/rapport.html"},{"naam":"Langemark-Poelkapelle","verh_perc":9.199313,"rbr_opp":48.23,"prank":15,"klasse":"goed","url":"Langemark-Poelkapelle/rapport.html"},{"naam":"Nazareth","verh_perc":16.767042,"rbr_opp":263.14,"prank":64,"klasse":"matig","url":"Nazareth/rapport.html"},{"naam":"Brugge","verh_perc":27.37416,"rbr_opp":1755.37,"prank":89,"klasse":"slecht","url":"Brugge/rapport.html"},{"naam":"Borgloon","verh_perc":9.937291,"rbr_opp":195.27,"prank":20,"klasse":"goed","url":"Borgloon/rapport.html"},{"naam":"Merksplas","verh_perc":12.454577,"rbr_opp":166.22,"prank":37,"klasse":"goed","url":"Merksplas/rapport.html"},{"naam":"Aalter","verh_perc":11.211675,"rbr_opp":404.51,"prank":29,"klasse":"goed","url":"Aalter/rapport.html"},{"naam":"Knokke-Heist","verh_perc":14.529871,"rbr_opp":245.43,"prank":51,"klasse":"matig","url":"Knokke-Heist/rapport.html"},{"naam":"Ravels","verh_perc":8.74396,"rbr_opp":177.39,"prank":12,"klasse":"goed","url":"Ravels/rapport.html"},{"naam":"Ieper","verh_perc":11.947986,"rbr_opp":337.89,"prank":32,"klasse":"goed","url":"Ieper/rapport.html"},{"naam":"Oostkamp","verh_perc":11.982292,"rbr_opp":262.79,"prank":32,"klasse":"goed","url":"Oostkamp/rapport.html"},{"naam":"Oudsbergen","verh_perc":9.24078,"rbr_opp":264.1,"prank":16,"klasse":"goed","url":"Oudsbergen/rapport.html"},{"naam":"Mol","verh_perc":11.286187,"rbr_opp":786.84,"prank":29,"klasse":"goed","url":"Mol/rapport.html"},{"naam":"Hasselt","verh_perc":21.517046,"rbr_opp":738.39,"prank":81,"klasse":"slecht","url":"Hasselt/rapport.html"},{"naam":"Tongeren","verh_perc":11.842271,"rbr_opp":425.34,"prank":32,"klasse":"goed","url":"Tongeren/rapport.html"},{"naam":"Zonnebeke","verh_perc":10.486944,"rbr_opp":81.93,"prank":24,"klasse":"goed","url":"Zonnebeke/rapport.html"},{"naam":"Geel","verh_perc":14.418412,"rbr_opp":536.35,"prank":50,"klasse":"matig","url":"Geel/rapport.html"},{"naam":"Sint-Katelijne-Waver","verh_perc":24.078075,"rbr_opp":222.34,"prank":84,"klasse":"slecht","url":"Sint-Katelijne-Waver/rapport.html"},{"naam":"Hooglede","verh_perc":14.980382,"rbr_opp":98.23,"prank":54,"klasse":"matig","url":"Hooglede/rapport.html"},{"naam":"Maaseik","verh_perc":11.634239,"rbr_opp":234.61,"prank":30,"klasse":"goed","url":"Maaseik/rapport.html"},{"naam":"Veurne","verh_perc":7.359966,"rbr_opp":111.27,"prank":6,"klasse":"goed","url":"Veurne/rapport.html"},{"naam":"Ninove","verh_perc":14.082782,"rbr_opp":301.61,"prank":49,"klasse":"goed","url":"Ninove/rapport.html"},{"naam":"Houthalen-Helchteren","verh_perc":12.737021,"rbr_opp":589.99,"prank":39,"klasse":"goed","url":"Houthalen-Helchteren/rapport.html"},{"naam":"De Pinte","verh_perc":17.375135,"rbr_opp":70.46,"prank":68,"klasse":"matig","url":"De%20Pinte/rapport.html"},{"naam":"Heuvelland","verh_perc":5.7568974,"rbr_opp":62.65,"prank":2,"klasse":"goed","url":"Heuvelland/rapport.html"},{"naam":"Kortrijk","verh_perc":27.665483,"rbr_opp":544.32,"prank":90,"klasse":"slecht","url":"Kortrijk/rapport.html"},{"naam":"Wuustwezel","verh_perc":9.710399,"rbr_opp":219.5,"prank":20,"klasse":"goed","url":"Wuustwezel/rapport.html"},{"naam":"Wingene","verh_perc":11.691461,"rbr_opp":114.49,"prank":31,"klasse":"goed","url":"Wingene/rapport.html"},{"naam":"Zemst","verh_perc":14.729464,"rbr_opp":229.06,"prank":52,"klasse":"matig","url":"Zemst/rapport.html"},{"naam":"Bilzen","verh_perc":14.455803,"rbr_opp":435.19,"prank":51,"klasse":"matig","url":"Bilzen/rapport.html"},{"naam":"Maldegem","verh_perc":10.783365,"rbr_opp":222.26,"prank":26,"klasse":"goed","url":"Maldegem/rapport.html"},{"naam":"Meulebeke","verh_perc":17.389357,"rbr_opp":60.16,"prank":68,"klasse":"matig","url":"Meulebeke/rapport.html"},{"naam":"Zottegem","verh_perc":13.400038,"rbr_opp":229.65,"prank":43,"klasse":"goed","url":"Zottegem/rapport.html"},{"naam":"Peer","verh_perc":8.978552,"rbr_opp":129.16,"prank":13,"klasse":"goed","url":"Peer/rapport.html"},{"naam":"Beernem","verh_perc":9.4317665,"rbr_opp":437.85,"prank":18,"klasse":"goed","url":"Beernem/rapport.html"},{"naam":"Genk","verh_perc":26.165184,"rbr_opp":1281.76,"prank":88,"klasse":"slecht","url":"Genk/rapport.html"},{"naam":"Assenede","verh_perc":7.4099913,"rbr_opp":119.48,"prank":6,"klasse":"goed","url":"Assenede/rapport.html"},{"naam":"Jabbeke","verh_perc":11.499075,"rbr_opp":64.03,"prank":30,"klasse":"goed","url":"Jabbeke/rapport.html"},{"naam":"Wevelgem","verh_perc":28.109123,"rbr_opp":200.1,"prank":91,"klasse":"slecht","url":"Wevelgem/rapport.html"},{"naam":"Zwevegem","verh_perc":13.952876,"rbr_opp":178.92,"prank":47,"klasse":"goed","url":"Zwevegem/rapport.html"},{"naam":"Sint-Niklaas","verh_perc":21.641241,"rbr_opp":467.5,"prank":81,"klasse":"slecht","url":"Sint-Niklaas/rapport.html"},{"naam":"Pelt","verh_perc":16.157158,"rbr_opp":420.29,"prank":58,"klasse":"matig","url":"Pelt/rapport.html"},{"naam":"Brecht","verh_perc":10.92547,"rbr_opp":297.62,"prank":27,"klasse":"goed","url":"Brecht/rapport.html"},{"naam":"Ardooie","verh_perc":17.43592,"rbr_opp":41.49,"prank":68,"klasse":"matig","url":"Ardooie/rapport.html"},{"naam":"Lievegem","verh_perc":11.198263,"rbr_opp":313.5,"prank":28,"klasse":"goed","url":"Lievegem/rapport.html"},{"naam":"Alveringem","verh_perc":5.0667467,"rbr_opp":31.35,"prank":1,"klasse":"goed","url":"Alveringem/rapport.html"},{"naam":"Kortemark","verh_perc":12.174465,"rbr_opp":66.88,"prank":34,"klasse":"goed","url":"Kortemark/rapport.html"},{"naam":"Dessel","verh_perc":14.803011,"rbr_opp":240.86,"prank":53,"klasse":"matig","url":"Dessel/rapport.html"},{"naam":"Geraardsbergen","verh_perc":11.415705,"rbr_opp":379.74,"prank":30,"klasse":"goed","url":"Geraardsbergen/rapport.html"},{"naam":"Middelkerke","verh_perc":10.014024,"rbr_opp":109.85,"prank":21,"klasse":"goed","url":"Middelkerke/rapport.html"},{"naam":"Aalst","verh_perc":23.824238,"rbr_opp":625.47,"prank":84,"klasse":"slecht","url":"Aalst/rapport.html"},{"naam":"Westerlo","verh_perc":17.531086,"rbr_opp":312.98,"prank":69,"klasse":"matig","url":"Westerlo/rapport.html"},{"naam":"Herentals","verh_perc":19.394539,"rbr_opp":304.78,"prank":77,"klasse":"slecht","url":"Herentals/rapport.html"},{"naam":"Maasmechelen","verh_perc":15.418779,"rbr_opp":584.05,"prank":56,"klasse":"matig","url":"Maasmechelen/rapport.html"},{"naam":"Hechtel-Eksel","verh_perc":6.707164,"rbr_opp":135.26,"prank":4,"klasse":"goed","url":"Hechtel-Eksel/rapport.html"},{"naam":"Brakel","verh_perc":8.690127,"rbr_opp":102.34,"prank":12,"klasse":"goed","url":"Brakel/rapport.html"},{"naam":"Waregem","verh_perc":34.386715,"rbr_opp":231.55,"prank":95,"klasse":"slecht","url":"Waregem/rapport.html"},{"naam":"Sint-Laureins","verh_perc":5.490606,"rbr_opp":29.52,"prank":2,"klasse":"goed","url":"Sint-Laureins/rapport.html"},{"naam":"Kruisem","verh_perc":11.329086,"rbr_opp":354.12,"prank":29,"klasse":"goed","url":"Kruisem/rapport.html"},{"naam":"Izegem","verh_perc":35.782436,"rbr_opp":115.36,"prank":97,"klasse":"slecht","url":"Izegem/rapport.html"},{"naam":"Tienen","verh_perc":13.648136,"rbr_opp":399.04,"prank":46,"klasse":"goed","url":"Tienen/rapport.html"},{"naam":"Asse","verh_perc":17.002985,"rbr_opp":252.74,"prank":66,"klasse":"matig","url":"Asse/rapport.html"},{"naam":"Balen","verh_perc":12.272539,"rbr_opp":443.08,"prank":35,"klasse":"goed","url":"Balen/rapport.html"},{"naam":"Kasterlee","verh_perc":10.051613,"rbr_opp":365.7,"prank":21,"klasse":"goed","url":"Kasterlee/rapport.html"},{"naam":"Oudenaarde","verh_perc":15.850398,"rbr_opp":231.7,"prank":58,"klasse":"matig","url":"Oudenaarde/rapport.html"},{"naam":"Tielt","verh_perc":14.083452,"rbr_opp":147.43,"prank":49,"klasse":"goed","url":"Tielt/rapport.html"},{"naam":"Meerhout","verh_perc":12.017133,"rbr_opp":61.91,"prank":33,"klasse":"goed","url":"Meerhout/rapport.html"},{"naam":"Puurs-Sint-Amands","verh_perc":17.547276,"rbr_opp":253.84,"prank":69,"klasse":"matig","url":"Puurs-Sint-Amands/rapport.html"},{"naam":"Mechelen","verh_perc":24.917683,"rbr_opp":299.85,"prank":86,"klasse":"slecht","url":"Mechelen/rapport.html"},{"naam":"Oud-Heverlee","verh_perc":9.368294,"rbr_opp":70.49,"prank":17,"klasse":"goed","url":"Oud-Heverlee/rapport.html"},{"naam":"Lo-Reninge","verh_perc":4.9885592,"rbr_opp":19.39,"prank":1,"klasse":"goed","url":"Lo-Reninge/rapport.html"},{"naam":"Aarschot","verh_perc":16.21109,"rbr_opp":228.44,"prank":60,"klasse":"matig","url":"Aarschot/rapport.html"},{"naam":"Oosterzele","verh_perc":11.072419,"rbr_opp":171.48,"prank":28,"klasse":"goed","url":"Oosterzele/rapport.html"},{"naam":"Houthulst","verh_perc":9.12512,"rbr_opp":63.67,"prank":15,"klasse":"goed","url":"Houthulst/rapport.html"},{"naam":"Lochristi","verh_perc":16.872059,"rbr_opp":162.88,"prank":65,"klasse":"matig","url":"Lochristi/rapport.html"},{"naam":"Lille","verh_perc":10.72434,"rbr_opp":299.33,"prank":25,"klasse":"goed","url":"Lille/rapport.html"},{"naam":"Kalmthout","verh_perc":9.545027,"rbr_opp":189.8,"prank":18,"klasse":"goed","url":"Kalmthout/rapport.html"},{"naam":"Bocholt","verh_perc":10.549544,"rbr_opp":136.01,"prank":24,"klasse":"goed","url":"Bocholt/rapport.html"},{"naam":"Diest","verh_perc":13.219133,"rbr_opp":326.41,"prank":42,"klasse":"goed","url":"Diest/rapport.html"},{"naam":"Lummen","verh_perc":12.854914,"rbr_opp":254.18,"prank":40,"klasse":"goed","url":"Lummen/rapport.html"},{"naam":"Beerse","verh_perc":19.22165,"rbr_opp":201.28,"prank":76,"klasse":"slecht","url":"Beerse/rapport.html"},{"naam":"Zedelgem","verh_perc":15.206482,"rbr_opp":225.56,"prank":55,"klasse":"matig","url":"Zedelgem/rapport.html"},{"naam":"Overijse","verh_perc":14.685564,"rbr_opp":134.8,"prank":52,"klasse":"matig","url":"Overijse/rapport.html"},{"naam":"Riemst","verh_perc":10.565643,"rbr_opp":169.89,"prank":25,"klasse":"goed","url":"Riemst/rapport.html"},{"naam":"Leuven","verh_perc":30.695726,"rbr_opp":522.38,"prank":93,"klasse":"slecht","url":"Leuven/rapport.html"},{"naam":"Turnhout","verh_perc":19.090876,"rbr_opp":251.67,"prank":75,"klasse":"slecht","url":"Turnhout/rapport.html"},{"naam":"Gingelom","verh_perc":6.5053563,"rbr_opp":106.47,"prank":4,"klasse":"goed","url":"Gingelom/rapport.html"},{"naam":"Anzegem","verh_perc":14.714957,"rbr_opp":127.93,"prank":52,"klasse":"matig","url":"Anzegem/rapport.html"},{"naam":"Putte","verh_perc":16.855478,"rbr_opp":117.18,"prank":65,"klasse":"matig","url":"Putte/rapport.html"},{"naam":"Sint-Gillis-Waas","verh_perc":12.262105,"rbr_opp":99.34,"prank":35,"klasse":"goed","url":"Sint-Gillis-Waas/rapport.html"},{"naam":"Wielsbeke","verh_perc":27.570192,"rbr_opp":155.92,"prank":90,"klasse":"slecht","url":"Wielsbeke/rapport.html"},{"naam":"Arendonk","verh_perc":10.177348,"rbr_opp":116.41,"prank":22,"klasse":"goed","url":"Arendonk/rapport.html"},{"naam":"Alken","verh_perc":16.48078,"rbr_opp":89.15,"prank":62,"klasse":"matig","url":"Alken/rapport.html"},{"naam":"Moorslede","verh_perc":13.546556,"rbr_opp":56.53,"prank":45,"klasse":"goed","url":"Moorslede/rapport.html"},{"naam":"Heusden-Zolder","verh_perc":19.349571,"rbr_opp":444.88,"prank":76,"klasse":"slecht","url":"Heusden-Zolder/rapport.html"},{"naam":"Landen","verh_perc":9.25877,"rbr_opp":211.34,"prank":16,"klasse":"goed","url":"Landen/rapport.html"},{"naam":"Heers","verh_perc":6.1971517,"rbr_opp":125.12,"prank":3,"klasse":"goed","url":"Heers/rapport.html"},{"naam":"Ham","verh_perc":15.704282,"rbr_opp":184.99,"prank":57,"klasse":"matig","url":"Ham/rapport.html"},{"naam":"Malle","verh_perc":11.987637,"rbr_opp":251.79,"prank":33,"klasse":"goed","url":"Malle/rapport.html"},{"naam":"Keerbergen","verh_perc":18.068071,"rbr_opp":116.52,"prank":72,"klasse":"matig","url":"Keerbergen/rapport.html"},{"naam":"Dendermonde","verh_perc":22.391787,"rbr_opp":315.42,"prank":82,"klasse":"slecht","url":"Dendermonde/rapport.html"},{"naam":"Zonhoven","verh_perc":17.684095,"rbr_opp":251.3,"prank":70,"klasse":"matig","url":"Zonhoven/rapport.html"},{"naam":"Zulte","verh_perc":18.67681,"rbr_opp":172.2,"prank":74,"klasse":"matig","url":"Zulte/rapport.html"},{"naam":"Herselt","verh_perc":10.329797,"rbr_opp":138.88,"prank":23,"klasse":"goed","url":"Herselt/rapport.html"},{"naam":"Kinrooi","verh_perc":10.8527,"rbr_opp":92.51,"prank":27,"klasse":"goed","url":"Kinrooi/rapport.html"},{"naam":"Scherpenheuvel-Zichem","verh_perc":13.690558,"rbr_opp":162.87,"prank":46,"klasse":"goed","url":"Scherpenheuvel-Zichem/rapport.html"},{"naam":"Deerlijk","verh_perc":29.62209,"rbr_opp":91.12,"prank":92,"klasse":"slecht","url":"Deerlijk/rapport.html"},{"naam":"Essen","verh_perc":12.215021,"rbr_opp":200.36,"prank":34,"klasse":"goed","url":"Essen/rapport.html"},{"naam":"Grobbendonk","verh_perc":17.07693,"rbr_opp":125.1,"prank":67,"klasse":"matig","url":"Grobbendonk/rapport.html"},{"naam":"Voeren","verh_perc":4.8595166,"rbr_opp":58.66,"prank":1,"klasse":"goed","url":"Voeren/rapport.html"},{"naam":"Koksijde","verh_perc":14.074225,"rbr_opp":144.49,"prank":49,"klasse":"goed","url":"Koksijde/rapport.html"},{"naam":"Zoutleeuw","verh_perc":7.6269093,"rbr_opp":93.04,"prank":7,"klasse":"goed","url":"Zoutleeuw/rapport.html"},{"naam":"Lier","verh_perc":20.294508,"rbr_opp":295.73,"prank":78,"klasse":"slecht","url":"Lier/rapport.html"},{"naam":"Kortenaken","verh_perc":7.7662573,"rbr_opp":50.23,"prank":8,"klasse":"goed","url":"Kortenaken/rapport.html"},{"naam":"Bornem","verh_perc":13.402187,"rbr_opp":93.35,"prank":43,"klasse":"goed","url":"Bornem/rapport.html"},{"naam":"Oostende","verh_perc":34.581272,"rbr_opp":316.13,"prank":95,"klasse":"slecht","url":"Oostende/rapport.html"},{"naam":"Zuienkerke","verh_perc":4.1182995,"rbr_opp":19.88,"prank":0,"klasse":"goed","url":"Zuienkerke/rapport.html"},{"naam":"Grimbergen","verh_perc":21.534792,"rbr_opp":175.45,"prank":81,"klasse":"slecht","url":"Grimbergen/rapport.html"},{"naam":"Retie","verh_perc":9.345541,"rbr_opp":274.7,"prank":17,"klasse":"goed","url":"Retie/rapport.html"},{"naam":"Herzele","verh_perc":10.5794325,"rbr_opp":103.21,"prank":25,"klasse":"goed","url":"Herzele/rapport.html"},{"naam":"Kaprijke","verh_perc":9.068352,"rbr_opp":155.17,"prank":14,"klasse":"goed","url":"Kaprijke/rapport.html"},{"naam":"Erpe-Mere","verh_perc":17.775501,"rbr_opp":153.71,"prank":70,"klasse":"matig","url":"Erpe-Mere/rapport.html"},{"naam":"Laakdal","verh_perc":14.646659,"rbr_opp":172.08,"prank":51,"klasse":"matig","url":"Laakdal/rapport.html"},{"naam":"Halle","verh_perc":18.656101,"rbr_opp":242.64,"prank":73,"klasse":"matig","url":"Halle/rapport.html"},{"naam":"De Haan","verh_perc":11.157374,"rbr_opp":90.32,"prank":28,"klasse":"goed","url":"De%20Haan/rapport.html"},{"naam":"Bertem","verh_perc":9.008337,"rbr_opp":121.71,"prank":14,"klasse":"goed","url":"Bertem/rapport.html"},{"naam":"Ichtegem","verh_perc":11.722613,"rbr_opp":73.56,"prank":31,"klasse":"goed","url":"Ichtegem/rapport.html"},{"naam":"Lede","verh_perc":16.628878,"rbr_opp":102.92,"prank":63,"klasse":"matig","url":"Lede/rapport.html"},{"naam":"Zele","verh_perc":19.641462,"rbr_opp":94.07,"prank":77,"klasse":"slecht","url":"Zele/rapport.html"},{"naam":"Torhout","verh_perc":16.317284,"rbr_opp":141.1,"prank":61,"klasse":"matig","url":"Torhout/rapport.html"},{"naam":"Stekene","verh_perc":13.159321,"rbr_opp":112.1,"prank":41,"klasse":"goed","url":"Stekene/rapport.html"},{"naam":"Harelbeke","verh_perc":31.229261,"rbr_opp":146.89,"prank":93,"klasse":"slecht","url":"Harelbeke/rapport.html"},{"naam":"Roosdaal","verh_perc":15.25096,"rbr_opp":97.38,"prank":56,"klasse":"matig","url":"Roosdaal/rapport.html"},{"naam":"Herne","verh_perc":6.7952375,"rbr_opp":41.71,"prank":5,"klasse":"goed","url":"Herne/rapport.html"},{"naam":"Tielt-Winge","verh_perc":9.709686,"rbr_opp":65.86,"prank":20,"klasse":"goed","url":"Tielt-Winge/rapport.html"},{"naam":"Zaventem","verh_perc":36.141216,"rbr_opp":203.39,"prank":97,"klasse":"slecht","url":"Zaventem/rapport.html"},{"naam":"Vleteren","verh_perc":6.724383,"rbr_opp":26.24,"prank":5,"klasse":"goed","url":"Vleteren/rapport.html"},{"naam":"Wervik","verh_perc":13.826399,"rbr_opp":92.32,"prank":47,"klasse":"goed","url":"Wervik/rapport.html"},{"naam":"Hamont-Achel","verh_perc":12.893654,"rbr_opp":269.73,"prank":40,"klasse":"goed","url":"Hamont-Achel/rapport.html"},{"naam":"Ranst","verh_perc":16.198774,"rbr_opp":202.29,"prank":59,"klasse":"matig","url":"Ranst/rapport.html"},{"naam":"Lubbeek","verh_perc":10.301078,"rbr_opp":91.42,"prank":23,"klasse":"goed","url":"Lubbeek/rapport.html"},{"naam":"Herk-de-Stad","verh_perc":11.991419,"rbr_opp":242.92,"prank":33,"klasse":"goed","url":"Herk-de-Stad/rapport.html"},{"naam":"Gistel","verh_perc":10.4592495,"rbr_opp":66.75,"prank":24,"klasse":"goed","url":"Gistel/rapport.html"},{"naam":"Sint-Pieters-Leeuw","verh_perc":18.527344,"rbr_opp":128.61,"prank":73,"klasse":"matig","url":"Sint-Pieters-Leeuw/rapport.html"},{"naam":"Bierbeek","verh_perc":8.227912,"rbr_opp":85.38,"prank":10,"klasse":"goed","url":"Bierbeek/rapport.html"},{"naam":"Pittem","verh_perc":13.162491,"rbr_opp":44.09,"prank":42,"klasse":"goed","url":"Pittem/rapport.html"},{"naam":"Maarkedal","verh_perc":6.7199883,"rbr_opp":34.54,"prank":5,"klasse":"goed","url":"Maarkedal/rapport.html"},{"naam":"Gooik","verh_perc":8.143152,"rbr_opp":86.53,"prank":10,"klasse":"goed","url":"Gooik/rapport.html"},{"naam":"Dilbeek","verh_perc":23.107986,"rbr_opp":293.96,"prank":83,"klasse":"slecht","url":"Dilbeek/rapport.html"},{"naam":"Hamme","verh_perc":17.082338,"rbr_opp":111.65,"prank":67,"klasse":"matig","url":"Hamme/rapport.html"},{"naam":"Zandhoven","verh_perc":12.677253,"rbr_opp":216.47,"prank":38,"klasse":"goed","url":"Zandhoven/rapport.html"},{"naam":"Temse","verh_perc":20.43182,"rbr_opp":206.26,"prank":79,"klasse":"slecht","url":"Temse/rapport.html"},{"naam":"Koekelare","verh_perc":9.649457,"rbr_opp":30.03,"prank":19,"klasse":"goed","url":"Koekelare/rapport.html"},{"naam":"Huldenberg","verh_perc":7.450772,"rbr_opp":128.94,"prank":7,"klasse":"goed","url":"Huldenberg/rapport.html"},{"naam":"Vilvoorde","verh_perc":35.964306,"rbr_opp":173.96,"prank":97,"klasse":"slecht","url":"Vilvoorde/rapport.html"},{"naam":"Nijlen","verh_perc":15.580797,"rbr_opp":241.73,"prank":57,"klasse":"matig","url":"Nijlen/rapport.html"},{"naam":"Oud-Turnhout","verh_perc":11.826518,"rbr_opp":147.36,"prank":31,"klasse":"goed","url":"Oud-Turnhout/rapport.html"},{"naam":"Holsbeek","verh_perc":8.385542,"rbr_opp":97.83,"prank":11,"klasse":"goed","url":"Holsbeek/rapport.html"},{"naam":"Londerzeel","verh_perc":16.498945,"rbr_opp":161.73,"prank":62,"klasse":"matig","url":"Londerzeel/rapport.html"},{"naam":"Zoersel","verh_perc":15.146409,"rbr_opp":212.5,"prank":55,"klasse":"matig","url":"Zoersel/rapport.html"},{"naam":"Brasschaat","verh_perc":17.026926,"rbr_opp":216.21,"prank":66,"klasse":"matig","url":"Brasschaat/rapport.html"},{"naam":"Tremelo","verh_perc":18.526855,"rbr_opp":137.37,"prank":73,"klasse":"matig","url":"Tremelo/rapport.html"},{"naam":"Kluisbergen","verh_perc":9.23914,"rbr_opp":120.81,"prank":15,"klasse":"goed","url":"Kluisbergen/rapport.html"},{"naam":"Berlare","verh_perc":12.249581,"rbr_opp":111.24,"prank":35,"klasse":"goed","url":"Berlare/rapport.html"},{"naam":"Beersel","verh_perc":20.504538,"rbr_opp":193.53,"prank":79,"klasse":"slecht","url":"Beersel/rapport.html"},{"naam":"Merchtem","verh_perc":12.492236,"rbr_opp":120.14,"prank":38,"klasse":"goed","url":"Merchtem/rapport.html"},{"naam":"Wortegem-Petegem","verh_perc":7.898503,"rbr_opp":70.32,"prank":9,"klasse":"goed","url":"Wortegem-Petegem/rapport.html"},{"naam":"Bekkevoort","verh_perc":9.034143,"rbr_opp":33.47,"prank":14,"klasse":"goed","url":"Bekkevoort/rapport.html"},{"naam":"Rotselaar","verh_perc":13.511929,"rbr_opp":162.41,"prank":44,"klasse":"goed","url":"Rotselaar/rapport.html"},{"naam":"Diepenbeek","verh_perc":16.211033,"rbr_opp":597.61,"prank":59,"klasse":"matig","url":"Diepenbeek/rapport.html"},{"naam":"Wetteren","verh_perc":21.039473,"rbr_opp":135.84,"prank":80,"klasse":"slecht","url":"Wetteren/rapport.html"},{"naam":"Merelbeke","verh_perc":18.719847,"rbr_opp":380.62,"prank":74,"klasse":"matig","url":"Merelbeke/rapport.html"},{"naam":"Linter","verh_perc":7.932028,"rbr_opp":45.64,"prank":9,"klasse":"goed","url":"Linter/rapport.html"},{"naam":"Halen","verh_perc":10.315417,"rbr_opp":112.57,"prank":23,"klasse":"goed","url":"Halen/rapport.html"},{"naam":"Pepingen","verh_perc":5.780573,"rbr_opp":40.65,"prank":3,"klasse":"goed","url":"Pepingen/rapport.html"},{"naam":"Kapellen","verh_perc":14.328424,"rbr_opp":189.31,"prank":50,"klasse":"matig","url":"Kapellen/rapport.html"},{"naam":"Geetbets","verh_perc":8.178284,"rbr_opp":68.6,"prank":10,"klasse":"goed","url":"Geetbets/rapport.html"},{"naam":"Galmaarden","verh_perc":8.39324,"rbr_opp":63.4,"prank":11,"klasse":"goed","url":"Galmaarden/rapport.html"},{"naam":"Meise","verh_perc":15.165681,"rbr_opp":228.03,"prank":55,"klasse":"matig","url":"Meise/rapport.html"},{"naam":"Ronse","verh_perc":17.786282,"rbr_opp":200.67,"prank":71,"klasse":"matig","url":"Ronse/rapport.html"},{"naam":"Wachtebeke","verh_perc":8.743512,"rbr_opp":109.66,"prank":12,"klasse":"goed","url":"Wachtebeke/rapport.html"},{"naam":"Ternat","verh_perc":19.81594,"rbr_opp":112.38,"prank":77,"klasse":"slecht","url":"Ternat/rapport.html"},{"naam":"Schilde","verh_perc":13.631889,"rbr_opp":215.89,"prank":45,"klasse":"goed","url":"Schilde/rapport.html"},{"naam":"Kortenberg","verh_perc":15.090598,"rbr_opp":99.86,"prank":54,"klasse":"matig","url":"Kortenberg/rapport.html"},{"naam":"Sint-Genesius-Rode","verh_perc":16.600254,"rbr_opp":56.95,"prank":63,"klasse":"matig","url":"Sint-Genesius-Rode/rapport.html"},{"naam":"Hoegaarden","verh_perc":7.569937,"rbr_opp":50.08,"prank":7,"klasse":"goed","url":"Hoegaarden/rapport.html"},{"naam":"Kuurne","verh_perc":42.67243,"rbr_opp":102.6,"prank":99,"klasse":"slecht","url":"Kuurne/rapport.html"},{"naam":"Kampenhout","verh_perc":12.364194,"rbr_opp":115.11,"prank":37,"klasse":"goed","url":"Kampenhout/rapport.html"},{"naam":"Tervuren","verh_perc":12.907355,"rbr_opp":114.58,"prank":41,"klasse":"goed","url":"Tervuren/rapport.html"},{"naam":"Kruibeke","verh_perc":13.546374,"rbr_opp":62.44,"prank":45,"klasse":"goed","url":"Kruibeke/rapport.html"},{"naam":"Eeklo","verh_perc":20.391762,"rbr_opp":182.43,"prank":79,"klasse":"slecht","url":"Eeklo/rapport.html"},{"naam":"Nieuwpoort","verh_perc":12.816226,"rbr_opp":99.57,"prank":39,"klasse":"goed","url":"Nieuwpoort/rapport.html"},{"naam":"Menen","verh_perc":29.20129,"rbr_opp":209.86,"prank":92,"klasse":"slecht","url":"Menen/rapport.html"},{"naam":"Opwijk","verh_perc":17.933613,"rbr_opp":85.31,"prank":71,"klasse":"matig","url":"Opwijk/rapport.html"},{"naam":"Herent","verh_perc":16.330915,"rbr_opp":143.87,"prank":61,"klasse":"matig","url":"Herent/rapport.html"},{"naam":"Moerbeke","verh_perc":7.6791725,"rbr_opp":65.26,"prank":8,"klasse":"goed","url":"Moerbeke/rapport.html"},{"naam":"Laarne","verh_perc":13.675079,"rbr_opp":50.07,"prank":46,"klasse":"goed","url":"Laarne/rapport.html"},{"naam":"Ruiselede","verh_perc":10.292543,"rbr_opp":31.15,"prank":22,"klasse":"goed","url":"Ruiselede/rapport.html"},{"naam":"Oudenburg","verh_perc":10.7714205,"rbr_opp":62.7,"prank":26,"klasse":"goed","url":"Oudenburg/rapport.html"},{"naam":"Waasmunster","verh_perc":12.044977,"rbr_opp":145.33,"prank":34,"klasse":"goed","url":"Waasmunster/rapport.html"},{"naam":"Zwalm","verh_perc":9.301222,"rbr_opp":66.86,"prank":17,"klasse":"goed","url":"Zwalm/rapport.html"},{"naam":"Zutendaal","verh_perc":10.054512,"rbr_opp":92.59,"prank":21,"klasse":"goed","url":"Zutendaal/rapport.html"},{"naam":"Hoeselt","verh_perc":12.319059,"rbr_opp":77.76,"prank":36,"klasse":"goed","url":"Hoeselt/rapport.html"},{"naam":"Gavere","verh_perc":13.448149,"rbr_opp":151.57,"prank":44,"klasse":"goed","url":"Gavere/rapport.html"},{"naam":"Boutersem","verh_perc":9.508952,"rbr_opp":87.88,"prank":18,"klasse":"goed","url":"Boutersem/rapport.html"},{"naam":"Lennik","verh_perc":10.155804,"rbr_opp":71.58,"prank":22,"klasse":"goed","url":"Lennik/rapport.html"},{"naam":"Haacht","verh_perc":14.795747,"rbr_opp":89.64,"prank":53,"klasse":"matig","url":"Haacht/rapport.html"},{"naam":"Kortessem","verh_perc":9.640945,"rbr_opp":59.04,"prank":19,"klasse":"goed","url":"Kortessem/rapport.html"},{"naam":"Haaltert","verh_perc":14.883857,"rbr_opp":165.65,"prank":53,"klasse":"matig","url":"Haaltert/rapport.html"},{"naam":"Willebroek","verh_perc":26.099493,"rbr_opp":246.07,"prank":88,"klasse":"slecht","url":"Willebroek/rapport.html"},{"naam":"Begijnendijk","verh_perc":17.659748,"rbr_opp":46.6,"prank":70,"klasse":"matig","url":"Begijnendijk/rapport.html"},{"naam":"Schoten","verh_perc":22.82097,"rbr_opp":122.15,"prank":83,"klasse":"slecht","url":"Schoten/rapport.html"},{"naam":"Bonheiden","verh_perc":13.522232,"rbr_opp":135.74,"prank":44,"klasse":"goed","url":"Bonheiden/rapport.html"},{"naam":"Ledegem","verh_perc":16.657145,"rbr_opp":32.11,"prank":63,"klasse":"matig","url":"Ledegem/rapport.html"},{"naam":"Nieuwerkerken","verh_perc":13.078615,"rbr_opp":55.52,"prank":41,"klasse":"goed","url":"Nieuwerkerken/rapport.html"},{"naam":"Vorselaar","verh_perc":8.9054575,"rbr_opp":106.96,"prank":13,"klasse":"goed","url":"Vorselaar/rapport.html"},{"naam":"Lebbeke","verh_perc":18.445004,"rbr_opp":141.86,"prank":72,"klasse":"matig","url":"Lebbeke/rapport.html"},{"naam":"Sint-Lievens-Houtem","verh_perc":12.833492,"rbr_opp":139.3,"prank":40,"klasse":"goed","url":"Sint-Lievens-Houtem/rapport.html"},{"naam":"Glabbeek","verh_perc":9.249669,"rbr_opp":52.99,"prank":16,"klasse":"goed","url":"Glabbeek/rapport.html"},{"naam":"Steenokkerzeel","verh_perc":25.033722,"rbr_opp":85.41,"prank":87,"klasse":"slecht","url":"Steenokkerzeel/rapport.html"},{"naam":"Wellen","verh_perc":10.820561,"rbr_opp":65.42,"prank":26,"klasse":"goed","url":"Wellen/rapport.html"},{"naam":"Destelbergen","verh_perc":20.219185,"rbr_opp":209.22,"prank":78,"klasse":"slecht","url":"Destelbergen/rapport.html"},{"naam":"De Panne","verh_perc":12.386011,"rbr_opp":105.36,"prank":37,"klasse":"goed","url":"De%20Panne/rapport.html"},{"naam":"Lierde","verh_perc":8.7522545,"rbr_opp":38.66,"prank":13,"klasse":"goed","url":"Lierde/rapport.html"},{"naam":"Dentergem","verh_perc":14.010571,"rbr_opp":47.02,"prank":48,"klasse":"goed","url":"Dentergem/rapport.html"},{"naam":"Buggenhout","verh_perc":16.733158,"rbr_opp":116.25,"prank":64,"klasse":"matig","url":"Buggenhout/rapport.html"},{"naam":"Lichtervelde","verh_perc":16.276983,"rbr_opp":36.87,"prank":61,"klasse":"matig","url":"Lichtervelde/rapport.html"},{"naam":"Berlaar","verh_perc":14.388675,"rbr_opp":98.9,"prank":50,"klasse":"matig","url":"Berlaar/rapport.html"},{"naam":"Machelen","verh_perc":52.734856,"rbr_opp":152.77,"prank":100,"klasse":"slecht","url":"Machelen/rapport.html"},{"naam":"Kontich","verh_perc":25.370205,"rbr_opp":150.45,"prank":87,"klasse":"slecht","url":"Kontich/rapport.html"},{"naam":"Herenthout","verh_perc":12.354022,"rbr_opp":38.61,"prank":36,"klasse":"goed","url":"Herenthout/rapport.html"},{"naam":"Wichelen","verh_perc":14.978925,"rbr_opp":46.79,"prank":54,"klasse":"matig","url":"Wichelen/rapport.html"},{"naam":"Olen","verh_perc":24.280981,"rbr_opp":173.3,"prank":85,"klasse":"slecht","url":"Olen/rapport.html"},{"naam":"Duffel","verh_perc":23.93531,"rbr_opp":168.97,"prank":84,"klasse":"slecht","url":"Duffel/rapport.html"},{"naam":"Leopoldsburg","verh_perc":19.096327,"rbr_opp":143.73,"prank":76,"klasse":"slecht","url":"Leopoldsburg/rapport.html"},{"naam":"As","verh_perc":10.834776,"rbr_opp":131.43,"prank":27,"klasse":"goed","url":"As/rapport.html"},{"naam":"Avelgem","verh_perc":16.231672,"rbr_opp":115.72,"prank":60,"klasse":"matig","url":"Avelgem/rapport.html"},{"naam":"Stabroek","verh_perc":16.169138,"rbr_opp":74.03,"prank":59,"klasse":"matig","url":"Stabroek/rapport.html"},{"naam":"Zelzate","verh_perc":25.409168,"rbr_opp":172.24,"prank":87,"klasse":"slecht","url":"Zelzate/rapport.html"},{"naam":"Boechout","verh_perc":16.95802,"rbr_opp":70.15,"prank":65,"klasse":"matig","url":"Boechout/rapport.html"},{"naam":"Hoeilaart","verh_perc":12.787266,"rbr_opp":37.09,"prank":39,"klasse":"goed","url":"Hoeilaart/rapport.html"},{"naam":"Zwijndrecht","verh_perc":32.17868,"rbr_opp":86.93,"prank":94,"klasse":"slecht","url":"Zwijndrecht/rapport.html"},{"naam":"Rumst","verh_perc":22.405807,"rbr_opp":123.43,"prank":83,"klasse":"slecht","url":"Rumst/rapport.html"},{"naam":"Bever","verh_perc":5.228705,"rbr_opp":20.18,"prank":2,"klasse":"goed","url":"Bever/rapport.html"},{"naam":"Blankenberge","verh_perc":18.030355,"rbr_opp":87.01,"prank":71,"klasse":"matig","url":"Blankenberge/rapport.html"},{"naam":"Aartselaar","verh_perc":33.090748,"rbr_opp":48.65,"prank":94,"klasse":"slecht","url":"Aartselaar/rapport.html"},{"naam":"Sint-Martens-Latem","verh_perc":18.116566,"rbr_opp":118.53,"prank":72,"klasse":"matig","url":"Sint-Martens-Latem/rapport.html"},{"naam":"Hulshout","verh_perc":20.372002,"rbr_opp":89.47,"prank":78,"klasse":"slecht","url":"Hulshout/rapport.html"},{"naam":"Affligem","verh_perc":19.069921,"rbr_opp":116.63,"prank":75,"klasse":"slecht","url":"Affligem/rapport.html"},{"naam":"Oostrozebeke","verh_perc":22.354229,"rbr_opp":73.4,"prank":82,"klasse":"slecht","url":"Oostrozebeke/rapport.html"},{"naam":"Boortmeerbeek","verh_perc":20.69255,"rbr_opp":107.79,"prank":80,"klasse":"slecht","url":"Boortmeerbeek/rapport.html"},{"naam":"Ingelmunster","verh_perc":27.289026,"rbr_opp":76.29,"prank":89,"klasse":"slecht","url":"Ingelmunster/rapport.html"},{"naam":"Kapelle-op-den-Bos","verh_perc":17.21696,"rbr_opp":44.87,"prank":67,"klasse":"matig","url":"Kapelle-op-den-Bos/rapport.html"},{"naam":"Melle","verh_perc":24.662064,"rbr_opp":298.38,"prank":86,"klasse":"slecht","url":"Melle/rapport.html"},{"naam":"Wommelgem","verh_perc":29.194613,"rbr_opp":78.96,"prank":91,"klasse":"slecht","url":"Wommelgem/rapport.html"},{"naam":"Bredene","verh_perc":27.45644,"rbr_opp":112.33,"prank":89,"klasse":"slecht","url":"Bredene/rapport.html"},{"naam":"Denderleeuw","verh_perc":25.977837,"rbr_opp":108.51,"prank":88,"klasse":"slecht","url":"Denderleeuw/rapport.html"},{"naam":"Lendelede","verh_perc":16.961416,"rbr_opp":15.75,"prank":66,"klasse":"matig","url":"Lendelede/rapport.html"},{"naam":"Liedekerke","verh_perc":24.735634,"rbr_opp":42.16,"prank":86,"klasse":"slecht","url":"Liedekerke/rapport.html"},{"naam":"Vosselaar","verh_perc":24.114244,"rbr_opp":61.52,"prank":85,"klasse":"slecht","url":"Vosselaar/rapport.html"},{"naam":"Horebeke","verh_perc":7.8716745,"rbr_opp":18.46,"prank":8,"klasse":"goed","url":"Horebeke/rapport.html"},{"naam":"Spiere-Helkijn","verh_perc":9.61181,"rbr_opp":23.76,"prank":19,"klasse":"goed","url":"Spiere-Helkijn/rapport.html"},{"naam":"Edegem","verh_perc":35.398476,"rbr_opp":72.96,"prank":96,"klasse":"slecht","url":"Edegem/rapport.html"},{"naam":"Wemmel","verh_perc":27.841484,"rbr_opp":51.05,"prank":90,"klasse":"slecht","url":"Wemmel/rapport.html"},{"naam":"Wijnegem","verh_perc":32.1875,"rbr_opp":35.56,"prank":94,"klasse":"slecht","url":"Wijnegem/rapport.html"},{"naam":"Schelle","verh_perc":21.848543,"rbr_opp":54.67,"prank":82,"klasse":"slecht","url":"Schelle/rapport.html"},{"naam":"Mortsel","verh_perc":41.311237,"rbr_opp":68.47,"prank":99,"klasse":"slecht","url":"Mortsel/rapport.html"},{"naam":"Niel","verh_perc":29.99174,"rbr_opp":40.17,"prank":92,"klasse":"slecht","url":"Niel/rapport.html"},{"naam":"Baarle-Hertog","verh_perc":13.383719,"rbr_opp":26.09,"prank":43,"klasse":"goed","url":"Baarle-Hertog/rapport.html"},{"naam":"Boom","verh_perc":39.667686,"rbr_opp":56.41,"prank":98,"klasse":"slecht","url":"Boom/rapport.html"},{"naam":"Wezembeek-Oppem","verh_perc":31.110584,"rbr_opp":35.59,"prank":93,"klasse":"slecht","url":"Wezembeek-Oppem/rapport.html"},{"naam":"Kraainem","verh_perc":33.630394,"rbr_opp":32.52,"prank":95,"klasse":"slecht","url":"Kraainem/rapport.html"},{"naam":"Hove","verh_perc":24.504667,"rbr_opp":65.9,"prank":85,"klasse":"slecht","url":"Hove/rapport.html"},{"naam":"Lint","verh_perc":28.701342,"rbr_opp":27.32,"prank":91,"klasse":"slecht","url":"Lint/rapport.html"},{"naam":"Hemiksem","verh_perc":37.01455,"rbr_opp":46.88,"prank":98,"klasse":"slecht","url":"Hemiksem/rapport.html"},{"naam":"Herstappe","verh_perc":7.266813,"rbr_opp":3.31,"prank":6,"klasse":"goed","url":"Herstappe/rapport.html"},{"naam":"Linkebeek","verh_perc":16.25024,"rbr_opp":17.84,"prank":60,"klasse":"matig","url":"Linkebeek/rapport.html"},{"naam":"Borsbeek","verh_perc":35.451992,"rbr_opp":7.53,"prank":96,"klasse":"slecht","url":"Borsbeek/rapport.html"},{"naam":"Mesen","verh_perc":8.050592,"rbr_opp":5.42,"prank":9,"klasse":"goed","url":"Mesen/rapport.html"},{"naam":"Drogenbos","verh_perc":55.794563,"rbr_opp":19.02,"prank":100,"klasse":"slecht","url":"Drogenbos/rapport.html"}];
+
+// ── Nav scroll ──────────────────────────────────────────────────────────────
+(function() {
+  var nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 60) {
+      nav.classList.add('solid');
+    } else {
+      nav.classList.remove('solid');
     }
-  </script>
+  });
+})();
+
+// ── Hamburger ───────────────────────────────────────────────────────────────
+document.getElementById('hamburgerBtn').addEventListener('click', function() {
+  document.getElementById('mobileMenu').classList.add('open');
+});
+document.getElementById('mobileClose').addEventListener('click', function() {
+  document.getElementById('mobileMenu').classList.remove('open');
+});
+
+// ── Stat counter animation ──────────────────────────────────────────────────
+(function() {
+  var counters = document.querySelectorAll('[data-target]');
+  var started = {};
+  function animateCounter(el) {
+    var target = parseInt(el.getAttribute('data-target'), 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    var start = 0;
+    var duration = 1600;
+    var startTime = null;
+    function step(ts) {
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var ease = 1 - Math.pow(1 - progress, 3);
+      var current = Math.round(start + (target - start) * ease);
+      el.textContent = current.toLocaleString('nl-BE') + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting && !started[entry.target.id]) {
+        started[entry.target.id] = true;
+        animateCounter(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(function(el, i) {
+    el.id = 'stat-' + i;
+    observer.observe(el);
+  });
+})();
+
+// ── Hero autocomplete ────────────────────────────────────────────────────────
+(function() {
+  var input = document.getElementById('heroSearch');
+  var dropdown = document.getElementById('heroDropdown');
+
+  function showDropdown(query) {
+    if (!query || query.length < 1) {
+      dropdown.innerHTML = '';
+      dropdown.classList.remove('open');
+      return;
+    }
+    var q = query.toLowerCase();
+    var matches = GEMEENTE_DATA.filter(function(g) {
+      return g.naam.toLowerCase().includes(q);
+    }).slice(0, 10);
+    if (matches.length === 0) {
+      dropdown.innerHTML = '';
+      dropdown.classList.remove('open');
+      return;
+    }
+    dropdown.innerHTML = matches.map(function(g) {
+      return '<div class="ac-item" data-url="' + g.url + '">' +
+        '<span>' + g.naam + '</span>' +
+        '<span class="ac-perc">' + (g.verh_perc !== null && g.verh_perc !== undefined ? g.verh_perc.toLocaleString('nl-BE', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%' : '–') + '</span>' +
+        '</div>';
+    }).join('');
+    dropdown.classList.add('open');
+  }
+
+  input.addEventListener('input', function() { showDropdown(this.value); });
+  input.addEventListener('focus', function() { showDropdown(this.value); });
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.hero-search-wrap')) {
+      dropdown.classList.remove('open');
+    }
+  });
+  dropdown.addEventListener('click', function(e) {
+    var item = e.target.closest('.ac-item');
+    if (item) window.location.href = item.getAttribute('data-url');
+  });
+})();
+
+// ── Gemeente grid ────────────────────────────────────────────────────────────
+(function() {
+  var grid = document.getElementById('gemGrid');
+  var gridSearch = document.getElementById('gridSearch');
+  var noResults = document.getElementById('noResults');
+  var gridCount = document.getElementById('gridCount');
+  var alphaFilter = document.getElementById('alphaFilter');
+  var activeAlpha = '';
+
+  // Build cards
+  var cards = GEMEENTE_DATA.map(function(g) {
+    var card = document.createElement('a');
+    card.className = 'gem-card';
+    card.href = g.url;
+    card.setAttribute('data-naam', g.naam.toLowerCase());
+    card.setAttribute('data-letter', g.naam.charAt(0).toUpperCase());
+    var verh = g.verh_perc !== null && g.verh_perc !== undefined
+      ? g.verh_perc.toLocaleString('nl-BE', {minimumFractionDigits:1, maximumFractionDigits:1}) + '%'
+      : '–';
+    var klasse = g.klasse || 'neutral';
+    var labelMap = { goed: 'Gunstig', matig: 'Gemiddeld', slecht: 'Ongunstig', neutral: '–' };
+    card.innerHTML =
+      '<div class="gem-naam">' + g.naam + '</div>' +
+      '<div class="gem-meta">' +
+        '<span class="gem-verh">Verharding: ' + verh + '</span>' +
+        '<span class="gem-badge ' + klasse + '">' + (labelMap[klasse] || klasse) + '</span>' +
+      '</div>';
+    return card;
+  });
+  cards.forEach(function(c) { grid.appendChild(c); });
+
+  // Alpha buttons
+  var letters = [...new Set(GEMEENTE_DATA.map(function(g) { return g.naam.charAt(0).toUpperCase(); }))].sort();
+  var allBtn = document.createElement('button');
+  allBtn.className = 'alpha-btn active';
+  allBtn.textContent = 'Alle';
+  allBtn.addEventListener('click', function() {
+    activeAlpha = '';
+    document.querySelectorAll('.alpha-btn').forEach(function(b) { b.classList.remove('active'); });
+    allBtn.classList.add('active');
+    filterGrid();
+  });
+  alphaFilter.appendChild(allBtn);
+  letters.forEach(function(l) {
+    var btn = document.createElement('button');
+    btn.className = 'alpha-btn';
+    btn.textContent = l;
+    btn.addEventListener('click', function() {
+      activeAlpha = l;
+      document.querySelectorAll('.alpha-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      filterGrid();
+    });
+    alphaFilter.appendChild(btn);
+  });
+
+  function filterGrid() {
+    var q = (gridSearch.value || '').toLowerCase();
+    var count = 0;
+    cards.forEach(function(card) {
+      var naam = card.getAttribute('data-naam');
+      var letter = card.getAttribute('data-letter');
+      var matchQ = !q || naam.includes(q);
+      var matchA = !activeAlpha || letter === activeAlpha;
+      if (matchQ && matchA) {
+        card.classList.remove('gem-hidden');
+        count++;
+      } else {
+        card.classList.add('gem-hidden');
+      }
+    });
+    gridCount.textContent = count + ' gemeente' + (count !== 1 ? 'n' : '');
+    noResults.style.display = count === 0 ? 'block' : 'none';
+  }
+
+  gridSearch.addEventListener('input', filterGrid);
+})();
+</script>
 </body>
 </html>
