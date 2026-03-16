@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Betonmeter – Boechout</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a2e; background: #f5f7fa; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
+
+    /* Header */
+    .rapport-header { background: linear-gradient(135deg, #1a3a5c 0%, #2e6b9e 100%); color: #fff; padding: 32px 36px; border-radius: 12px; margin-bottom: 32px; }
+    .rapport-header h1 { font-size: 2rem; font-weight: 700; letter-spacing: 0.5px; }
+    .rapport-header .subtitle { font-size: 1rem; opacity: 0.85; margin-top: 6px; }
+    .rapport-header .meta { display: flex; gap: 28px; margin-top: 18px; flex-wrap: wrap; }
+    .rapport-header .meta span { font-size: 0.9rem; opacity: 0.9; }
+
+    /* Secties */
+    .sectie { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.07); padding: 28px 32px; margin-bottom: 24px; }
+    .sectie h2 { font-size: 1.25rem; font-weight: 700; color: #1a3a5c; border-bottom: 2px solid #e8eef5; padding-bottom: 10px; margin-bottom: 18px; }
+    .sectie h3 { font-size: 1rem; font-weight: 600; color: #2e6b9e; margin: 20px 0 10px; }
+    .sectie p { line-height: 1.7; color: #333; margin-bottom: 12px; }
+
+    /* Tabel */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 14px; }
+    thead th { background: #1a3a5c; color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; }
+    tbody tr:nth-child(even) { background: #f0f4f9; }
+    tbody td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+    .badge-goed    { background: #d1fae5; color: #065f46; }
+    .badge-matig   { background: #fef3c7; color: #92400e; }
+    .badge-slecht  { background: #fee2e2; color: #991b1b; }
+    .badge-neutral { background: #e2e8f0; color: #475569; }
+
+    /* Charts grid */
+    .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 700px) { .charts-grid { grid-template-columns: 1fr; } }
+    .chart-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.07); padding: 20px; }
+    .chart-card h3 { font-size: 0.95rem; font-weight: 600; color: #1a3a5c; margin-bottom: 14px; }
+    .chart-wrap { position: relative; height: 260px; }
+    .chart-wrap-tall { position: relative; height: 320px; }
+
+    /* Pijl terug */
+    .back-link { display: inline-block; margin-bottom: 20px; color: #2e6b9e; text-decoration: none; font-size: 13px; }
+    .back-link:hover { text-decoration: underline; }
+
+    /* Footer */
+    .rapport-footer { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 32px; padding: 16px 0; }
+
+    /* Percentielbalk */
+    .prank-bar { width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; display: inline-block; }
+    .prank-fill { height: 100%; border-radius: 4px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="../index.html" class="back-link">← Terug naar overzicht</a>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!--  HEADER                                                               -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <div class="rapport-header">
+    <h1>Betonmeter – Boechout</h1>
+    <div class="subtitle">Gemeenterapport ruimtebeslag en verharding · Referentiejaar 2022</div>
+    <div class="meta">
+      <span>NIS-code: <strong>11004</strong></span>
+      <span>Oppervlakte: <strong>2.071 ha</strong></span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!--  DEEL 1 – GEMEENTEBESCHRIJVING                                        -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <div class="sectie">
+    <h2>Deel 1 – Gemeenteprofiel</h2>
+    <p>Boechout (NIS-code 11004) heeft een totale oppervlakte van 2.071 ha. De gemeente telt 351 ha verharding, wat overeenkomt met 17,0% van de totale oppervlakte. Dit is iets boven gemiddeld ten opzichte van de andere Vlaamse gemeenten (percentielpositie: 65/100). Per inwoner bedraagt de verharding 256 m². Het ruimtebeslag-risico — de oppervlakte met een harde bestemming die nog niet bebouwd is — bedraagt 70 ha.</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!--  DEEL 2 – SCOREANALYSE                                                -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <div class="sectie">
+    <h2>Deel 2 – Scoreanalyse</h2>
+    
+    <h3>Betontoestand</h3>
+    <p>Oppervlakte verharding 2022: Boechout scoort 351,17 ha, tegenover een Vlaams gemiddelde van 686,29 ha. Dit is iets onder gemiddeld (P25) voor Vlaamse gemeenten. Aandeel verharding 2022: Boechout scoort 16,96 %, tegenover een Vlaams gemiddelde van 16,34 %. Dit is iets boven gemiddeld (P65) voor Vlaamse gemeenten. Verharding per inwoner 2022: Boechout scoort 255,71 m²/inwoner, tegenover een Vlaams gemiddelde van 358,01 m²/inwoner. Dit is relatief laag (P18) voor Vlaamse gemeenten. Aandeel verharding in harde bestemmingen 2022: Boechout scoort 57,35 %, tegenover een Vlaams gemiddelde van 72,25 %. Dit is relatief laag (P19) voor Vlaamse gemeenten. Aandeel verharding in zachte bestemmingen 2022: Boechout scoort 42,65 %, tegenover een Vlaams gemiddelde van 27,75 %. Dit is relatief hoog (P82) voor Vlaamse gemeenten. Aandeel ruimtebeslag in zachte bestemmingen 2022: Boechout scoort 44,80 %, tegenover een Vlaams gemiddelde van 35,31 %. Dit is iets boven gemiddeld (P74) voor Vlaamse gemeenten.</p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Indicator</th>
+          <th>Waarde</th>
+          <th>Vlaams gemiddelde</th>
+          <th>Mediaan</th>
+          <th>Percentielpositie</th>
+          <th>Beoordeling</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td title="De totale oppervlakte aan verharding per gemeente, volgens de Vlaamse definitie (2022).">Oppervlakte verharding 2022</td>
+            <td>351,17 ha</td>
+            <td>686,29 ha</td>
+            <td>532,57 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:25%; background:#4caf7d"></div>
+                </div>
+                P25
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het aandeel verharding ten opzichte van de totale oppervlakte van de gemeente (2022).">Aandeel verharding 2022</td>
+            <td>16,96 %</td>
+            <td>16,34 %</td>
+            <td>14,40 %</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:65%; background:#f5a623"></div>
+                </div>
+                P65
+              
+            </td>
+            <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De gemiddelde verharding per gemeentelijke inwoner (2022).">Verharding per inwoner 2022</td>
+            <td>255,71 m²/inwoner</td>
+            <td>358,01 m²/inwoner</td>
+            <td>336,61 m²/inwoner</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:18%; background:#4caf7d"></div>
+                </div>
+                P18
+              
+            </td>
+            <td><span class="badge badge-goed">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het aandeel van alle verharding, gelegen in de harde bestemmingen (wonen, industrie, recreatie ed.).">Aandeel verharding in harde bestemmingen 2022</td>
+            <td>57,35 %</td>
+            <td>72,25 %</td>
+            <td>75,40 %</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:19%; background:#4caf7d"></div>
+                </div>
+                P19
+              
+            </td>
+            <td><span class="badge badge-goed">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het aandeel van alle verharding, gelegen in de zachte bestemmingen (landbouw, natuur, bos ed.).">Aandeel verharding in zachte bestemmingen 2022</td>
+            <td>42,65 %</td>
+            <td>27,75 %</td>
+            <td>24,60 %</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:82%; background:#e05c5c"></div>
+                </div>
+                P82
+              
+            </td>
+            <td><span class="badge badge-slecht">relatief hoog</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het aandeel ruimtebeslag dat in de zachte bestemmingen gelegen is (landbouw, natuur, bos ed.).">Aandeel ruimtebeslag in zachte bestemmingen 2022</td>
+            <td>44,80 %</td>
+            <td>35,31 %</td>
+            <td>34,88 %</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:74%; background:#f5a623"></div>
+                </div>
+                P74
+              
+            </td>
+            <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+  
+
+    <h3>Betonevolutie</h3>
+    <p>Jaarlijkse ruimtebeslagsnelheid 2013–2022: Boechout scoort 4,98 ha/jaar, tegenover een Vlaams gemiddelde van 5,58 ha/jaar. Dit is iets boven gemiddeld (P59) voor Vlaamse gemeenten. Jaarlijkse ruimtebeslagsnelheid 2019–2022: Boechout scoort -2,02 ha/jaar, tegenover een Vlaams gemiddelde van 4,60 ha/jaar. Dit is relatief laag (P4) voor Vlaamse gemeenten. Relatieve ruimtebeslagsnelheid 2013–2022: Boechout scoort 3,90 m²/inwoner/jaar, tegenover een Vlaams gemiddelde van 3,44 m²/inwoner/jaar. Dit is iets boven gemiddeld (P68) voor Vlaamse gemeenten.</p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Indicator</th>
+          <th>Waarde</th>
+          <th>Vlaams gemiddelde</th>
+          <th>Mediaan</th>
+          <th>Percentielpositie</th>
+          <th>Beoordeling</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td title="De gemiddelde oppervlakte aan landbouw- en natuurgronden die per jaar ingenomen wordt met ruimtebeslag (2013–2022).">Jaarlijkse ruimtebeslagsnelheid 2013–2022</td>
+            <td>4,98 ha/jaar</td>
+            <td>5,58 ha/jaar</td>
+            <td>4,05 ha/jaar</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:59%; background:#f5a623"></div>
+                </div>
+                P59
+              
+            </td>
+            <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De gemiddelde oppervlakte aan landbouw- en natuurgronden die per jaar ingenomen wordt met ruimtebeslag (2019–2022).">Jaarlijkse ruimtebeslagsnelheid 2019–2022</td>
+            <td>-2,02 ha/jaar</td>
+            <td>4,60 ha/jaar</td>
+            <td>3,34 ha/jaar</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:4%; background:#4caf7d"></div>
+                </div>
+                P4
+              
+            </td>
+            <td><span class="badge badge-goed">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De gemiddelde oppervlakte aan landbouw- en natuurgronden die per jaar ingenomen wordt, per inwoner (2013–2022).">Relatieve ruimtebeslagsnelheid 2013–2022</td>
+            <td>3,90 m²/inwoner/jaar</td>
+            <td>3,44 m²/inwoner/jaar</td>
+            <td>2,66 m²/inwoner/jaar</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:68%; background:#f5a623"></div>
+                </div>
+                P68
+              
+            </td>
+            <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+  
+
+    <h3>Betonrisico</h3>
+    <p>Ruimtebeslag-risico 2022: Boechout scoort 70,15 ha, tegenover een Vlaams gemiddelde van 189,89 ha. Dit is iets onder gemiddeld (P25) voor Vlaamse gemeenten. Hoger Ruimtebeslag-risico 2022: Boechout scoort 25,80 ha, tegenover een Vlaams gemiddelde van 129,26 ha. Dit is relatief laag (P9) voor Vlaamse gemeenten. Lager Ruimtebeslag-risico 2022: Boechout scoort 44,35 ha, tegenover een Vlaams gemiddelde van 60,64 ha. Dit is iets boven gemiddeld (P60) voor Vlaamse gemeenten. Ruimtebeslag-risico woonreservegebieden 2022: Boechout scoort 10,21 ha, tegenover een Vlaams gemiddelde van 32,10 ha. Dit is iets onder gemiddeld (P29) voor Vlaamse gemeenten. RBR woonzones: Boechout scoort 25,21 ha, tegenover een Vlaams gemiddelde van 77,01 ha. Dit is relatief laag (P16) voor Vlaamse gemeenten. RBR recreatiezones: Boechout scoort 5,34 ha, tegenover een Vlaams gemiddelde van 17,99 ha. Dit is iets onder gemiddeld (P43) voor Vlaamse gemeenten. RBR overige groenzones: Boechout scoort 39,01 ha, tegenover een Vlaams gemiddelde van 42,65 ha. Dit is iets boven gemiddeld (P71) voor Vlaamse gemeenten. RBR industriezones: Boechout scoort 0,05 ha, tegenover een Vlaams gemiddelde van 22,70 ha. Dit is relatief laag (P5) voor Vlaamse gemeenten. RBR gemeenschapszones: Boechout scoort 0,54 ha, tegenover een Vlaams gemiddelde van 20,73 ha. Dit is relatief laag (P8) voor Vlaamse gemeenten. RBR overige zones: Boechout scoort 0,00 ha, tegenover een Vlaams gemiddelde van 0,13 ha. Dit is relatief hoog (P91) voor Vlaamse gemeenten. RBR havenzones: Boechout scoort 0,00 ha, tegenover een Vlaams gemiddelde van 8,69 ha. Dit is relatief hoog (P96) voor Vlaamse gemeenten. Hoge ecosysteemdienstwaarde onder RBR 2022: Boechout scoort 13,20 ha, tegenover een Vlaams gemiddelde van 67,04 ha. Dit is iets onder gemiddeld (P25) voor Vlaamse gemeenten. Watergevoelig gebied onder RBR 2022: Boechout scoort 8,79 ha, tegenover een Vlaams gemiddelde van 39,73 ha. Dit is relatief laag (P24) voor Vlaamse gemeenten. Bossen onder RBR 2022: Boechout scoort 7,19 ha, tegenover een Vlaams gemiddelde van 38,54 ha. Dit is iets onder gemiddeld (P33) voor Vlaamse gemeenten.</p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Indicator</th>
+          <th>Waarde</th>
+          <th>Vlaams gemiddelde</th>
+          <th>Mediaan</th>
+          <th>Percentielpositie</th>
+          <th>Beoordeling</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td title="De gemeentelijke oppervlakte aan landbouwgronden of in natuurlijke staat met een harde bestemming, waar vergunningen voor ruimtebeslag kunnen afgeleverd worden.">Ruimtebeslag-risico 2022</td>
+            <td>70,15 ha</td>
+            <td>189,89 ha</td>
+            <td>125,11 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:25%; background:#4caf7d"></div>
+                </div>
+                P25
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De gemeentelijke oppervlakte met een hoger risico op ruimtebeslag (harde bestemmingen excl. woonreservegebieden).">Hoger Ruimtebeslag-risico 2022</td>
+            <td>25,80 ha</td>
+            <td>129,26 ha</td>
+            <td>89,43 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:9%; background:#4caf7d"></div>
+                </div>
+                P9
+              
+            </td>
+            <td><span class="badge badge-goed">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De gemeentelijke oppervlakte met een lager risico op ruimtebeslag.">Lager Ruimtebeslag-risico 2022</td>
+            <td>44,35 ha</td>
+            <td>60,64 ha</td>
+            <td>35,36 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:60%; background:#f5a623"></div>
+                </div>
+                P60
+              
+            </td>
+            <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het ruimtebeslag-risico gelegen in woonreservegebieden (woonuitbreidingsgebied e.d.).">Ruimtebeslag-risico woonreservegebieden 2022</td>
+            <td>10,21 ha</td>
+            <td>32,10 ha</td>
+            <td>22,61 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:29%; background:#4caf7d"></div>
+                </div>
+                P29
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het ruimtebeslag-risico gelegen in woonzones.">RBR woonzones</td>
+            <td>25,21 ha</td>
+            <td>77,01 ha</td>
+            <td>58,45 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:16%; background:#4caf7d"></div>
+                </div>
+                P16
+              
+            </td>
+            <td><span class="badge badge-goed">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het ruimtebeslag-risico gelegen in recreatiezones.">RBR recreatiezones</td>
+            <td>5,34 ha</td>
+            <td>17,99 ha</td>
+            <td>7,44 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:43%; background:#4caf7d"></div>
+                </div>
+                P43
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het ruimtebeslag-risico gelegen in overige groenzones.">RBR overige groenzones</td>
+            <td>39,01 ha</td>
+            <td>42,65 ha</td>
+            <td>20,38 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:71%; background:#f5a623"></div>
+                </div>
+                P71
+              
+            </td>
+            <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het ruimtebeslag-risico gelegen in industriezones.">RBR industriezones</td>
+            <td>0,05 ha</td>
+            <td>22,70 ha</td>
+            <td>8,27 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:5%; background:#4caf7d"></div>
+                </div>
+                P5
+              
+            </td>
+            <td><span class="badge badge-goed">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het ruimtebeslag-risico gelegen in gemeenschapszones e.d.">RBR gemeenschapszones</td>
+            <td>0,54 ha</td>
+            <td>20,73 ha</td>
+            <td>7,31 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:8%; background:#4caf7d"></div>
+                </div>
+                P8
+              
+            </td>
+            <td><span class="badge badge-goed">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het ruimtebeslag-risico gelegen in overige zones.">RBR overige zones</td>
+            <td>0,00 ha</td>
+            <td>0,13 ha</td>
+            <td>0,00 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:91%; background:#e05c5c"></div>
+                </div>
+                P91
+              
+            </td>
+            <td><span class="badge badge-slecht">relatief hoog</span></td>
+          </tr>
+        
+          <tr>
+            <td title="Het ruimtebeslag-risico gelegen in havenzones.">RBR havenzones</td>
+            <td>0,00 ha</td>
+            <td>8,69 ha</td>
+            <td>0,00 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:96%; background:#e05c5c"></div>
+                </div>
+                P96
+              
+            </td>
+            <td><span class="badge badge-slecht">relatief hoog</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De oppervlakte aan ruimtebeslag-risico met hoge ecosysteemdienstwaarde (INBO 2019).">Hoge ecosysteemdienstwaarde onder RBR 2022</td>
+            <td>13,20 ha</td>
+            <td>67,04 ha</td>
+            <td>33,22 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:25%; background:#4caf7d"></div>
+                </div>
+                P25
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De oppervlakte aan ruimtebeslag-risico die watergevoelig is.">Watergevoelig gebied onder RBR 2022</td>
+            <td>8,79 ha</td>
+            <td>39,73 ha</td>
+            <td>22,73 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:24%; background:#4caf7d"></div>
+                </div>
+                P24
+              
+            </td>
+            <td><span class="badge badge-goed">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De oppervlakte aan ruimtebeslag-risico die uit bos bestaat (Boswijzer 2021).">Bossen onder RBR 2022</td>
+            <td>7,19 ha</td>
+            <td>38,54 ha</td>
+            <td>14,83 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:33%; background:#4caf7d"></div>
+                </div>
+                P33
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+  
+
+    <h3>Reductieopgave</h3>
+    <p>Gemeentelijk quotum 2022–2040: Boechout scoort 18,14 ha, tegenover een Vlaams gemiddelde van 39,78 ha. Dit is relatief laag (P16) voor Vlaamse gemeenten. Minimale neutralisatie-opgave 2022: Boechout scoort 7,66 ha, tegenover een Vlaams gemiddelde van 89,48 ha. Dit is relatief laag (P15) voor Vlaamse gemeenten. Prioritaire neutralisatie-opgave hoger risico 2020: Boechout scoort 0,64 ha, tegenover een Vlaams gemiddelde van 36,52 ha. Dit is relatief laag (P4) voor Vlaamse gemeenten. Prioritaire neutralisatie-opgave lager risico 2020: Boechout scoort 17,44 ha, tegenover een Vlaams gemiddelde van 39,67 ha. Dit is iets onder gemiddeld (P49) voor Vlaamse gemeenten. Totale onthardingsopgave 2022: Boechout scoort 36,55 ha, tegenover een Vlaams gemiddelde van 65,23 ha. Dit is iets onder gemiddeld (P29) voor Vlaamse gemeenten. Onthardingsopgave harde bestemmingen 2022: Boechout scoort 9,62 ha, tegenover een Vlaams gemiddelde van 28,56 ha. Dit is iets onder gemiddeld (P31) voor Vlaamse gemeenten. Onthardingsdoelstelling zachte bestemmingen 2022: Boechout scoort 26,93 ha, tegenover een Vlaams gemiddelde van 36,67 ha. Dit is iets onder gemiddeld (P40) voor Vlaamse gemeenten. Onthardingsopgave scenario 2022: Boechout scoort 36,55 ha, tegenover een Vlaams gemiddelde van 65,23 ha. Dit is iets onder gemiddeld (P29) voor Vlaamse gemeenten.</p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Indicator</th>
+          <th>Waarde</th>
+          <th>Vlaams gemiddelde</th>
+          <th>Mediaan</th>
+          <th>Percentielpositie</th>
+          <th>Beoordeling</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td title="De bovengrens aan bijkomend ruimtebeslag tijdens de periode 2022–2040 opdat de gemeente voldoet aan de BRV-reductiedoelstelling.">Gemeentelijk quotum 2022–2040</td>
+            <td>18,14 ha</td>
+            <td>39,78 ha</td>
+            <td>33,83 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:16%; background:#e05c5c"></div>
+                </div>
+                P16
+              
+            </td>
+            <td><span class="badge badge-slecht">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De oppervlakte aan harde bestemmingen met hoger risico die de gemeente minimaal dient te neutraliseren om de BRV-doelstelling te bereiken.">Minimale neutralisatie-opgave 2022</td>
+            <td>7,66 ha</td>
+            <td>89,48 ha</td>
+            <td>57,69 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:15%; background:#4caf7d"></div>
+                </div>
+                P15
+              
+            </td>
+            <td><span class="badge badge-goed">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De oppervlakte gronden met hoge bodemwaarde die prioritair bescherming nodig hebben via neutralisatie van de harde bestemming (hoger risico).">Prioritaire neutralisatie-opgave hoger risico 2020</td>
+            <td>0,64 ha</td>
+            <td>36,52 ha</td>
+            <td>13,65 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:4%; background:#4caf7d"></div>
+                </div>
+                P4
+              
+            </td>
+            <td><span class="badge badge-goed">relatief laag</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De oppervlakte gronden met hoge bodemwaarde die prioritair bescherming nodig hebben via neutralisatie van de harde bestemming (lager risico).">Prioritaire neutralisatie-opgave lager risico 2020</td>
+            <td>17,44 ha</td>
+            <td>39,67 ha</td>
+            <td>18,37 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:49%; background:#4caf7d"></div>
+                </div>
+                P49
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De totale onthardingsopgave voor de gemeente (harde + zachte bestemmingen), opgave voor 2022.">Totale onthardingsopgave 2022</td>
+            <td>36,55 ha</td>
+            <td>65,23 ha</td>
+            <td>54,68 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:29%; background:#4caf7d"></div>
+                </div>
+                P29
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De te ontharden oppervlakte ten opzichte van de situatie 2015 in de harde bestemmingen.">Onthardingsopgave harde bestemmingen 2022</td>
+            <td>9,62 ha</td>
+            <td>28,56 ha</td>
+            <td>18,68 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:31%; background:#4caf7d"></div>
+                </div>
+                P31
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De te ontharden oppervlakte ten opzichte van de situatie 2015 in de zachte bestemmingen.">Onthardingsdoelstelling zachte bestemmingen 2022</td>
+            <td>26,93 ha</td>
+            <td>36,67 ha</td>
+            <td>32,16 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:40%; background:#4caf7d"></div>
+                </div>
+                P40
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+          <tr>
+            <td title="De totale onthardingsopgave voor de gemeente, in de harde en zachte bestemmingen samen (scenario 2022).">Onthardingsopgave scenario 2022</td>
+            <td>36,55 ha</td>
+            <td>65,23 ha</td>
+            <td>54,68 ha</td>
+            <td>
+              
+                <div class="prank-bar">
+                  <div class="prank-fill" style="width:29%; background:#4caf7d"></div>
+                </div>
+                P29
+              
+            </td>
+            <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+  
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!--  DEEL 3 – VISUALS                                                     -->
+  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <div class="sectie">
+    <h2>Deel 3 – Visuals</h2>
+    <div class="charts-grid">
+
+      <!-- Radar: percentielprofieel -->
+      <div class="chart-card" style="grid-column: 1 / -1;">
+        <h3>Percentielprofiel (hogere score = gunstiger dan Vlaamse mediaan)</h3>
+        <div class="chart-wrap-tall">
+          <canvas id="radarChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Bar: gemeente vs gemiddelde -->
+      <div class="chart-card" style="grid-column: 1 / -1;">
+        <h3>Gemeente vs Vlaams gemiddelde – profielindicatoren</h3>
+        <div class="chart-wrap-tall">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+
+      <!-- BRV Reductietraject -->
+      <div class="chart-card">
+        <h3>BRV Reductietraject ruimtebeslag (m²/dag)</h3>
+        <div class="chart-wrap">
+          <canvas id="brvChart"></canvas>
+        </div>
+      </div>
+
+      <!-- RBR Zonepie -->
+      <div class="chart-card">
+        <h3>Ruimtebeslag-risico per bestemmingszone (ha)</h3>
+        <div class="chart-wrap">
+          <canvas id="pieChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Boxplots als gestapeld horizontaal bar chart -->
+      <div class="chart-card" style="grid-column: 1 / -1;">
+        <h3>Positie van Boechout in de Vlaamse spreiding (per indicator)</h3>
+        <div class="chart-wrap-tall">
+          <canvas id="boxChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="rapport-footer">
+    Betonmeter – DRUM · Hogeschool Gent · Gegenereerd op 16/3/2026
+  </div>
+</div>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────────────────────
+const DATA = {
+  "profielChart": {
+    "labels": [
+      "Oppervlakte verharding",
+      "Aandeel verharding",
+      "Aandeel ruimtebeslag in zachte bestemmingen",
+      "Jaarlijkse ruimtebeslagsnelheid",
+      "Ruimtebeslag-risico",
+      "Hoge ecosysteemdienstwaarde onder RBR",
+      "Gemeentelijk quotum",
+      "Minimale neutralisatie-opgave",
+      "Totale onthardingsopgave"
+    ],
+    "gemeente": [
+      351.172,
+      16.95802,
+      44.800343,
+      4.98,
+      70.15,
+      13.2,
+      18.136379149410345,
+      7.6636208505896555,
+      36.54684
+    ],
+    "gemiddelde": [
+      686.2893909999999,
+      16.34334891366667,
+      35.31275207333332,
+      5.577611109330002,
+      189.8947,
+      67.04086666666666,
+      39.77813333333334,
+      89.4773,
+      65.23352923333333
+    ],
+    "units": [
+      "ha",
+      "%",
+      "%",
+      "ha/jaar",
+      "ha",
+      "ha",
+      "ha",
+      "ha",
+      "ha"
+    ],
+    "pranks": [
+      25,
+      65,
+      74,
+      59,
+      25,
+      25,
+      16,
+      15,
+      29
+    ]
+  },
+  "brvChart": {
+    "jaren": [
+      2022,
+      2025,
+      2030,
+      2040
+    ],
+    "waarden": [
+      55.171888811043694,
+      45.976574009203084,
+      30.651049339468724,
+      0
+    ]
+  },
+  "rbrZoneChart": {
+    "labels": [
+      "Woonzones",
+      "Recreatiezones",
+      "Overige groenzones",
+      "Industriezones",
+      "Gemeenschapszones",
+      "Overige zones",
+      "Havenzones"
+    ],
+    "waarden": [
+      25.21,
+      5.34,
+      39.01,
+      0.05,
+      0.54,
+      0,
+      0
+    ]
+  },
+  "radarChart": {
+    "labels": [
+      "Oppervlakte verharding",
+      "Aandeel verharding",
+      "Aandeel ruimtebeslag in zachte bestemmingen",
+      "Jaarlijkse ruimtebeslagsnelheid",
+      "Ruimtebeslag-risico",
+      "Hoge ecosysteemdienstwaarde onder RBR",
+      "Gemeentelijk quotum",
+      "Minimale neutralisatie-opgave",
+      "Totale onthardingsopgave"
+    ],
+    "pranks": [
+      75,
+      35,
+      26,
+      41,
+      75,
+      75,
+      16,
+      85,
+      71
+    ],
+    "colors": [
+      "goed",
+      "matig",
+      "matig",
+      "matig",
+      "goed",
+      "goed",
+      "slecht",
+      "goed",
+      "goed"
+    ]
+  },
+  "boxplotChart": [
+    {
+      "label": "Aandeel verharding",
+      "unit": "%",
+      "min": 4.1182995,
+      "q1": 10.688113125,
+      "median": 14.4035435,
+      "q3": 19.07515975,
+      "max": 55.794563,
+      "waarde": 16.95802,
+      "prank": 65
+    },
+    {
+      "label": "Ruimtebeslag-risico",
+      "unit": "ha",
+      "min": 3.31,
+      "q1": 70.425,
+      "median": 125.11,
+      "q3": 228.1325,
+      "max": 1755.37,
+      "waarde": 70.15,
+      "prank": 25
+    },
+    {
+      "label": "Jaarlijkse ruimtebeslagsnelheid",
+      "unit": "ha/jaar",
+      "min": -10.307777,
+      "q1": 2.2488888,
+      "median": 4.052222049999999,
+      "q3": 7.246111,
+      "max": 58.29111,
+      "waarde": 4.98,
+      "prank": 59
+    },
+    {
+      "label": "Minimale neutralisatie-opgave",
+      "unit": "ha",
+      "min": -47.97862096876067,
+      "q1": 20.42695583297082,
+      "median": 57.69109753901102,
+      "q3": 113.06751903269769,
+      "max": 1008.7765716297667,
+      "waarde": 7.6636208505896555,
+      "prank": 15
+    },
+    {
+      "label": "Totale onthardingsopgave",
+      "unit": "ha",
+      "min": 2.18378,
+      "q1": 32.271840000000005,
+      "median": 54.680080000000004,
+      "q3": 81.86961,
+      "max": 633.42868,
+      "waarde": 36.54684,
+      "prank": 29
+    }
+  ]
+};
+
+const PALETTE = {
+  blauw:   '#2e6b9e',
+  lichtbl: '#7eb8d4',
+  rood:    '#e05c5c',
+  oranje:  '#f5a623',
+  groen:   '#4caf7d',
+  paars:   '#9b59b6',
+  geel:    '#f7c948',
+  grijs:   '#94a3b8',
+};
+
+Chart.defaults.font.family = "'Segoe UI', Arial, sans-serif";
+Chart.defaults.font.size = 12;
+
+// ── 1. Radar chart ────────────────────────────────────────────────────────────
+new Chart(document.getElementById('radarChart'), {
+  type: 'radar',
+  data: {
+    labels: DATA.radarChart.labels,
+    datasets: [{
+      label: 'Boechout',
+      data: DATA.radarChart.pranks,
+      backgroundColor: 'rgba(46,107,158,0.2)',
+      borderColor: PALETTE.blauw,
+      borderWidth: 2,
+      pointBackgroundColor: PALETTE.blauw,
+    }],
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    scales: {
+      r: {
+        min: 0, max: 100,
+        ticks: { stepSize: 25, font: { size: 10 } },
+        pointLabels: { font: { size: 11 } },
+      },
+    },
+    plugins: { legend: { position: 'top' } },
+  },
+});
+
+// ── 2. Bar chart gemeente vs gemiddelde ───────────────────────────────────────
+(function() {
+  const labels = DATA.profielChart.labels;
+  const gem    = DATA.profielChart.gemeente;
+  const avg    = DATA.profielChart.gemiddelde;
+  const pranks = DATA.profielChart.pranks;
+  const units  = DATA.profielChart.units;
+
+  // Normaliseer naar percentage van maximum voor vergelijkbaarheid
+  const maxes = labels.map((_, i) => Math.max(gem[i] || 0, avg[i] || 0, 0.001));
+  const gemNorm = gem.map((v, i) => v !== null ? Math.round((v / maxes[i]) * 100) : null);
+  const avgNorm = avg.map((v, i) => v !== null ? Math.round((v / maxes[i]) * 100) : null);
+
+  new Chart(document.getElementById('barChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Boechout', data: gemNorm, backgroundColor: PALETTE.blauw },
+        { label: 'Vlaams gemiddelde', data: avgNorm, backgroundColor: PALETTE.lichtbl },
+      ],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              const i = ctx.dataIndex;
+              const rawVal = ctx.datasetIndex === 0 ? gem[i] : avg[i];
+              const unit = units[i];
+              return `${ctx.dataset.label}: ${rawVal !== null ? rawVal.toLocaleString('nl-BE', {maximumFractionDigits: 2}) : '–'} ${unit}`;
+            },
+          },
+        },
+      },
+      scales: {
+        y: {
+          title: { display: true, text: '% van maximum (voor vergelijkbaarheid)' },
+          ticks: { callback: v => v + '%' },
+        },
+      },
+    },
+  });
+})();
+
+// ── 3. BRV Reductietraject ────────────────────────────────────────────────────
+new Chart(document.getElementById('brvChart'), {
+  type: 'line',
+  data: {
+    labels: DATA.brvChart.jaren,
+    datasets: [{
+      label: 'Toegestaan bijkomend ruimtebeslag (m²/dag)',
+      data: DATA.brvChart.waarden,
+      borderColor: PALETTE.rood,
+      backgroundColor: 'rgba(224,92,92,0.1)',
+      borderWidth: 2.5,
+      pointRadius: 5,
+      fill: true,
+      tension: 0.3,
+    }],
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { title: { display: true, text: 'm²/dag' } },
+      x: { title: { display: true, text: 'Jaar' } },
+    },
+  },
+});
+
+// ── 4. RBR Zone pie ───────────────────────────────────────────────────────────
+(function() {
+  const d = DATA.rbrZoneChart;
+  const total = d.waarden.reduce((s, v) => s + v, 0);
+  const nonZeroIdx = d.waarden.map((v, i) => v > 0 ? i : -1).filter(i => i >= 0);
+  const labels = nonZeroIdx.map(i => d.labels[i]);
+  const values = nonZeroIdx.map(i => d.waarden[i]);
+  const colors = [PALETTE.blauw, PALETTE.rood, PALETTE.groen, PALETTE.oranje, PALETTE.paars, PALETTE.geel, PALETTE.grijs];
+
+  new Chart(document.getElementById('pieChart'), {
+    type: total > 0 ? 'doughnut' : 'doughnut',
+    data: {
+      labels: total > 0 ? labels : ['Geen data'],
+      datasets: [{
+        data: total > 0 ? values : [1],
+        backgroundColor: total > 0 ? colors.slice(0, labels.length) : ['#e2e8f0'],
+        borderWidth: 1,
+      }],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            label: ctx => total > 0
+              ? `${ctx.label}: ${ctx.parsed.toLocaleString('nl-BE', {maximumFractionDigits:1})} ha (${Math.round(ctx.parsed/total*100)}%)`
+              : 'Geen data',
+          },
+        },
+      },
+    },
+  });
+})();
+
+// ── 5. Box plot (positie in spreiding) als horizontaal bar chart ──────────────
+(function() {
+  const d = DATA.boxplotChart;
+  const labels = d.map(b => b.label);
+  const gemeente = d.map(b => b.waarde);
+  const q1       = d.map(b => b.q1);
+  const medians  = d.map(b => b.median);
+  const q3       = d.map(b => b.q3);
+
+  new Chart(document.getElementById('boxChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Q1–Q3 Vlaams bereik',
+          data: d.map(b => b.q3 - b.q1),
+          backgroundColor: 'rgba(126,184,212,0.4)',
+          base: d.map(b => b.q1),
+          borderColor: PALETTE.lichtbl,
+          borderWidth: 1,
+        },
+        {
+          label: 'Boechout',
+          data: gemeente,
+          type: 'scatter',
+          backgroundColor: PALETTE.rood,
+          pointRadius: 8,
+          pointStyle: 'triangle',
+          showLine: false,
+        },
+      ],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      indexAxis: 'y',
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: {
+          callbacks: {
+            label: function(ctx) {
+              if (ctx.datasetIndex === 0) {
+                const b = d[ctx.dataIndex];
+                return `Q1: ${b.q1.toLocaleString('nl-BE',{maximumFractionDigits:1})} · Mediaan: ${b.median.toLocaleString('nl-BE',{maximumFractionDigits:1})} · Q3: ${b.q3.toLocaleString('nl-BE',{maximumFractionDigits:1})} ${b.unit}`;
+              }
+              const b = d[ctx.dataIndex];
+              const prank = b.prank;
+              return `Boechout: ${b.waarde !== null ? b.waarde.toLocaleString('nl-BE',{maximumFractionDigits:1}) : '–'} ${b.unit} (P${prank})`;
+            },
+          },
+        },
+      },
+      scales: {
+        x: { title: { display: true, text: 'Waarde (eenheden variëren per indicator)' } },
+      },
+    },
+  });
+})();
+</script>
+</body>
+</html>

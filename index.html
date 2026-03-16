@@ -1,0 +1,2754 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <title>Betonmeter – Overzicht gemeenten</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; color: #1a1a2e; background: #f5f7fa; padding: 24px 20px; }
+    h1 { font-size: 1.6rem; color: #1a3a5c; margin-bottom: 6px; }
+    .subtitle { color: #64748b; margin-bottom: 24px; font-size: 0.95rem; }
+    input[type=search] { width: 320px; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,.07); }
+    thead th { background: #1a3a5c; color: #fff; padding: 10px 14px; text-align: left; font-size: 13px; }
+    tbody tr:hover { background: #f0f4f9; }
+    tbody td { padding: 9px 14px; border-bottom: 1px solid #e2e8f0; font-size: 13px; }
+    a { color: #2e6b9e; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+    .badge-goed   { background: #d1fae5; color: #065f46; }
+    .badge-matig  { background: #fef3c7; color: #92400e; }
+    .badge-slecht { background: #fee2e2; color: #991b1b; }
+    .badge-neutral{ background: #e2e8f0; color: #475569; }
+    .footer { text-align: center; color: #94a3b8; font-size: 12px; margin-top: 28px; }
+  </style>
+</head>
+<body>
+  <h1>Betonmeter – Overzicht Vlaamse Gemeenten</h1>
+  <p class="subtitle">Klik op een gemeente om het volledige rapport te openen · 300 gemeenten</p>
+  <input type="search" id="zoek" placeholder="Zoek gemeente…" oninput="filterTabel(this.value)">
+  <table id="tabel">
+    <thead>
+      <tr>
+        <th>Gemeente</th>
+        <th>NIS-code</th>
+        <th>Oppervlakte</th>
+        <th>Aandeel verharding</th>
+        <th>RBR-risico (ha)</th>
+        <th>Percentiel</th>
+        <th>Beoordeling verharding</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="Roeselare/rapport.html">Roeselare</a></td>
+        <td>36015</td>
+        <td>6.040 ha</td>
+        <td>34,8%</td>
+        <td>311 ha</td>
+        <td>P96</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lommel/rapport.html">Lommel</a></td>
+        <td>72020</td>
+        <td>10.228 ha</td>
+        <td>15,7%</td>
+        <td>689 ha</td>
+        <td>P57</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Beringen/rapport.html">Beringen</a></td>
+        <td>71004</td>
+        <td>7.856 ha</td>
+        <td>18,8%</td>
+        <td>630 ha</td>
+        <td>P75</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Gent/rapport.html">Gent</a></td>
+        <td>44021</td>
+        <td>15.777 ha</td>
+        <td>36,8%</td>
+        <td>1.079 ha</td>
+        <td>P98</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Evergem/rapport.html">Evergem</a></td>
+        <td>44019</td>
+        <td>7.538 ha</td>
+        <td>17,6%</td>
+        <td>806 ha</td>
+        <td>P69</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lokeren/rapport.html">Lokeren</a></td>
+        <td>46014</td>
+        <td>6.824 ha</td>
+        <td>18,7%</td>
+        <td>271 ha</td>
+        <td>P74</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Damme/rapport.html">Damme</a></td>
+        <td>31006</td>
+        <td>9.036 ha</td>
+        <td>6,1%</td>
+        <td>76 ha</td>
+        <td>P3</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Staden/rapport.html">Staden</a></td>
+        <td>36019</td>
+        <td>4.682 ha</td>
+        <td>15,7%</td>
+        <td>56 ha</td>
+        <td>P58</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Antwerpen/rapport.html">Antwerpen</a></td>
+        <td>11002</td>
+        <td>20.432 ha</td>
+        <td>41,5%</td>
+        <td>1.422 ha</td>
+        <td>P99</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Deinze/rapport.html">Deinze</a></td>
+        <td>44083</td>
+        <td>12.803 ha</td>
+        <td>13,9%</td>
+        <td>470 ha</td>
+        <td>P47</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hoogstraten/rapport.html">Hoogstraten</a></td>
+        <td>13014</td>
+        <td>10.540 ha</td>
+        <td>14,0%</td>
+        <td>204 ha</td>
+        <td>P48</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Dilsen-Stokkem/rapport.html">Dilsen-Stokkem</a></td>
+        <td>72041</td>
+        <td>6.589 ha</td>
+        <td>12,3%</td>
+        <td>271 ha</td>
+        <td>P36</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Poperinge/rapport.html">Poperinge</a></td>
+        <td>33021</td>
+        <td>12.037 ha</td>
+        <td>8,5%</td>
+        <td>136 ha</td>
+        <td>P11</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Sint-Truiden/rapport.html">Sint-Truiden</a></td>
+        <td>71053</td>
+        <td>10.712 ha</td>
+        <td>14,1%</td>
+        <td>477 ha</td>
+        <td>P48</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Beveren/rapport.html">Beveren</a></td>
+        <td>46003</td>
+        <td>15.269 ha</td>
+        <td>21,5%</td>
+        <td>1.747 ha</td>
+        <td>P80</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Bree/rapport.html">Bree</a></td>
+        <td>72004</td>
+        <td>6.498 ha</td>
+        <td>12,6%</td>
+        <td>168 ha</td>
+        <td>P38</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Tessenderlo/rapport.html">Tessenderlo</a></td>
+        <td>71057</td>
+        <td>5.164 ha</td>
+        <td>16,7%</td>
+        <td>355 ha</td>
+        <td>P64</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lanaken/rapport.html">Lanaken</a></td>
+        <td>73042</td>
+        <td>5.895 ha</td>
+        <td>15,3%</td>
+        <td>416 ha</td>
+        <td>P56</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Rijkevorsel/rapport.html">Rijkevorsel</a></td>
+        <td>13037</td>
+        <td>4.684 ha</td>
+        <td>13,2%</td>
+        <td>90 ha</td>
+        <td>P42</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Heist-op-den-Berg/rapport.html">Heist-op-den-Berg</a></td>
+        <td>12014</td>
+        <td>8.667 ha</td>
+        <td>16,6%</td>
+        <td>452 ha</td>
+        <td>P62</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Diksmuide/rapport.html">Diksmuide</a></td>
+        <td>32003</td>
+        <td>15.074 ha</td>
+        <td>6,6%</td>
+        <td>180 ha</td>
+        <td>P4</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Langemark-Poelkapelle/rapport.html">Langemark-Poelkapelle</a></td>
+        <td>33040</td>
+        <td>5.307 ha</td>
+        <td>9,2%</td>
+        <td>48 ha</td>
+        <td>P15</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Nazareth/rapport.html">Nazareth</a></td>
+        <td>44048</td>
+        <td>3.544 ha</td>
+        <td>16,8%</td>
+        <td>263 ha</td>
+        <td>P64</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Brugge/rapport.html">Brugge</a></td>
+        <td>31005</td>
+        <td>14.099 ha</td>
+        <td>27,4%</td>
+        <td>1.755 ha</td>
+        <td>P89</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Borgloon/rapport.html">Borgloon</a></td>
+        <td>73009</td>
+        <td>5.132 ha</td>
+        <td>9,9%</td>
+        <td>195 ha</td>
+        <td>P20</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Merksplas/rapport.html">Merksplas</a></td>
+        <td>13023</td>
+        <td>4.461 ha</td>
+        <td>12,5%</td>
+        <td>166 ha</td>
+        <td>P37</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Aalter/rapport.html">Aalter</a></td>
+        <td>44084</td>
+        <td>11.985 ha</td>
+        <td>11,2%</td>
+        <td>405 ha</td>
+        <td>P29</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Knokke-Heist/rapport.html">Knokke-Heist</a></td>
+        <td>31043</td>
+        <td>6.159 ha</td>
+        <td>14,5%</td>
+        <td>245 ha</td>
+        <td>P51</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ravels/rapport.html">Ravels</a></td>
+        <td>13035</td>
+        <td>9.514 ha</td>
+        <td>8,7%</td>
+        <td>177 ha</td>
+        <td>P12</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ieper/rapport.html">Ieper</a></td>
+        <td>33011</td>
+        <td>13.146 ha</td>
+        <td>11,9%</td>
+        <td>338 ha</td>
+        <td>P32</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Oostkamp/rapport.html">Oostkamp</a></td>
+        <td>31022</td>
+        <td>8.013 ha</td>
+        <td>12,0%</td>
+        <td>263 ha</td>
+        <td>P32</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Oudsbergen/rapport.html">Oudsbergen</a></td>
+        <td>72042</td>
+        <td>11.637 ha</td>
+        <td>9,2%</td>
+        <td>264 ha</td>
+        <td>P16</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Mol/rapport.html">Mol</a></td>
+        <td>13025</td>
+        <td>11.455 ha</td>
+        <td>11,3%</td>
+        <td>787 ha</td>
+        <td>P29</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hasselt/rapport.html">Hasselt</a></td>
+        <td>71022</td>
+        <td>10.269 ha</td>
+        <td>21,5%</td>
+        <td>738 ha</td>
+        <td>P81</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Tongeren/rapport.html">Tongeren</a></td>
+        <td>73083</td>
+        <td>8.781 ha</td>
+        <td>11,8%</td>
+        <td>425 ha</td>
+        <td>P32</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zonnebeke/rapport.html">Zonnebeke</a></td>
+        <td>33037</td>
+        <td>6.809 ha</td>
+        <td>10,5%</td>
+        <td>82 ha</td>
+        <td>P24</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Geel/rapport.html">Geel</a></td>
+        <td>13008</td>
+        <td>11.020 ha</td>
+        <td>14,4%</td>
+        <td>536 ha</td>
+        <td>P50</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Sint-Katelijne-Waver/rapport.html">Sint-Katelijne-Waver</a></td>
+        <td>12035</td>
+        <td>3.616 ha</td>
+        <td>24,1%</td>
+        <td>222 ha</td>
+        <td>P84</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hooglede/rapport.html">Hooglede</a></td>
+        <td>36006</td>
+        <td>3.811 ha</td>
+        <td>15,0%</td>
+        <td>98 ha</td>
+        <td>P54</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Maaseik/rapport.html">Maaseik</a></td>
+        <td>72021</td>
+        <td>7.718 ha</td>
+        <td>11,6%</td>
+        <td>235 ha</td>
+        <td>P30</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Veurne/rapport.html">Veurne</a></td>
+        <td>38025</td>
+        <td>9.721 ha</td>
+        <td>7,4%</td>
+        <td>111 ha</td>
+        <td>P6</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ninove/rapport.html">Ninove</a></td>
+        <td>41048</td>
+        <td>7.312 ha</td>
+        <td>14,1%</td>
+        <td>302 ha</td>
+        <td>P49</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Houthalen-Helchteren/rapport.html">Houthalen-Helchteren</a></td>
+        <td>72039</td>
+        <td>7.823 ha</td>
+        <td>12,7%</td>
+        <td>590 ha</td>
+        <td>P39</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="De%20Pinte/rapport.html">De Pinte</a></td>
+        <td>44012</td>
+        <td>1.778 ha</td>
+        <td>17,4%</td>
+        <td>70 ha</td>
+        <td>P68</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Heuvelland/rapport.html">Heuvelland</a></td>
+        <td>33039</td>
+        <td>9.479 ha</td>
+        <td>5,8%</td>
+        <td>63 ha</td>
+        <td>P2</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kortrijk/rapport.html">Kortrijk</a></td>
+        <td>34022</td>
+        <td>8.069 ha</td>
+        <td>27,7%</td>
+        <td>544 ha</td>
+        <td>P90</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wuustwezel/rapport.html">Wuustwezel</a></td>
+        <td>11053</td>
+        <td>8.941 ha</td>
+        <td>9,7%</td>
+        <td>220 ha</td>
+        <td>P20</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wingene/rapport.html">Wingene</a></td>
+        <td>37018</td>
+        <td>6.854 ha</td>
+        <td>11,7%</td>
+        <td>114 ha</td>
+        <td>P31</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zemst/rapport.html">Zemst</a></td>
+        <td>23096</td>
+        <td>4.323 ha</td>
+        <td>14,7%</td>
+        <td>229 ha</td>
+        <td>P52</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Bilzen/rapport.html">Bilzen</a></td>
+        <td>73006</td>
+        <td>7.598 ha</td>
+        <td>14,5%</td>
+        <td>435 ha</td>
+        <td>P51</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Maldegem/rapport.html">Maldegem</a></td>
+        <td>43010</td>
+        <td>9.563 ha</td>
+        <td>10,8%</td>
+        <td>222 ha</td>
+        <td>P26</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Meulebeke/rapport.html">Meulebeke</a></td>
+        <td>37007</td>
+        <td>2.949 ha</td>
+        <td>17,4%</td>
+        <td>60 ha</td>
+        <td>P68</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zottegem/rapport.html">Zottegem</a></td>
+        <td>41081</td>
+        <td>5.746 ha</td>
+        <td>13,4%</td>
+        <td>230 ha</td>
+        <td>P43</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Peer/rapport.html">Peer</a></td>
+        <td>72030</td>
+        <td>8.724 ha</td>
+        <td>9,0%</td>
+        <td>129 ha</td>
+        <td>P13</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Beernem/rapport.html">Beernem</a></td>
+        <td>31003</td>
+        <td>7.242 ha</td>
+        <td>9,4%</td>
+        <td>438 ha</td>
+        <td>P18</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Genk/rapport.html">Genk</a></td>
+        <td>71016</td>
+        <td>8.757 ha</td>
+        <td>26,2%</td>
+        <td>1.282 ha</td>
+        <td>P88</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Assenede/rapport.html">Assenede</a></td>
+        <td>43002</td>
+        <td>8.750 ha</td>
+        <td>7,4%</td>
+        <td>119 ha</td>
+        <td>P6</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Jabbeke/rapport.html">Jabbeke</a></td>
+        <td>31012</td>
+        <td>5.386 ha</td>
+        <td>11,5%</td>
+        <td>64 ha</td>
+        <td>P30</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wevelgem/rapport.html">Wevelgem</a></td>
+        <td>34041</td>
+        <td>3.914 ha</td>
+        <td>28,1%</td>
+        <td>200 ha</td>
+        <td>P91</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zwevegem/rapport.html">Zwevegem</a></td>
+        <td>34042</td>
+        <td>6.361 ha</td>
+        <td>14,0%</td>
+        <td>179 ha</td>
+        <td>P47</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Sint-Niklaas/rapport.html">Sint-Niklaas</a></td>
+        <td>46021</td>
+        <td>8.420 ha</td>
+        <td>21,6%</td>
+        <td>468 ha</td>
+        <td>P81</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Pelt/rapport.html">Pelt</a></td>
+        <td>72043</td>
+        <td>8.378 ha</td>
+        <td>16,2%</td>
+        <td>420 ha</td>
+        <td>P58</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Brecht/rapport.html">Brecht</a></td>
+        <td>11009</td>
+        <td>9.147 ha</td>
+        <td>10,9%</td>
+        <td>298 ha</td>
+        <td>P27</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ardooie/rapport.html">Ardooie</a></td>
+        <td>37020</td>
+        <td>3.492 ha</td>
+        <td>17,4%</td>
+        <td>41 ha</td>
+        <td>P68</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lievegem/rapport.html">Lievegem</a></td>
+        <td>44085</td>
+        <td>8.078 ha</td>
+        <td>11,2%</td>
+        <td>314 ha</td>
+        <td>P28</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Alveringem/rapport.html">Alveringem</a></td>
+        <td>38002</td>
+        <td>8.071 ha</td>
+        <td>5,1%</td>
+        <td>31 ha</td>
+        <td>P1</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kortemark/rapport.html">Kortemark</a></td>
+        <td>32011</td>
+        <td>5.543 ha</td>
+        <td>12,2%</td>
+        <td>67 ha</td>
+        <td>P34</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Dessel/rapport.html">Dessel</a></td>
+        <td>13006</td>
+        <td>2.745 ha</td>
+        <td>14,8%</td>
+        <td>241 ha</td>
+        <td>P53</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Geraardsbergen/rapport.html">Geraardsbergen</a></td>
+        <td>41018</td>
+        <td>8.006 ha</td>
+        <td>11,4%</td>
+        <td>380 ha</td>
+        <td>P30</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Middelkerke/rapport.html">Middelkerke</a></td>
+        <td>35011</td>
+        <td>7.904 ha</td>
+        <td>10,0%</td>
+        <td>110 ha</td>
+        <td>P21</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Aalst/rapport.html">Aalst</a></td>
+        <td>41002</td>
+        <td>7.866 ha</td>
+        <td>23,8%</td>
+        <td>625 ha</td>
+        <td>P84</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Westerlo/rapport.html">Westerlo</a></td>
+        <td>13049</td>
+        <td>5.547 ha</td>
+        <td>17,5%</td>
+        <td>313 ha</td>
+        <td>P69</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Herentals/rapport.html">Herentals</a></td>
+        <td>13011</td>
+        <td>4.795 ha</td>
+        <td>19,4%</td>
+        <td>305 ha</td>
+        <td>P77</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Maasmechelen/rapport.html">Maasmechelen</a></td>
+        <td>73107</td>
+        <td>7.685 ha</td>
+        <td>15,4%</td>
+        <td>584 ha</td>
+        <td>P56</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hechtel-Eksel/rapport.html">Hechtel-Eksel</a></td>
+        <td>72038</td>
+        <td>7.668 ha</td>
+        <td>6,7%</td>
+        <td>135 ha</td>
+        <td>P4</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Brakel/rapport.html">Brakel</a></td>
+        <td>45059</td>
+        <td>5.696 ha</td>
+        <td>8,7%</td>
+        <td>102 ha</td>
+        <td>P12</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Waregem/rapport.html">Waregem</a></td>
+        <td>34040</td>
+        <td>4.450 ha</td>
+        <td>34,4%</td>
+        <td>232 ha</td>
+        <td>P95</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Sint-Laureins/rapport.html">Sint-Laureins</a></td>
+        <td>43014</td>
+        <td>7.454 ha</td>
+        <td>5,5%</td>
+        <td>30 ha</td>
+        <td>P2</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kruisem/rapport.html">Kruisem</a></td>
+        <td>45068</td>
+        <td>7.159 ha</td>
+        <td>11,3%</td>
+        <td>354 ha</td>
+        <td>P29</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Izegem/rapport.html">Izegem</a></td>
+        <td>36008</td>
+        <td>2.564 ha</td>
+        <td>35,8%</td>
+        <td>115 ha</td>
+        <td>P97</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Tienen/rapport.html">Tienen</a></td>
+        <td>24107</td>
+        <td>7.277 ha</td>
+        <td>13,6%</td>
+        <td>399 ha</td>
+        <td>P46</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Asse/rapport.html">Asse</a></td>
+        <td>23002</td>
+        <td>5.022 ha</td>
+        <td>17,0%</td>
+        <td>253 ha</td>
+        <td>P66</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Balen/rapport.html">Balen</a></td>
+        <td>13003</td>
+        <td>7.299 ha</td>
+        <td>12,3%</td>
+        <td>443 ha</td>
+        <td>P35</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kasterlee/rapport.html">Kasterlee</a></td>
+        <td>13017</td>
+        <td>7.227 ha</td>
+        <td>10,1%</td>
+        <td>366 ha</td>
+        <td>P21</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Oudenaarde/rapport.html">Oudenaarde</a></td>
+        <td>45035</td>
+        <td>6.892 ha</td>
+        <td>15,9%</td>
+        <td>232 ha</td>
+        <td>P58</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Tielt/rapport.html">Tielt</a></td>
+        <td>37015</td>
+        <td>6.885 ha</td>
+        <td>14,1%</td>
+        <td>147 ha</td>
+        <td>P49</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Meerhout/rapport.html">Meerhout</a></td>
+        <td>13021</td>
+        <td>3.654 ha</td>
+        <td>12,0%</td>
+        <td>62 ha</td>
+        <td>P33</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Puurs-Sint-Amands/rapport.html">Puurs-Sint-Amands</a></td>
+        <td>12041</td>
+        <td>4.914 ha</td>
+        <td>17,5%</td>
+        <td>254 ha</td>
+        <td>P69</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Mechelen/rapport.html">Mechelen</a></td>
+        <td>12025</td>
+        <td>6.579 ha</td>
+        <td>24,9%</td>
+        <td>300 ha</td>
+        <td>P86</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Oud-Heverlee/rapport.html">Oud-Heverlee</a></td>
+        <td>24086</td>
+        <td>3.118 ha</td>
+        <td>9,4%</td>
+        <td>70 ha</td>
+        <td>P17</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lo-Reninge/rapport.html">Lo-Reninge</a></td>
+        <td>32030</td>
+        <td>6.340 ha</td>
+        <td>5,0%</td>
+        <td>19 ha</td>
+        <td>P1</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Aarschot/rapport.html">Aarschot</a></td>
+        <td>24001</td>
+        <td>6.305 ha</td>
+        <td>16,2%</td>
+        <td>228 ha</td>
+        <td>P60</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Oosterzele/rapport.html">Oosterzele</a></td>
+        <td>44052</td>
+        <td>4.357 ha</td>
+        <td>11,1%</td>
+        <td>171 ha</td>
+        <td>P28</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Houthulst/rapport.html">Houthulst</a></td>
+        <td>32006</td>
+        <td>5.602 ha</td>
+        <td>9,1%</td>
+        <td>64 ha</td>
+        <td>P15</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lochristi/rapport.html">Lochristi</a></td>
+        <td>44034</td>
+        <td>6.066 ha</td>
+        <td>16,9%</td>
+        <td>163 ha</td>
+        <td>P65</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lille/rapport.html">Lille</a></td>
+        <td>13019</td>
+        <td>5.962 ha</td>
+        <td>10,7%</td>
+        <td>299 ha</td>
+        <td>P25</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kalmthout/rapport.html">Kalmthout</a></td>
+        <td>11022</td>
+        <td>5.941 ha</td>
+        <td>9,5%</td>
+        <td>190 ha</td>
+        <td>P18</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Bocholt/rapport.html">Bocholt</a></td>
+        <td>72003</td>
+        <td>5.929 ha</td>
+        <td>10,5%</td>
+        <td>136 ha</td>
+        <td>P24</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Diest/rapport.html">Diest</a></td>
+        <td>24020</td>
+        <td>5.872 ha</td>
+        <td>13,2%</td>
+        <td>326 ha</td>
+        <td>P42</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lummen/rapport.html">Lummen</a></td>
+        <td>71037</td>
+        <td>5.370 ha</td>
+        <td>12,9%</td>
+        <td>254 ha</td>
+        <td>P40</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Beerse/rapport.html">Beerse</a></td>
+        <td>13004</td>
+        <td>3.736 ha</td>
+        <td>19,2%</td>
+        <td>201 ha</td>
+        <td>P76</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zedelgem/rapport.html">Zedelgem</a></td>
+        <td>31040</td>
+        <td>6.066 ha</td>
+        <td>15,2%</td>
+        <td>226 ha</td>
+        <td>P55</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Overijse/rapport.html">Overijse</a></td>
+        <td>23062</td>
+        <td>4.499 ha</td>
+        <td>14,7%</td>
+        <td>135 ha</td>
+        <td>P52</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Riemst/rapport.html">Riemst</a></td>
+        <td>73066</td>
+        <td>5.806 ha</td>
+        <td>10,6%</td>
+        <td>170 ha</td>
+        <td>P25</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Leuven/rapport.html">Leuven</a></td>
+        <td>24062</td>
+        <td>5.751 ha</td>
+        <td>30,7%</td>
+        <td>522 ha</td>
+        <td>P93</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Turnhout/rapport.html">Turnhout</a></td>
+        <td>13040</td>
+        <td>5.671 ha</td>
+        <td>19,1%</td>
+        <td>252 ha</td>
+        <td>P75</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Gingelom/rapport.html">Gingelom</a></td>
+        <td>71017</td>
+        <td>5.634 ha</td>
+        <td>6,5%</td>
+        <td>106 ha</td>
+        <td>P4</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Anzegem/rapport.html">Anzegem</a></td>
+        <td>34002</td>
+        <td>4.235 ha</td>
+        <td>14,7%</td>
+        <td>128 ha</td>
+        <td>P52</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Putte/rapport.html">Putte</a></td>
+        <td>12029</td>
+        <td>3.516 ha</td>
+        <td>16,9%</td>
+        <td>117 ha</td>
+        <td>P65</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Sint-Gillis-Waas/rapport.html">Sint-Gillis-Waas</a></td>
+        <td>46020</td>
+        <td>5.549 ha</td>
+        <td>12,3%</td>
+        <td>99 ha</td>
+        <td>P35</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wielsbeke/rapport.html">Wielsbeke</a></td>
+        <td>37017</td>
+        <td>2.191 ha</td>
+        <td>27,6%</td>
+        <td>156 ha</td>
+        <td>P90</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Arendonk/rapport.html">Arendonk</a></td>
+        <td>13001</td>
+        <td>5.515 ha</td>
+        <td>10,2%</td>
+        <td>116 ha</td>
+        <td>P22</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Alken/rapport.html">Alken</a></td>
+        <td>73001</td>
+        <td>2.824 ha</td>
+        <td>16,5%</td>
+        <td>89 ha</td>
+        <td>P62</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Moorslede/rapport.html">Moorslede</a></td>
+        <td>36012</td>
+        <td>3.545 ha</td>
+        <td>13,5%</td>
+        <td>57 ha</td>
+        <td>P45</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Heusden-Zolder/rapport.html">Heusden-Zolder</a></td>
+        <td>71070</td>
+        <td>5.340 ha</td>
+        <td>19,3%</td>
+        <td>445 ha</td>
+        <td>P76</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Landen/rapport.html">Landen</a></td>
+        <td>24059</td>
+        <td>5.330 ha</td>
+        <td>9,3%</td>
+        <td>211 ha</td>
+        <td>P16</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Heers/rapport.html">Heers</a></td>
+        <td>73022</td>
+        <td>5.306 ha</td>
+        <td>6,2%</td>
+        <td>125 ha</td>
+        <td>P3</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ham/rapport.html">Ham</a></td>
+        <td>71069</td>
+        <td>3.279 ha</td>
+        <td>15,7%</td>
+        <td>185 ha</td>
+        <td>P57</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Malle/rapport.html">Malle</a></td>
+        <td>11057</td>
+        <td>5.190 ha</td>
+        <td>12,0%</td>
+        <td>252 ha</td>
+        <td>P33</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Keerbergen/rapport.html">Keerbergen</a></td>
+        <td>24048</td>
+        <td>1.854 ha</td>
+        <td>18,1%</td>
+        <td>117 ha</td>
+        <td>P72</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Dendermonde/rapport.html">Dendermonde</a></td>
+        <td>42006</td>
+        <td>5.652 ha</td>
+        <td>22,4%</td>
+        <td>315 ha</td>
+        <td>P82</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zonhoven/rapport.html">Zonhoven</a></td>
+        <td>71066</td>
+        <td>3.967 ha</td>
+        <td>17,7%</td>
+        <td>251 ha</td>
+        <td>P70</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zulte/rapport.html">Zulte</a></td>
+        <td>44081</td>
+        <td>3.276 ha</td>
+        <td>18,7%</td>
+        <td>172 ha</td>
+        <td>P74</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Herselt/rapport.html">Herselt</a></td>
+        <td>13013</td>
+        <td>5.237 ha</td>
+        <td>10,3%</td>
+        <td>139 ha</td>
+        <td>P23</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kinrooi/rapport.html">Kinrooi</a></td>
+        <td>72018</td>
+        <td>5.480 ha</td>
+        <td>10,9%</td>
+        <td>93 ha</td>
+        <td>P27</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Scherpenheuvel-Zichem/rapport.html">Scherpenheuvel-Zichem</a></td>
+        <td>24134</td>
+        <td>5.115 ha</td>
+        <td>13,7%</td>
+        <td>163 ha</td>
+        <td>P46</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Deerlijk/rapport.html">Deerlijk</a></td>
+        <td>34009</td>
+        <td>1.697 ha</td>
+        <td>29,6%</td>
+        <td>91 ha</td>
+        <td>P92</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Essen/rapport.html">Essen</a></td>
+        <td>11016</td>
+        <td>4.757 ha</td>
+        <td>12,2%</td>
+        <td>200 ha</td>
+        <td>P34</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Grobbendonk/rapport.html">Grobbendonk</a></td>
+        <td>13010</td>
+        <td>2.837 ha</td>
+        <td>17,1%</td>
+        <td>125 ha</td>
+        <td>P67</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Voeren/rapport.html">Voeren</a></td>
+        <td>73109</td>
+        <td>5.061 ha</td>
+        <td>4,9%</td>
+        <td>59 ha</td>
+        <td>P1</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Koksijde/rapport.html">Koksijde</a></td>
+        <td>38014</td>
+        <td>5.036 ha</td>
+        <td>14,1%</td>
+        <td>144 ha</td>
+        <td>P49</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zoutleeuw/rapport.html">Zoutleeuw</a></td>
+        <td>24130</td>
+        <td>4.685 ha</td>
+        <td>7,6%</td>
+        <td>93 ha</td>
+        <td>P7</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lier/rapport.html">Lier</a></td>
+        <td>12021</td>
+        <td>4.985 ha</td>
+        <td>20,3%</td>
+        <td>296 ha</td>
+        <td>P78</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kortenaken/rapport.html">Kortenaken</a></td>
+        <td>24054</td>
+        <td>4.944 ha</td>
+        <td>7,8%</td>
+        <td>50 ha</td>
+        <td>P8</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Bornem/rapport.html">Bornem</a></td>
+        <td>12007</td>
+        <td>4.619 ha</td>
+        <td>13,4%</td>
+        <td>93 ha</td>
+        <td>P43</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Oostende/rapport.html">Oostende</a></td>
+        <td>35013</td>
+        <td>4.095 ha</td>
+        <td>34,6%</td>
+        <td>316 ha</td>
+        <td>P95</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zuienkerke/rapport.html">Zuienkerke</a></td>
+        <td>31042</td>
+        <td>4.890 ha</td>
+        <td>4,1%</td>
+        <td>20 ha</td>
+        <td>P0</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Grimbergen/rapport.html">Grimbergen</a></td>
+        <td>23025</td>
+        <td>3.867 ha</td>
+        <td>21,5%</td>
+        <td>175 ha</td>
+        <td>P81</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Retie/rapport.html">Retie</a></td>
+        <td>13036</td>
+        <td>4.850 ha</td>
+        <td>9,3%</td>
+        <td>275 ha</td>
+        <td>P17</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Herzele/rapport.html">Herzele</a></td>
+        <td>41027</td>
+        <td>4.791 ha</td>
+        <td>10,6%</td>
+        <td>103 ha</td>
+        <td>P25</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kaprijke/rapport.html">Kaprijke</a></td>
+        <td>43007</td>
+        <td>3.364 ha</td>
+        <td>9,1%</td>
+        <td>155 ha</td>
+        <td>P14</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Erpe-Mere/rapport.html">Erpe-Mere</a></td>
+        <td>41082</td>
+        <td>3.441 ha</td>
+        <td>17,8%</td>
+        <td>154 ha</td>
+        <td>P70</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Laakdal/rapport.html">Laakdal</a></td>
+        <td>13053</td>
+        <td>4.243 ha</td>
+        <td>14,6%</td>
+        <td>172 ha</td>
+        <td>P51</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Halle/rapport.html">Halle</a></td>
+        <td>23027</td>
+        <td>4.498 ha</td>
+        <td>18,7%</td>
+        <td>243 ha</td>
+        <td>P73</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="De%20Haan/rapport.html">De Haan</a></td>
+        <td>35029</td>
+        <td>4.614 ha</td>
+        <td>11,2%</td>
+        <td>90 ha</td>
+        <td>P28</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Bertem/rapport.html">Bertem</a></td>
+        <td>24009</td>
+        <td>2.999 ha</td>
+        <td>9,0%</td>
+        <td>122 ha</td>
+        <td>P14</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ichtegem/rapport.html">Ichtegem</a></td>
+        <td>35006</td>
+        <td>4.578 ha</td>
+        <td>11,7%</td>
+        <td>74 ha</td>
+        <td>P31</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lede/rapport.html">Lede</a></td>
+        <td>41034</td>
+        <td>2.989 ha</td>
+        <td>16,6%</td>
+        <td>103 ha</td>
+        <td>P63</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zele/rapport.html">Zele</a></td>
+        <td>42028</td>
+        <td>3.328 ha</td>
+        <td>19,6%</td>
+        <td>94 ha</td>
+        <td>P77</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Torhout/rapport.html">Torhout</a></td>
+        <td>31033</td>
+        <td>4.533 ha</td>
+        <td>16,3%</td>
+        <td>141 ha</td>
+        <td>P61</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Stekene/rapport.html">Stekene</a></td>
+        <td>46024</td>
+        <td>4.526 ha</td>
+        <td>13,2%</td>
+        <td>112 ha</td>
+        <td>P41</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Harelbeke/rapport.html">Harelbeke</a></td>
+        <td>34013</td>
+        <td>2.940 ha</td>
+        <td>31,2%</td>
+        <td>147 ha</td>
+        <td>P93</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Roosdaal/rapport.html">Roosdaal</a></td>
+        <td>23097</td>
+        <td>2.192 ha</td>
+        <td>15,3%</td>
+        <td>97 ha</td>
+        <td>P56</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Herne/rapport.html">Herne</a></td>
+        <td>23032</td>
+        <td>4.466 ha</td>
+        <td>6,8%</td>
+        <td>42 ha</td>
+        <td>P5</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Tielt-Winge/rapport.html">Tielt-Winge</a></td>
+        <td>24135</td>
+        <td>4.452 ha</td>
+        <td>9,7%</td>
+        <td>66 ha</td>
+        <td>P20</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zaventem/rapport.html">Zaventem</a></td>
+        <td>23094</td>
+        <td>2.773 ha</td>
+        <td>36,1%</td>
+        <td>203 ha</td>
+        <td>P97</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Vleteren/rapport.html">Vleteren</a></td>
+        <td>33041</td>
+        <td>3.858 ha</td>
+        <td>6,7%</td>
+        <td>26 ha</td>
+        <td>P5</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wervik/rapport.html">Wervik</a></td>
+        <td>33029</td>
+        <td>4.377 ha</td>
+        <td>13,8%</td>
+        <td>92 ha</td>
+        <td>P47</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hamont-Achel/rapport.html">Hamont-Achel</a></td>
+        <td>72037</td>
+        <td>4.373 ha</td>
+        <td>12,9%</td>
+        <td>270 ha</td>
+        <td>P40</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ranst/rapport.html">Ranst</a></td>
+        <td>11035</td>
+        <td>4.367 ha</td>
+        <td>16,2%</td>
+        <td>202 ha</td>
+        <td>P59</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lubbeek/rapport.html">Lubbeek</a></td>
+        <td>24066</td>
+        <td>4.528 ha</td>
+        <td>10,3%</td>
+        <td>91 ha</td>
+        <td>P23</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Herk-de-Stad/rapport.html">Herk-de-Stad</a></td>
+        <td>71024</td>
+        <td>4.303 ha</td>
+        <td>12,0%</td>
+        <td>243 ha</td>
+        <td>P33</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Gistel/rapport.html">Gistel</a></td>
+        <td>35005</td>
+        <td>4.284 ha</td>
+        <td>10,5%</td>
+        <td>67 ha</td>
+        <td>P24</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Sint-Pieters-Leeuw/rapport.html">Sint-Pieters-Leeuw</a></td>
+        <td>23077</td>
+        <td>4.067 ha</td>
+        <td>18,5%</td>
+        <td>129 ha</td>
+        <td>P73</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Bierbeek/rapport.html">Bierbeek</a></td>
+        <td>24011</td>
+        <td>3.897 ha</td>
+        <td>8,2%</td>
+        <td>85 ha</td>
+        <td>P10</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Pittem/rapport.html">Pittem</a></td>
+        <td>37011</td>
+        <td>3.469 ha</td>
+        <td>13,2%</td>
+        <td>44 ha</td>
+        <td>P42</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Maarkedal/rapport.html">Maarkedal</a></td>
+        <td>45064</td>
+        <td>4.616 ha</td>
+        <td>6,7%</td>
+        <td>35 ha</td>
+        <td>P5</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Gooik/rapport.html">Gooik</a></td>
+        <td>23024</td>
+        <td>4.021 ha</td>
+        <td>8,1%</td>
+        <td>87 ha</td>
+        <td>P10</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Dilbeek/rapport.html">Dilbeek</a></td>
+        <td>23016</td>
+        <td>4.148 ha</td>
+        <td>23,1%</td>
+        <td>294 ha</td>
+        <td>P83</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hamme/rapport.html">Hamme</a></td>
+        <td>42008</td>
+        <td>4.053 ha</td>
+        <td>17,1%</td>
+        <td>112 ha</td>
+        <td>P67</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zandhoven/rapport.html">Zandhoven</a></td>
+        <td>11054</td>
+        <td>4.010 ha</td>
+        <td>12,7%</td>
+        <td>216 ha</td>
+        <td>P38</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Temse/rapport.html">Temse</a></td>
+        <td>46025</td>
+        <td>4.010 ha</td>
+        <td>20,4%</td>
+        <td>206 ha</td>
+        <td>P79</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Koekelare/rapport.html">Koekelare</a></td>
+        <td>32010</td>
+        <td>3.944 ha</td>
+        <td>9,6%</td>
+        <td>30 ha</td>
+        <td>P19</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Huldenberg/rapport.html">Huldenberg</a></td>
+        <td>24045</td>
+        <td>3.995 ha</td>
+        <td>7,5%</td>
+        <td>129 ha</td>
+        <td>P7</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Vilvoorde/rapport.html">Vilvoorde</a></td>
+        <td>23088</td>
+        <td>2.157 ha</td>
+        <td>36,0%</td>
+        <td>174 ha</td>
+        <td>P97</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Nijlen/rapport.html">Nijlen</a></td>
+        <td>12026</td>
+        <td>3.920 ha</td>
+        <td>15,6%</td>
+        <td>242 ha</td>
+        <td>P57</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Oud-Turnhout/rapport.html">Oud-Turnhout</a></td>
+        <td>13031</td>
+        <td>3.917 ha</td>
+        <td>11,8%</td>
+        <td>147 ha</td>
+        <td>P31</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Holsbeek/rapport.html">Holsbeek</a></td>
+        <td>24043</td>
+        <td>3.878 ha</td>
+        <td>8,4%</td>
+        <td>98 ha</td>
+        <td>P11</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Londerzeel/rapport.html">Londerzeel</a></td>
+        <td>23045</td>
+        <td>3.653 ha</td>
+        <td>16,5%</td>
+        <td>162 ha</td>
+        <td>P62</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zoersel/rapport.html">Zoersel</a></td>
+        <td>11055</td>
+        <td>3.869 ha</td>
+        <td>15,1%</td>
+        <td>213 ha</td>
+        <td>P55</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Brasschaat/rapport.html">Brasschaat</a></td>
+        <td>11008</td>
+        <td>3.858 ha</td>
+        <td>17,0%</td>
+        <td>216 ha</td>
+        <td>P66</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Tremelo/rapport.html">Tremelo</a></td>
+        <td>24109</td>
+        <td>2.189 ha</td>
+        <td>18,5%</td>
+        <td>137 ha</td>
+        <td>P73</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kluisbergen/rapport.html">Kluisbergen</a></td>
+        <td>45060</td>
+        <td>3.063 ha</td>
+        <td>9,2%</td>
+        <td>121 ha</td>
+        <td>P15</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Berlare/rapport.html">Berlare</a></td>
+        <td>42003</td>
+        <td>3.823 ha</td>
+        <td>12,2%</td>
+        <td>111 ha</td>
+        <td>P35</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Beersel/rapport.html">Beersel</a></td>
+        <td>23003</td>
+        <td>3.040 ha</td>
+        <td>20,5%</td>
+        <td>194 ha</td>
+        <td>P79</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Merchtem/rapport.html">Merchtem</a></td>
+        <td>23052</td>
+        <td>3.690 ha</td>
+        <td>12,5%</td>
+        <td>120 ha</td>
+        <td>P38</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wortegem-Petegem/rapport.html">Wortegem-Petegem</a></td>
+        <td>45061</td>
+        <td>4.247 ha</td>
+        <td>7,9%</td>
+        <td>70 ha</td>
+        <td>P9</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Bekkevoort/rapport.html">Bekkevoort</a></td>
+        <td>24008</td>
+        <td>3.728 ha</td>
+        <td>9,0%</td>
+        <td>33 ha</td>
+        <td>P14</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Rotselaar/rapport.html">Rotselaar</a></td>
+        <td>24094</td>
+        <td>3.722 ha</td>
+        <td>13,5%</td>
+        <td>162 ha</td>
+        <td>P44</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Diepenbeek/rapport.html">Diepenbeek</a></td>
+        <td>71011</td>
+        <td>4.141 ha</td>
+        <td>16,2%</td>
+        <td>598 ha</td>
+        <td>P59</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wetteren/rapport.html">Wetteren</a></td>
+        <td>42025</td>
+        <td>3.702 ha</td>
+        <td>21,0%</td>
+        <td>136 ha</td>
+        <td>P80</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Merelbeke/rapport.html">Merelbeke</a></td>
+        <td>44043</td>
+        <td>3.700 ha</td>
+        <td>18,7%</td>
+        <td>381 ha</td>
+        <td>P74</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Linter/rapport.html">Linter</a></td>
+        <td>24133</td>
+        <td>3.687 ha</td>
+        <td>7,9%</td>
+        <td>46 ha</td>
+        <td>P9</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Halen/rapport.html">Halen</a></td>
+        <td>71020</td>
+        <td>3.660 ha</td>
+        <td>10,3%</td>
+        <td>113 ha</td>
+        <td>P23</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Pepingen/rapport.html">Pepingen</a></td>
+        <td>23064</td>
+        <td>3.593 ha</td>
+        <td>5,8%</td>
+        <td>41 ha</td>
+        <td>P3</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kapellen/rapport.html">Kapellen</a></td>
+        <td>11023</td>
+        <td>3.722 ha</td>
+        <td>14,3%</td>
+        <td>189 ha</td>
+        <td>P50</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Geetbets/rapport.html">Geetbets</a></td>
+        <td>24028</td>
+        <td>3.552 ha</td>
+        <td>8,2%</td>
+        <td>69 ha</td>
+        <td>P10</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Galmaarden/rapport.html">Galmaarden</a></td>
+        <td>23023</td>
+        <td>3.529 ha</td>
+        <td>8,4%</td>
+        <td>63 ha</td>
+        <td>P11</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Meise/rapport.html">Meise</a></td>
+        <td>23050</td>
+        <td>3.507 ha</td>
+        <td>15,2%</td>
+        <td>228 ha</td>
+        <td>P55</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ronse/rapport.html">Ronse</a></td>
+        <td>45041</td>
+        <td>3.470 ha</td>
+        <td>17,8%</td>
+        <td>201 ha</td>
+        <td>P71</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wachtebeke/rapport.html">Wachtebeke</a></td>
+        <td>44073</td>
+        <td>3.463 ha</td>
+        <td>8,7%</td>
+        <td>110 ha</td>
+        <td>P12</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ternat/rapport.html">Ternat</a></td>
+        <td>23086</td>
+        <td>2.471 ha</td>
+        <td>19,8%</td>
+        <td>112 ha</td>
+        <td>P77</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Schilde/rapport.html">Schilde</a></td>
+        <td>11039</td>
+        <td>3.609 ha</td>
+        <td>13,6%</td>
+        <td>216 ha</td>
+        <td>P45</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kortenberg/rapport.html">Kortenberg</a></td>
+        <td>24055</td>
+        <td>3.470 ha</td>
+        <td>15,1%</td>
+        <td>100 ha</td>
+        <td>P54</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Sint-Genesius-Rode/rapport.html">Sint-Genesius-Rode</a></td>
+        <td>23101</td>
+        <td>2.275 ha</td>
+        <td>16,6%</td>
+        <td>57 ha</td>
+        <td>P63</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hoegaarden/rapport.html">Hoegaarden</a></td>
+        <td>24041</td>
+        <td>3.413 ha</td>
+        <td>7,6%</td>
+        <td>50 ha</td>
+        <td>P7</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kuurne/rapport.html">Kuurne</a></td>
+        <td>34023</td>
+        <td>1.011 ha</td>
+        <td>42,7%</td>
+        <td>103 ha</td>
+        <td>P99</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kampenhout/rapport.html">Kampenhout</a></td>
+        <td>23038</td>
+        <td>3.365 ha</td>
+        <td>12,4%</td>
+        <td>115 ha</td>
+        <td>P37</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Tervuren/rapport.html">Tervuren</a></td>
+        <td>24104</td>
+        <td>3.362 ha</td>
+        <td>12,9%</td>
+        <td>115 ha</td>
+        <td>P41</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kruibeke/rapport.html">Kruibeke</a></td>
+        <td>46013</td>
+        <td>3.353 ha</td>
+        <td>13,5%</td>
+        <td>62 ha</td>
+        <td>P45</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Eeklo/rapport.html">Eeklo</a></td>
+        <td>43005</td>
+        <td>3.045 ha</td>
+        <td>20,4%</td>
+        <td>182 ha</td>
+        <td>P79</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Nieuwpoort/rapport.html">Nieuwpoort</a></td>
+        <td>38016</td>
+        <td>3.328 ha</td>
+        <td>12,8%</td>
+        <td>100 ha</td>
+        <td>P39</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Menen/rapport.html">Menen</a></td>
+        <td>34027</td>
+        <td>3.316 ha</td>
+        <td>29,2%</td>
+        <td>210 ha</td>
+        <td>P92</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Opwijk/rapport.html">Opwijk</a></td>
+        <td>23060</td>
+        <td>1.992 ha</td>
+        <td>17,9%</td>
+        <td>85 ha</td>
+        <td>P71</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Herent/rapport.html">Herent</a></td>
+        <td>24038</td>
+        <td>3.274 ha</td>
+        <td>16,3%</td>
+        <td>144 ha</td>
+        <td>P61</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Moerbeke/rapport.html">Moerbeke</a></td>
+        <td>44045</td>
+        <td>3.793 ha</td>
+        <td>7,7%</td>
+        <td>65 ha</td>
+        <td>P8</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Laarne/rapport.html">Laarne</a></td>
+        <td>42010</td>
+        <td>3.258 ha</td>
+        <td>13,7%</td>
+        <td>50 ha</td>
+        <td>P46</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ruiselede/rapport.html">Ruiselede</a></td>
+        <td>37012</td>
+        <td>3.062 ha</td>
+        <td>10,3%</td>
+        <td>31 ha</td>
+        <td>P22</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Oudenburg/rapport.html">Oudenburg</a></td>
+        <td>35014</td>
+        <td>3.560 ha</td>
+        <td>10,8%</td>
+        <td>63 ha</td>
+        <td>P26</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Waasmunster/rapport.html">Waasmunster</a></td>
+        <td>42023</td>
+        <td>3.227 ha</td>
+        <td>12,0%</td>
+        <td>145 ha</td>
+        <td>P34</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zwalm/rapport.html">Zwalm</a></td>
+        <td>45065</td>
+        <td>3.388 ha</td>
+        <td>9,3%</td>
+        <td>67 ha</td>
+        <td>P17</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zutendaal/rapport.html">Zutendaal</a></td>
+        <td>71067</td>
+        <td>3.211 ha</td>
+        <td>10,1%</td>
+        <td>93 ha</td>
+        <td>P21</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hoeselt/rapport.html">Hoeselt</a></td>
+        <td>73032</td>
+        <td>3.010 ha</td>
+        <td>12,3%</td>
+        <td>78 ha</td>
+        <td>P36</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Gavere/rapport.html">Gavere</a></td>
+        <td>44020</td>
+        <td>3.160 ha</td>
+        <td>13,4%</td>
+        <td>152 ha</td>
+        <td>P44</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Boutersem/rapport.html">Boutersem</a></td>
+        <td>24016</td>
+        <td>3.114 ha</td>
+        <td>9,5%</td>
+        <td>88 ha</td>
+        <td>P18</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lennik/rapport.html">Lennik</a></td>
+        <td>23104</td>
+        <td>3.112 ha</td>
+        <td>10,2%</td>
+        <td>72 ha</td>
+        <td>P22</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Haacht/rapport.html">Haacht</a></td>
+        <td>24033</td>
+        <td>3.074 ha</td>
+        <td>14,8%</td>
+        <td>90 ha</td>
+        <td>P53</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kortessem/rapport.html">Kortessem</a></td>
+        <td>73040</td>
+        <td>3.399 ha</td>
+        <td>9,6%</td>
+        <td>59 ha</td>
+        <td>P19</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Haaltert/rapport.html">Haaltert</a></td>
+        <td>41024</td>
+        <td>3.052 ha</td>
+        <td>14,9%</td>
+        <td>166 ha</td>
+        <td>P53</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Willebroek/rapport.html">Willebroek</a></td>
+        <td>12040</td>
+        <td>2.737 ha</td>
+        <td>26,1%</td>
+        <td>246 ha</td>
+        <td>P88</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Begijnendijk/rapport.html">Begijnendijk</a></td>
+        <td>24007</td>
+        <td>1.766 ha</td>
+        <td>17,7%</td>
+        <td>47 ha</td>
+        <td>P70</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Schoten/rapport.html">Schoten</a></td>
+        <td>11040</td>
+        <td>2.951 ha</td>
+        <td>22,8%</td>
+        <td>122 ha</td>
+        <td>P83</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Bonheiden/rapport.html">Bonheiden</a></td>
+        <td>12005</td>
+        <td>2.919 ha</td>
+        <td>13,5%</td>
+        <td>136 ha</td>
+        <td>P44</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ledegem/rapport.html">Ledegem</a></td>
+        <td>36010</td>
+        <td>2.483 ha</td>
+        <td>16,7%</td>
+        <td>32 ha</td>
+        <td>P63</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Nieuwerkerken/rapport.html">Nieuwerkerken</a></td>
+        <td>71045</td>
+        <td>2.251 ha</td>
+        <td>13,1%</td>
+        <td>56 ha</td>
+        <td>P41</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Vorselaar/rapport.html">Vorselaar</a></td>
+        <td>13044</td>
+        <td>2.762 ha</td>
+        <td>8,9%</td>
+        <td>107 ha</td>
+        <td>P13</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lebbeke/rapport.html">Lebbeke</a></td>
+        <td>42011</td>
+        <td>2.730 ha</td>
+        <td>18,4%</td>
+        <td>142 ha</td>
+        <td>P72</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Sint-Lievens-Houtem/rapport.html">Sint-Lievens-Houtem</a></td>
+        <td>41063</td>
+        <td>2.705 ha</td>
+        <td>12,8%</td>
+        <td>139 ha</td>
+        <td>P40</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Glabbeek/rapport.html">Glabbeek</a></td>
+        <td>24137</td>
+        <td>2.699 ha</td>
+        <td>9,2%</td>
+        <td>53 ha</td>
+        <td>P16</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Steenokkerzeel/rapport.html">Steenokkerzeel</a></td>
+        <td>23081</td>
+        <td>2.363 ha</td>
+        <td>25,0%</td>
+        <td>85 ha</td>
+        <td>P87</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wellen/rapport.html">Wellen</a></td>
+        <td>73098</td>
+        <td>2.680 ha</td>
+        <td>10,8%</td>
+        <td>65 ha</td>
+        <td>P26</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Destelbergen/rapport.html">Destelbergen</a></td>
+        <td>44013</td>
+        <td>2.671 ha</td>
+        <td>20,2%</td>
+        <td>209 ha</td>
+        <td>P78</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="De%20Panne/rapport.html">De Panne</a></td>
+        <td>38008</td>
+        <td>2.663 ha</td>
+        <td>12,4%</td>
+        <td>105 ha</td>
+        <td>P37</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lierde/rapport.html">Lierde</a></td>
+        <td>45063</td>
+        <td>2.632 ha</td>
+        <td>8,8%</td>
+        <td>39 ha</td>
+        <td>P13</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Dentergem/rapport.html">Dentergem</a></td>
+        <td>37002</td>
+        <td>2.609 ha</td>
+        <td>14,0%</td>
+        <td>47 ha</td>
+        <td>P48</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Buggenhout/rapport.html">Buggenhout</a></td>
+        <td>42004</td>
+        <td>2.564 ha</td>
+        <td>16,7%</td>
+        <td>116 ha</td>
+        <td>P64</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lichtervelde/rapport.html">Lichtervelde</a></td>
+        <td>36011</td>
+        <td>2.616 ha</td>
+        <td>16,3%</td>
+        <td>37 ha</td>
+        <td>P61</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Berlaar/rapport.html">Berlaar</a></td>
+        <td>12002</td>
+        <td>2.453 ha</td>
+        <td>14,4%</td>
+        <td>99 ha</td>
+        <td>P50</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Machelen/rapport.html">Machelen</a></td>
+        <td>23047</td>
+        <td>1.150 ha</td>
+        <td>52,7%</td>
+        <td>153 ha</td>
+        <td>P100</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kontich/rapport.html">Kontich</a></td>
+        <td>11024</td>
+        <td>2.380 ha</td>
+        <td>25,4%</td>
+        <td>150 ha</td>
+        <td>P87</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Herenthout/rapport.html">Herenthout</a></td>
+        <td>13012</td>
+        <td>2.361 ha</td>
+        <td>12,4%</td>
+        <td>39 ha</td>
+        <td>P36</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wichelen/rapport.html">Wichelen</a></td>
+        <td>42026</td>
+        <td>2.320 ha</td>
+        <td>15,0%</td>
+        <td>47 ha</td>
+        <td>P54</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Olen/rapport.html">Olen</a></td>
+        <td>13029</td>
+        <td>2.312 ha</td>
+        <td>24,3%</td>
+        <td>173 ha</td>
+        <td>P85</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Duffel/rapport.html">Duffel</a></td>
+        <td>12009</td>
+        <td>2.260 ha</td>
+        <td>23,9%</td>
+        <td>169 ha</td>
+        <td>P84</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Leopoldsburg/rapport.html">Leopoldsburg</a></td>
+        <td>71034</td>
+        <td>2.260 ha</td>
+        <td>19,1%</td>
+        <td>144 ha</td>
+        <td>P76</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="As/rapport.html">As</a></td>
+        <td>71002</td>
+        <td>2.213 ha</td>
+        <td>10,8%</td>
+        <td>131 ha</td>
+        <td>P27</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Avelgem/rapport.html">Avelgem</a></td>
+        <td>34003</td>
+        <td>2.212 ha</td>
+        <td>16,2%</td>
+        <td>116 ha</td>
+        <td>P60</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Stabroek/rapport.html">Stabroek</a></td>
+        <td>11044</td>
+        <td>2.142 ha</td>
+        <td>16,2%</td>
+        <td>74 ha</td>
+        <td>P59</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zelzate/rapport.html">Zelzate</a></td>
+        <td>43018</td>
+        <td>1.377 ha</td>
+        <td>25,4%</td>
+        <td>172 ha</td>
+        <td>P87</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Boechout/rapport.html">Boechout</a></td>
+        <td>11004</td>
+        <td>2.071 ha</td>
+        <td>17,0%</td>
+        <td>70 ha</td>
+        <td>P65</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hoeilaart/rapport.html">Hoeilaart</a></td>
+        <td>23033</td>
+        <td>2.053 ha</td>
+        <td>12,8%</td>
+        <td>37 ha</td>
+        <td>P39</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Zwijndrecht/rapport.html">Zwijndrecht</a></td>
+        <td>11056</td>
+        <td>2.025 ha</td>
+        <td>32,2%</td>
+        <td>87 ha</td>
+        <td>P94</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Rumst/rapport.html">Rumst</a></td>
+        <td>11037</td>
+        <td>2.015 ha</td>
+        <td>22,4%</td>
+        <td>123 ha</td>
+        <td>P83</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Bever/rapport.html">Bever</a></td>
+        <td>23009</td>
+        <td>1.924 ha</td>
+        <td>5,2%</td>
+        <td>20 ha</td>
+        <td>P2</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Blankenberge/rapport.html">Blankenberge</a></td>
+        <td>31004</td>
+        <td>1.902 ha</td>
+        <td>18,0%</td>
+        <td>87 ha</td>
+        <td>P71</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Aartselaar/rapport.html">Aartselaar</a></td>
+        <td>11001</td>
+        <td>1.102 ha</td>
+        <td>33,1%</td>
+        <td>49 ha</td>
+        <td>P94</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Sint-Martens-Latem/rapport.html">Sint-Martens-Latem</a></td>
+        <td>44064</td>
+        <td>1.445 ha</td>
+        <td>18,1%</td>
+        <td>119 ha</td>
+        <td>P72</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hulshout/rapport.html">Hulshout</a></td>
+        <td>13016</td>
+        <td>1.738 ha</td>
+        <td>20,4%</td>
+        <td>89 ha</td>
+        <td>P78</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Affligem/rapport.html">Affligem</a></td>
+        <td>23105</td>
+        <td>1.792 ha</td>
+        <td>19,1%</td>
+        <td>117 ha</td>
+        <td>P75</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Oostrozebeke/rapport.html">Oostrozebeke</a></td>
+        <td>37010</td>
+        <td>1.673 ha</td>
+        <td>22,4%</td>
+        <td>73 ha</td>
+        <td>P82</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Boortmeerbeek/rapport.html">Boortmeerbeek</a></td>
+        <td>24014</td>
+        <td>1.877 ha</td>
+        <td>20,7%</td>
+        <td>108 ha</td>
+        <td>P80</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Ingelmunster/rapport.html">Ingelmunster</a></td>
+        <td>36007</td>
+        <td>1.643 ha</td>
+        <td>27,3%</td>
+        <td>76 ha</td>
+        <td>P89</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kapelle-op-den-Bos/rapport.html">Kapelle-op-den-Bos</a></td>
+        <td>23039</td>
+        <td>1.537 ha</td>
+        <td>17,2%</td>
+        <td>45 ha</td>
+        <td>P67</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Melle/rapport.html">Melle</a></td>
+        <td>44040</td>
+        <td>1.534 ha</td>
+        <td>24,7%</td>
+        <td>298 ha</td>
+        <td>P86</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wommelgem/rapport.html">Wommelgem</a></td>
+        <td>11052</td>
+        <td>1.299 ha</td>
+        <td>29,2%</td>
+        <td>79 ha</td>
+        <td>P91</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Bredene/rapport.html">Bredene</a></td>
+        <td>35002</td>
+        <td>1.425 ha</td>
+        <td>27,5%</td>
+        <td>112 ha</td>
+        <td>P89</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Denderleeuw/rapport.html">Denderleeuw</a></td>
+        <td>41011</td>
+        <td>1.387 ha</td>
+        <td>26,0%</td>
+        <td>109 ha</td>
+        <td>P88</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lendelede/rapport.html">Lendelede</a></td>
+        <td>34025</td>
+        <td>1.327 ha</td>
+        <td>17,0%</td>
+        <td>16 ha</td>
+        <td>P66</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Liedekerke/rapport.html">Liedekerke</a></td>
+        <td>23044</td>
+        <td>1.017 ha</td>
+        <td>24,7%</td>
+        <td>42 ha</td>
+        <td>P86</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Vosselaar/rapport.html">Vosselaar</a></td>
+        <td>13046</td>
+        <td>1.183 ha</td>
+        <td>24,1%</td>
+        <td>62 ha</td>
+        <td>P85</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Horebeke/rapport.html">Horebeke</a></td>
+        <td>45062</td>
+        <td>1.125 ha</td>
+        <td>7,9%</td>
+        <td>18 ha</td>
+        <td>P8</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Spiere-Helkijn/rapport.html">Spiere-Helkijn</a></td>
+        <td>34043</td>
+        <td>1.082 ha</td>
+        <td>9,6%</td>
+        <td>24 ha</td>
+        <td>P19</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Edegem/rapport.html">Edegem</a></td>
+        <td>11013</td>
+        <td>872 ha</td>
+        <td>35,4%</td>
+        <td>73 ha</td>
+        <td>P96</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wemmel/rapport.html">Wemmel</a></td>
+        <td>23102</td>
+        <td>877 ha</td>
+        <td>27,8%</td>
+        <td>51 ha</td>
+        <td>P90</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wijnegem/rapport.html">Wijnegem</a></td>
+        <td>11050</td>
+        <td>788 ha</td>
+        <td>32,2%</td>
+        <td>36 ha</td>
+        <td>P94</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Schelle/rapport.html">Schelle</a></td>
+        <td>11038</td>
+        <td>783 ha</td>
+        <td>21,8%</td>
+        <td>55 ha</td>
+        <td>P82</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Mortsel/rapport.html">Mortsel</a></td>
+        <td>11029</td>
+        <td>778 ha</td>
+        <td>41,3%</td>
+        <td>68 ha</td>
+        <td>P99</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Niel/rapport.html">Niel</a></td>
+        <td>11030</td>
+        <td>535 ha</td>
+        <td>30,0%</td>
+        <td>40 ha</td>
+        <td>P92</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Baarle-Hertog/rapport.html">Baarle-Hertog</a></td>
+        <td>13002</td>
+        <td>741 ha</td>
+        <td>13,4%</td>
+        <td>26 ha</td>
+        <td>P43</td>
+        <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Boom/rapport.html">Boom</a></td>
+        <td>11005</td>
+        <td>738 ha</td>
+        <td>39,7%</td>
+        <td>56 ha</td>
+        <td>P98</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Wezembeek-Oppem/rapport.html">Wezembeek-Oppem</a></td>
+        <td>23103</td>
+        <td>686 ha</td>
+        <td>31,1%</td>
+        <td>36 ha</td>
+        <td>P93</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Kraainem/rapport.html">Kraainem</a></td>
+        <td>23099</td>
+        <td>584 ha</td>
+        <td>33,6%</td>
+        <td>33 ha</td>
+        <td>P95</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hove/rapport.html">Hove</a></td>
+        <td>11021</td>
+        <td>602 ha</td>
+        <td>24,5%</td>
+        <td>66 ha</td>
+        <td>P85</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Lint/rapport.html">Lint</a></td>
+        <td>11025</td>
+        <td>565 ha</td>
+        <td>28,7%</td>
+        <td>27 ha</td>
+        <td>P91</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Hemiksem/rapport.html">Hemiksem</a></td>
+        <td>11018</td>
+        <td>548 ha</td>
+        <td>37,0%</td>
+        <td>47 ha</td>
+        <td>P98</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Herstappe/rapport.html">Herstappe</a></td>
+        <td>73028</td>
+        <td>135 ha</td>
+        <td>7,3%</td>
+        <td>3 ha</td>
+        <td>P6</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Linkebeek/rapport.html">Linkebeek</a></td>
+        <td>23100</td>
+        <td>419 ha</td>
+        <td>16,3%</td>
+        <td>18 ha</td>
+        <td>P60</td>
+        <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+      </tr>
+      <tr>
+        <td><a href="Borsbeek/rapport.html">Borsbeek</a></td>
+        <td>11007</td>
+        <td>390 ha</td>
+        <td>35,5%</td>
+        <td>8 ha</td>
+        <td>P96</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr>
+      <tr>
+        <td><a href="Mesen/rapport.html">Mesen</a></td>
+        <td>33016</td>
+        <td>360 ha</td>
+        <td>8,1%</td>
+        <td>5 ha</td>
+        <td>P9</td>
+        <td><span class="badge badge-goed">relatief laag</span></td>
+      </tr>
+      <tr>
+        <td><a href="Drogenbos/rapport.html">Drogenbos</a></td>
+        <td>23098</td>
+        <td>250 ha</td>
+        <td>55,8%</td>
+        <td>19 ha</td>
+        <td>P100</td>
+        <td><span class="badge badge-slecht">relatief hoog</span></td>
+      </tr></tbody>
+  </table>
+  <div class="footer">Betonmeter – DRUM · Hogeschool Gent · 16/3/2026</div>
+  <script>
+    function filterTabel(q) {
+      q = q.toLowerCase();
+      document.querySelectorAll('#tabel tbody tr').forEach(row => {
+        row.style.display = row.cells[0].textContent.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>
