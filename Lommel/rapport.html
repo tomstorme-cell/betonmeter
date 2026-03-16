@@ -11,36 +11,68 @@
     .container { max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
 
     /* Header */
-    .rapport-header { background: linear-gradient(135deg, #1a3a5c 0%, #2e6b9e 100%); color: #fff; padding: 32px 36px; border-radius: 12px; margin-bottom: 32px; }
-    .rapport-header h1 { font-size: 2rem; font-weight: 700; letter-spacing: 0.5px; }
+    .rapport-header { background: linear-gradient(135deg, #1a3a5c 0%, #2e6b9e 100%); color: #fff; padding: 32px 36px; border-radius: 12px; margin-bottom: 24px; }
+    .rapport-header h1 { font-size: 2rem; font-weight: 700; }
     .rapport-header .subtitle { font-size: 1rem; opacity: 0.85; margin-top: 6px; }
     .rapport-header .meta { display: flex; gap: 28px; margin-top: 18px; flex-wrap: wrap; }
     .rapport-header .meta span { font-size: 0.9rem; opacity: 0.9; }
 
-    /* Secties */
+    /* Sectie */
     .sectie { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.07); padding: 28px 32px; margin-bottom: 24px; }
-    .sectie h2 { font-size: 1.25rem; font-weight: 700; color: #1a3a5c; border-bottom: 2px solid #e8eef5; padding-bottom: 10px; margin-bottom: 18px; }
-    .sectie h3 { font-size: 1rem; font-weight: 600; color: #2e6b9e; margin: 20px 0 10px; }
-    .sectie p { line-height: 1.7; color: #333; margin-bottom: 12px; }
+    .sectie > h2 { font-size: 1.25rem; font-weight: 700; color: #1a3a5c; border-bottom: 2px solid #e8eef5; padding-bottom: 10px; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+    .sectie-num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: #1a3a5c; color: #fff; border-radius: 50%; font-size: 0.85rem; flex-shrink: 0; }
+    .sectie h3 { font-size: 1.05rem; font-weight: 700; color: #2e6b9e; margin: 22px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #e8eef5; }
+    .sectie h4 { font-size: 0.9rem; font-weight: 600; color: #475569; margin: 14px 0 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .sectie p, .sectie .intro-text { line-height: 1.75; color: #334155; margin-bottom: 12px; }
+    .sectie .score-tekst { line-height: 1.75; color: #334155; white-space: pre-wrap; }
+
+    /* Beleidskadering */
+    .beleids-box { background: #eff6ff; border-left: 4px solid #2e6b9e; border-radius: 0 8px 8px 0; padding: 16px 20px; margin: 16px 0; }
+    .beleids-box p { color: #1e3a5f; margin: 0; line-height: 1.7; }
+
+    /* Brv doelstellingen bar */
+    .brv-bar { display: flex; gap: 12px; margin: 12px 0 18px; flex-wrap: wrap; }
+    .brv-pill { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .brv-pill-huidig   { background: #fee2e2; color: #991b1b; }
+    .brv-pill-2025     { background: #fef3c7; color: #92400e; }
+    .brv-pill-2040     { background: #d1fae5; color: #065f46; }
 
     /* Tabel */
-    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 14px; }
-    thead th { background: #1a3a5c; color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; }
-    tbody tr:nth-child(even) { background: #f0f4f9; }
-    tbody td { padding: 8px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+    .tabel-wrap { overflow-x: auto; margin-top: 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; min-width: 700px; }
+    thead th { background: #1a3a5c; color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    tbody tr:hover { background: #eff6ff; }
+    tbody td { padding: 9px 12px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
+    .td-definitie { font-size: 11px; color: #64748b; line-height: 1.5; max-width: 280px; }
+    .td-benchmark { font-size: 11px; color: #7c3aed; line-height: 1.5; max-width: 200px; }
+
+    /* Badge */
     .badge { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 11px; font-weight: 600; white-space: nowrap; }
     .badge-goed    { background: #d1fae5; color: #065f46; }
     .badge-matig   { background: #fef3c7; color: #92400e; }
     .badge-slecht  { background: #fee2e2; color: #991b1b; }
     .badge-neutral { background: #e2e8f0; color: #475569; }
 
-    /* Charts grid */
+    /* Percentielbalk */
+    .prank-wrap { display: flex; align-items: center; gap: 6px; }
+    .prank-bar { width: 80px; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; flex-shrink: 0; }
+    .prank-fill { height: 100%; border-radius: 4px; }
+    .prank-lbl { font-size: 11px; color: #475569; white-space: nowrap; }
+
+    /* Charts */
     .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media (max-width: 700px) { .charts-grid { grid-template-columns: 1fr; } }
-    .chart-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.07); padding: 20px; }
-    .chart-card h3 { font-size: 0.95rem; font-weight: 600; color: #1a3a5c; margin-bottom: 14px; }
+    .chart-card { background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,.07); padding: 20px 22px; }
+    .chart-card h3 { font-size: 0.9rem; font-weight: 600; color: #1a3a5c; margin-bottom: 6px; }
+    .chart-card .chart-bron { font-size: 11px; color: #94a3b8; margin-bottom: 12px; }
     .chart-wrap { position: relative; height: 260px; }
     .chart-wrap-tall { position: relative; height: 320px; }
+    .full-width { grid-column: 1 / -1; }
+
+    /* Bronnen */
+    .bronnen { font-size: 12px; color: #64748b; margin-top: 8px; border-top: 1px solid #e2e8f0; padding-top: 12px; }
+    .bronnen strong { color: #1a3a5c; }
 
     /* Pijl terug */
     .back-link { display: inline-block; margin-bottom: 20px; color: #2e6b9e; text-decoration: none; font-size: 13px; }
@@ -48,19 +80,13 @@
 
     /* Footer */
     .rapport-footer { text-align: center; font-size: 12px; color: #94a3b8; margin-top: 32px; padding: 16px 0; }
-
-    /* Percentielbalk */
-    .prank-bar { width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden; display: inline-block; }
-    .prank-fill { height: 100%; border-radius: 4px; }
   </style>
 </head>
 <body>
 <div class="container">
   <a href="../index.html" class="back-link">← Terug naar overzicht</a>
 
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!--  HEADER                                                               -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ HEADER ══════════════════════════════════════════════════════════════ -->
   <div class="rapport-header">
     <h1>Betonmeter – Lommel</h1>
     <div class="subtitle">Gemeenterapport ruimtebeslag en verharding · Referentiejaar 2022</div>
@@ -68,660 +94,754 @@
       <span>NIS-code: <strong>72020</strong></span>
       <span>Oppervlakte: <strong>10.228 ha</strong></span>
     </div>
+    <div class="brv-bar">
+      <span class="brv-pill brv-pill-huidig">Historisch (2013–2015): 6 ha/dag</span>
+      <span class="brv-pill brv-pill-2025">BRV-doel 2025: max. 3 ha/dag</span>
+      <span class="brv-pill brv-pill-2040">BRV-doel 2040: 0 ha/dag (ruimteneutraliteit)</span>
+    </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!--  DEEL 1 – GEMEENTEBESCHRIJVING                                        -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ DEEL 1 ══════════════════════════════════════════════════════════════ -->
   <div class="sectie">
-    <h2>Deel 1 – Gemeenteprofiel</h2>
-    <p>Lommel (NIS-code 72020) heeft een totale oppervlakte van 10.228 ha. De gemeente telt 1.607 ha verharding, wat overeenkomt met 15,7% van de totale oppervlakte. Dit is iets boven gemiddeld ten opzichte van de andere Vlaamse gemeenten (percentielpositie: 57/100). Per inwoner bedraagt de verharding 467 m². Het ruimtebeslag-risico — de oppervlakte met een harde bestemming die nog niet bebouwd is — bedraagt 689 ha.</p>
+    <h2><span class="sectie-num">1</span> Gemeenteprofiel</h2>
+
+    <h4>Situering</h4>
+    <p>Lommel (NIS-code 72020) beslaat een totale oppervlakte van 10.228 ha. De gemeente telt 1.607 ha verharding, wat overeenkomt met 15,7% van de totale oppervlakte. Dit is iets boven gemiddeld ten opzichte van de andere Vlaamse gemeenten (percentielpositie P57/100). Ter vergelijking: het EU-gemiddelde voor ruimtebeslag bedraagt slechts 6% (EEA, 2019) en het Vlaams gemiddelde 33%. Per inwoner bedraagt de verharding 467 m² (P86). Het ruimtebeslag-risico — de nog niet ingenomen oppervlakte met een harde bestemming — bedraagt 689 ha, wat groot is (P97). 26,5% van het ruimtebeslag bevindt zich in zachte bestemmingen (zonevreemd ruimtebeslag) (P31). Het Vlaams gemiddelde voor zonevreemd ruimtebeslag bedraagt 37%.</p>
+
+    <h4>Beleidskadering (BRV)</h4>
+    <div class="beleids-box">
+      <p>Het Beleidsplan Ruimte Vlaanderen (BRV) legt een bindende reductiedoelstelling op: het bijkomend ruimtebeslag daalt van ca. 6 ha/dag (historisch gemiddelde 2013–2015) naar max. 3 ha/dag in 2025, en naar volledige ruimteneutraliteit (0 ha/dag) in 2040. Lommel realiseerde in de periode 2013–2022 gemiddeld 18,18 ha/jaar bijkomend ruimtebeslag. Dit is relatief hoog (P97) en impliceert een substantiële aanpassingsinspanning om de BRV-doelstelling te halen. Het gemeentelijk quotum voor de periode 2022–2040 bedraagt 90 ha — dit is de bovengrens aan bijkomend ruimtebeslag die de gemeente conform het BRV-reductietraject mag realiseren. De minimale neutralisatie-opgave bedraagt 389 ha (groot): dit is de oppervlakte aan harde bestemmingen die de gemeente minimaal dient te herbestemmen of te neutraliseren om haar BRV-aandeel te realiseren. Op het vlak van ontharding bedraagt de totale opgave 219 ha. Ontharding is een sleutelmaatregel voor klimaatadaptatie (waterberging, hittestressreductie) en biodiversiteitsherstel. Intergemeentelijke samenwerking en compensatiemechanismen zijn wenselijk voor een rechtvaardige verdeling van de reductieopgave (HOGENT Rapport 6).</p>
+    </div>
+
+    <div class="bronnen">
+      <strong>Bronnen:</strong>
+      HOGENT Rapport 1 – Ruimtebeslag en Risico Bijkomend Ruimtebeslag;
+      HOGENT Rapport 6 – Gemeentelijke Reductieopgave;
+      EEA (2019) – Land Take indicator;
+      Beleidsplan Ruimte Vlaanderen (BRV).
+    </div>
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!--  DEEL 2 – SCOREANALYSE                                                -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ DEEL 2 ══════════════════════════════════════════════════════════════ -->
   <div class="sectie">
-    <h2>Deel 2 – Scoreanalyse</h2>
+    <h2><span class="sectie-num">2</span> Scoreanalyse per thema</h2>
     
     <h3>Betontoestand</h3>
-    <p>Oppervlakte verharding 2022: Lommel scoort 1.607,27 ha, tegenover een Vlaams gemiddelde van 686,29 ha. Dit is relatief hoog (P96) voor Vlaamse gemeenten. Aandeel verharding 2022: Lommel scoort 15,71 %, tegenover een Vlaams gemiddelde van 16,34 %. Dit is iets boven gemiddeld (P57) voor Vlaamse gemeenten. Verharding per inwoner 2022: Lommel scoort 467,28 m²/inwoner, tegenover een Vlaams gemiddelde van 358,01 m²/inwoner. Dit is relatief hoog (P86) voor Vlaamse gemeenten. Aandeel verharding in harde bestemmingen 2022: Lommel scoort 84,80 %, tegenover een Vlaams gemiddelde van 72,25 %. Dit is relatief hoog (P76) voor Vlaamse gemeenten. Aandeel verharding in zachte bestemmingen 2022: Lommel scoort 15,20 %, tegenover een Vlaams gemiddelde van 27,75 %. Dit is relatief laag (P24) voor Vlaamse gemeenten. Aandeel ruimtebeslag in zachte bestemmingen 2022: Lommel scoort 26,52 %, tegenover een Vlaams gemiddelde van 35,31 %. Dit is iets onder gemiddeld (P31) voor Vlaamse gemeenten.</p>
+    <p class="intro-text">De betontoestand beschrijft de huidige toestand van verharding en ruimtebeslag in de gemeente op basis van metingen uit 2022. Vlaanderen heeft met 33% ruimtebeslag een Europees record: het EU-gemiddelde bedraagt slechts 6% (EEA, 2019). Ter vergelijking: Nederland zit op ca. 14%, Wallonië op ca. 13%. Hieronder worden de gemeentelijke scores gesitueerd binnen de Vlaamse spreiding.</p>
+    <h4>Scores </h4>
+    <div class="score-tekst"><p><strong>Oppervlakte verharding 2022:</strong> Lommel scoort 1.607,27 ha (Vlaams gemiddelde: 686,29 ha, mediaan: 532,57 ha) — relatief hoog (P96). Verharding omvat wegen, straten, fietspaden, parkeerterreinen, pleinen, trottoirs, bedrijfsterreinen en luchthavens. Niet alle ruimtebeslag is verharding: tuinen en sportvelden tellen wel mee als ruimtebeslag maar zijn soms slechts deels verhard.</p><p><strong>Aandeel verharding 2022:</strong> Lommel scoort 15,71 % (Vlaams gemiddelde: 16,34 %, mediaan: 14,40 %) — iets boven gemiddeld (P57). Het Vlaamse beleid streeft naar reductie van de verhardingsgraad als klimaatadaptatiemaatregel (ontharding). De Vlaamse Bouwmeester en het Departement Omgeving stimuleren onthardingsprojecten.</p><p><strong>Verharding per inwoner 2022:</strong> Lommel scoort 467,28 m²/inwoner (Vlaams gemiddelde: 358,01 m²/inwoner, mediaan: 336,61 m²/inwoner) — relatief hoog (P86).</p><p><strong>Aandeel verharding in harde bestemmingen 2022:</strong> Lommel scoort 84,80 % (Vlaams gemiddelde: 72,25 %, mediaan: 75,40 %) — relatief hoog (P76).</p><p><strong>Aandeel verharding in zachte bestemmingen 2022:</strong> Lommel scoort 15,20 % (Vlaams gemiddelde: 27,75 %, mediaan: 24,60 %) — relatief laag (P24).</p><p><strong>Aandeel ruimtebeslag in zachte bestemmingen 2022:</strong> Lommel scoort 26,52 % (Vlaams gemiddelde: 35,31 %, mediaan: 34,88 %) — iets onder gemiddeld (P31). In 2020 lag 37% van het totale Vlaamse ruimtebeslag in zachte bestemmingen. In de periode 2013–2020 betrof zelfs 45% van al het nieuwe ruimtebeslag zachte bestemmingen. Dit wijst op een lage ruimtelijke effectiviteit van de bestemmingsplannen: de juridisch bindende bestemmingsverdeling heeft de afgelopen decennia geen bijsturend effect gehad op de verdeling van nieuw ruimtebeslag.</p></div>
     
+    <div class="tabel-wrap">
     <table>
       <thead>
         <tr>
           <th>Indicator</th>
+          <th>Definitie</th>
           <th>Waarde</th>
-          <th>Vlaams gemiddelde</th>
+          <th>Gem.</th>
           <th>Mediaan</th>
-          <th>Percentielpositie</th>
+          <th>Q1 – Q3</th>
+          <th>Percentiel</th>
           <th>Beoordeling</th>
+          <th>Benchmark</th>
         </tr>
       </thead>
       <tbody>
         
           <tr>
-            <td title="De totale oppervlakte aan verharding per gemeente, volgens de Vlaamse definitie (2022).">Oppervlakte verharding 2022</td>
-            <td>1.607,27 ha</td>
-            <td>686,29 ha</td>
-            <td>532,57 ha</td>
+            <td><strong>Oppervlakte verharding 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De totale oppervlakte aan verharding per gemeente, gemeten volgens de Vlaamse definitie op basis van het Grootschalig Referentiebestand (GRB) van Digitaal Vlaanderen.</td>
+            <td><strong>1.607,27</strong></td>
+            <td>686,29</td>
+            <td>532,57</td>
+            <td style="white-space:nowrap">350,84 – 803,16</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:96%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:96%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P96</span>
                 </div>
-                P96
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het aandeel verharding ten opzichte van de totale oppervlakte van de gemeente (2022).">Aandeel verharding 2022</td>
-            <td>15,71 %</td>
-            <td>16,34 %</td>
-            <td>14,40 %</td>
+            <td><strong>Aandeel verharding 2022</strong><br><small style="color:#64748b">%</small></td>
+            <td class="td-definitie">Het aandeel van de gemeentelijke oppervlakte dat verhaard is (kunstmatige, ondoorlaatbare of semi-doorlaatbare oppervlakten zoals wegen, parkeerterreinen, pleinen en bedrijfsterreinen). Verharding is een onderdeel van het ruimtebeslag, maar ook een zelfstandig concept relevant voor waterhuishouding, hittestress en biodiversiteit.</td>
+            <td><strong>15,71</strong></td>
+            <td>16,34</td>
+            <td>14,40</td>
+            <td style="white-space:nowrap">10,69 – 19,08</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:57%; background:#f5a623"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:57%;background:#f5a623"></div></div>
+                  <span class="prank-lbl">P57</span>
                 </div>
-                P57
-              
             </td>
             <td><span class="badge badge-matig">iets boven gemiddeld</span></td>
+            <td class="td-benchmark">Het Vlaams gemiddelde bedraagt 33% ruimtebeslag; verharding maakt daar een substantieel deel van uit. Het EU-gemiddelde voor ruimtebeslag bedraagt slechts 6% (EEA, 2019).</td>
           </tr>
         
           <tr>
-            <td title="De gemiddelde verharding per gemeentelijke inwoner (2022).">Verharding per inwoner 2022</td>
-            <td>467,28 m²/inwoner</td>
-            <td>358,01 m²/inwoner</td>
-            <td>336,61 m²/inwoner</td>
+            <td><strong>Verharding per inwoner 2022</strong><br><small style="color:#64748b">m²/inwoner</small></td>
+            <td class="td-definitie">De gemiddelde verharding per gemeentelijke inwoner (2022).</td>
+            <td><strong>467,28</strong></td>
+            <td>358,01</td>
+            <td>336,61</td>
+            <td style="white-space:nowrap">273,89 – 420,59</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:86%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:86%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P86</span>
                 </div>
-                P86
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het aandeel van alle verharding, gelegen in de harde bestemmingen (wonen, industrie, recreatie ed.).">Aandeel verharding in harde bestemmingen 2022</td>
-            <td>84,80 %</td>
-            <td>72,25 %</td>
-            <td>75,40 %</td>
+            <td><strong>Aandeel verharding in harde bestemmingen 2022</strong><br><small style="color:#64748b">%</small></td>
+            <td class="td-definitie">Het aandeel van alle verharding, gelegen in de harde bestemmingen (wonen, industrie, recreatie ed.).</td>
+            <td><strong>84,80</strong></td>
+            <td>72,25</td>
+            <td>75,40</td>
+            <td style="white-space:nowrap">61,38 – 84,52</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:76%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:76%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P76</span>
                 </div>
-                P76
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het aandeel van alle verharding, gelegen in de zachte bestemmingen (landbouw, natuur, bos ed.).">Aandeel verharding in zachte bestemmingen 2022</td>
-            <td>15,20 %</td>
-            <td>27,75 %</td>
-            <td>24,60 %</td>
+            <td><strong>Aandeel verharding in zachte bestemmingen 2022</strong><br><small style="color:#64748b">%</small></td>
+            <td class="td-definitie">Het aandeel van alle verharding, gelegen in de zachte bestemmingen (landbouw, natuur, bos ed.).</td>
+            <td><strong>15,20</strong></td>
+            <td>27,75</td>
+            <td>24,60</td>
+            <td style="white-space:nowrap">15,48 – 38,62</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:24%; background:#4caf7d"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:24%;background:#4caf7d"></div></div>
+                  <span class="prank-lbl">P24</span>
                 </div>
-                P24
-              
             </td>
             <td><span class="badge badge-goed">relatief laag</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het aandeel ruimtebeslag dat in de zachte bestemmingen gelegen is (landbouw, natuur, bos ed.).">Aandeel ruimtebeslag in zachte bestemmingen 2022</td>
-            <td>26,52 %</td>
-            <td>35,31 %</td>
-            <td>34,88 %</td>
+            <td><strong>Aandeel ruimtebeslag in zachte bestemmingen 2022</strong><br><small style="color:#64748b">%</small></td>
+            <td class="td-definitie">Het aandeel ruimtebeslag dat niet in de daartoe bestemde harde zones ligt, maar in zachte bestemmingen zoals landbouw-, natuur- en bosgebieden. Dit wordt ook "zonevreemd ruimtebeslag" genoemd.</td>
+            <td><strong>26,52</strong></td>
+            <td>35,31</td>
+            <td>34,88</td>
+            <td style="white-space:nowrap">24,17 – 45,61</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:31%; background:#4caf7d"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:31%;background:#4caf7d"></div></div>
+                  <span class="prank-lbl">P31</span>
                 </div>
-                P31
-              
             </td>
             <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+            <td class="td-benchmark">Referentiewaarde: gemiddeld 37% voor Vlaanderen (2020). Een hoger aandeel duidt op meer zonevreemd ruimtebeslag en bijgevolg een grotere druk op de open ruimte in zachte bestemmingen.</td>
           </tr>
         
       </tbody>
     </table>
+    </div>
   
   
 
     <h3>Betonevolutie</h3>
-    <p>Jaarlijkse ruimtebeslagsnelheid 2013–2022: Lommel scoort 18,18 ha/jaar, tegenover een Vlaams gemiddelde van 5,58 ha/jaar. Dit is relatief hoog (P97) voor Vlaamse gemeenten. Jaarlijkse ruimtebeslagsnelheid 2019–2022: Lommel scoort 40,95 ha/jaar, tegenover een Vlaams gemiddelde van 4,60 ha/jaar. Dit is relatief hoog (P100) voor Vlaamse gemeenten. Relatieve ruimtebeslagsnelheid 2013–2022: Lommel scoort 5,40 m²/inwoner/jaar, tegenover een Vlaams gemiddelde van 3,44 m²/inwoner/jaar. Dit is relatief hoog (P82) voor Vlaamse gemeenten.</p>
+    <p class="intro-text">De betonevolutie meet de snelheid waarmee de gemeente bijkomend ruimtebeslag realiseert. Het BRV (Beleidsplan Ruimte Vlaanderen) bepaalt dat het bijkomend ruimtebeslag daalt van ca. 6 ha/dag (historisch gemiddelde 2013–2015) naar max. 3 ha/dag in 2025, en naar ruimteneutraliteit (0 ha/dag) in 2040. Een hoge ruimtebeslagsnelheid impliceert een grotere aanpassingsinspanning om de BRV-doelstelling te halen.</p>
+    <h4>Scores </h4>
+    <div class="score-tekst"><p><strong>Jaarlijkse ruimtebeslagsnelheid 2013–2022:</strong> Lommel scoort 18,18 ha/jaar (Vlaams gemiddelde: 5,58 ha/jaar, mediaan: 4,05 ha/jaar) — relatief hoog (P97). Het BRV bepaalt dat het bijkomend ruimtebeslag voor heel Vlaanderen daalt van ca. 6 ha/dag (historisch gemiddelde 2013–2015) naar max. 3 ha/dag in 2025, en verder naar 0 ha/dag (ruimteneutraliteit) in 2040. Dit vertaalt zich naar een gemeentelijke doelstelling die proportioneel verdeeld wordt op basis van het historisch aandeel in de groei.</p><p><strong>Jaarlijkse ruimtebeslagsnelheid 2019–2022:</strong> Lommel scoort 40,95 ha/jaar (Vlaams gemiddelde: 4,60 ha/jaar, mediaan: 3,34 ha/jaar) — relatief hoog (P100).</p><p><strong>Relatieve ruimtebeslagsnelheid 2013–2022:</strong> Lommel scoort 5,40 m²/inwoner/jaar (Vlaams gemiddelde: 3,44 m²/inwoner/jaar, mediaan: 2,66 m²/inwoner/jaar) — relatief hoog (P82).</p></div>
     
+    <div class="tabel-wrap">
     <table>
       <thead>
         <tr>
           <th>Indicator</th>
+          <th>Definitie</th>
           <th>Waarde</th>
-          <th>Vlaams gemiddelde</th>
+          <th>Gem.</th>
           <th>Mediaan</th>
-          <th>Percentielpositie</th>
+          <th>Q1 – Q3</th>
+          <th>Percentiel</th>
           <th>Beoordeling</th>
+          <th>Benchmark</th>
         </tr>
       </thead>
       <tbody>
         
           <tr>
-            <td title="De gemiddelde oppervlakte aan landbouw- en natuurgronden die per jaar ingenomen wordt met ruimtebeslag (2013–2022).">Jaarlijkse ruimtebeslagsnelheid 2013–2022</td>
-            <td>18,18 ha/jaar</td>
-            <td>5,58 ha/jaar</td>
-            <td>4,05 ha/jaar</td>
+            <td><strong>Jaarlijkse ruimtebeslagsnelheid 2013–2022</strong><br><small style="color:#64748b">ha/jaar</small></td>
+            <td class="td-definitie">De gemiddelde oppervlakte aan landbouw- en natuurgronden die per jaar in de gemeente ingenomen wordt met ruimtebeslag (meetperiode 2013–2022). Ruimtebeslag omvat bebouwing, verharding en aanverwante functies, en sluit landbouwgrond, natuur, bos en water uit.</td>
+            <td><strong>18,18</strong></td>
+            <td>5,58</td>
+            <td>4,05</td>
+            <td style="white-space:nowrap">2,25 – 7,25</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:97%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:97%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P97</span>
                 </div>
-                P97
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark">Referentiewaarde voor ruimteneutraliteit: netto 0 ha/jaar bijkomend ruimtebeslag in 2040. Het historisch Vlaams gemiddelde bedraagt ca. 7.1 ha/gemeente/jaar (periode 2013–2015).</td>
           </tr>
         
           <tr>
-            <td title="De gemiddelde oppervlakte aan landbouw- en natuurgronden die per jaar ingenomen wordt met ruimtebeslag (2019–2022).">Jaarlijkse ruimtebeslagsnelheid 2019–2022</td>
-            <td>40,95 ha/jaar</td>
-            <td>4,60 ha/jaar</td>
-            <td>3,34 ha/jaar</td>
+            <td><strong>Jaarlijkse ruimtebeslagsnelheid 2019–2022</strong><br><small style="color:#64748b">ha/jaar</small></td>
+            <td class="td-definitie">De gemiddelde oppervlakte aan landbouw- en natuurgronden die per jaar ingenomen wordt met ruimtebeslag (2019–2022).</td>
+            <td><strong>40,95</strong></td>
+            <td>4,60</td>
+            <td>3,34</td>
+            <td style="white-space:nowrap">1,16 – 5,76</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:100%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:100%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P100</span>
                 </div>
-                P100
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De gemiddelde oppervlakte aan landbouw- en natuurgronden die per jaar ingenomen wordt, per inwoner (2013–2022).">Relatieve ruimtebeslagsnelheid 2013–2022</td>
-            <td>5,40 m²/inwoner/jaar</td>
-            <td>3,44 m²/inwoner/jaar</td>
-            <td>2,66 m²/inwoner/jaar</td>
+            <td><strong>Relatieve ruimtebeslagsnelheid 2013–2022</strong><br><small style="color:#64748b">m²/inwoner/jaar</small></td>
+            <td class="td-definitie">De gemiddelde oppervlakte aan landbouw- en natuurgronden die per jaar ingenomen wordt, per inwoner (2013–2022).</td>
+            <td><strong>5,40</strong></td>
+            <td>3,44</td>
+            <td>2,66</td>
+            <td style="white-space:nowrap">1,48 – 4,44</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:82%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:82%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P82</span>
                 </div>
-                P82
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
       </tbody>
     </table>
+    </div>
   
   
 
     <h3>Betonrisico</h3>
-    <p>Ruimtebeslag-risico 2022: Lommel scoort 688,84 ha, tegenover een Vlaams gemiddelde van 189,89 ha. Dit is relatief hoog (P97) voor Vlaamse gemeenten. Hoger Ruimtebeslag-risico 2022: Lommel scoort 479,06 ha, tegenover een Vlaams gemiddelde van 129,26 ha. Dit is relatief hoog (P97) voor Vlaamse gemeenten. Lager Ruimtebeslag-risico 2022: Lommel scoort 209,78 ha, tegenover een Vlaams gemiddelde van 60,64 ha. Dit is relatief hoog (P96) voor Vlaamse gemeenten. Ruimtebeslag-risico woonreservegebieden 2022: Lommel scoort 86,65 ha, tegenover een Vlaams gemiddelde van 32,10 ha. Dit is relatief hoog (P93) voor Vlaamse gemeenten. RBR woonzones: Lommel scoort 158,41 ha, tegenover een Vlaams gemiddelde van 77,01 ha. Dit is relatief hoog (P90) voor Vlaamse gemeenten. RBR recreatiezones: Lommel scoort 59,38 ha, tegenover een Vlaams gemiddelde van 17,99 ha. Dit is relatief hoog (P94) voor Vlaamse gemeenten. RBR overige groenzones: Lommel scoort 150,40 ha, tegenover een Vlaams gemiddelde van 42,65 ha. Dit is relatief hoog (P96) voor Vlaamse gemeenten. RBR industriezones: Lommel scoort 251,63 ha, tegenover een Vlaams gemiddelde van 22,70 ha. Dit is relatief hoog (P100) voor Vlaamse gemeenten. RBR gemeenschapszones: Lommel scoort 69,02 ha, tegenover een Vlaams gemiddelde van 20,73 ha. Dit is relatief hoog (P93) voor Vlaamse gemeenten. RBR overige zones: Lommel scoort 0,00 ha, tegenover een Vlaams gemiddelde van 0,13 ha. Dit is relatief hoog (P91) voor Vlaamse gemeenten. RBR havenzones: Lommel scoort 0,00 ha, tegenover een Vlaams gemiddelde van 8,69 ha. Dit is relatief hoog (P96) voor Vlaamse gemeenten. Hoge ecosysteemdienstwaarde onder RBR 2022: Lommel scoort 376,20 ha, tegenover een Vlaams gemiddelde van 67,04 ha. Dit is relatief hoog (P98) voor Vlaamse gemeenten. Watergevoelig gebied onder RBR 2022: Lommel scoort 10,89 ha, tegenover een Vlaams gemiddelde van 39,73 ha. Dit is iets onder gemiddeld (P29) voor Vlaamse gemeenten. Bossen onder RBR 2022: Lommel scoort 146,21 ha, tegenover een Vlaams gemiddelde van 38,54 ha. Dit is relatief hoog (P95) voor Vlaamse gemeenten.</p>
+    <p class="intro-text">Het betonrisico brengt de oppervlakte in kaart die planologisch bestemd is als harde bestemming maar nog niet ingenomen is door ruimtebeslag. Dit vormt het "overaanbod" dat de BRV-doelstelling bedreigt. In 2020 bedroeg het totale risico bijkomend ruimtebeslag voor heel Vlaanderen ca. 179.000 ha. De realisatiegraad verschilt per bestemmingscategorie: woonzones zijn voor 90% ingenomen, industriezones voor 83% en recreatiezones voor slechts 63% (Rapport 4, HOGENT).</p>
+    <h4>Scores </h4>
+    <div class="score-tekst"><p><strong>Ruimtebeslag-risico 2022:</strong> Lommel scoort 688,84 ha (Vlaams gemiddelde: 189,89 ha, mediaan: 125,11 ha) — relatief hoog (P97). In 2020 bedroeg het totale risico bijkomend ruimtebeslag in Vlaanderen ca. 179.000 ha. Dit overaanbod is historisch opgebouwd via de gewestplannen (1976–1980) en is sindsdien nooit structureel teruggedrongen. De realisatiegraad verschilt sterk per bestemmingscategorie: woonzones zijn voor 90% ingenomen, industriezones voor 83% en recreatiezones voor slechts 63%.</p><p><strong>Hoger Ruimtebeslag-risico 2022:</strong> Lommel scoort 479,06 ha (Vlaams gemiddelde: 129,26 ha, mediaan: 89,43 ha) — relatief hoog (P97). Het onderscheid tussen hoger en lager risico is beleidsrelevant: hoger-risicozones vereisen een prioritaire aanpak via neutralisatie (herbestemming, ruiling of aankoop) om de BRV-doelstelling te halen.</p><p><strong>Lager Ruimtebeslag-risico 2022:</strong> Lommel scoort 209,78 ha (Vlaams gemiddelde: 60,64 ha, mediaan: 35,36 ha) — relatief hoog (P96). Woonreservegebieden (woonuitbreidingsgebieden) zijn een bijzondere categorie: ze zijn bestemd voor wonen maar vereisen een programma van gemeentelijk woonbeleid voor activatie. Ze vertegenwoordigen een latent risico voor bijkomend ruimtebeslag.</p><p><strong>Ruimtebeslag-risico woonreservegebieden 2022:</strong> Lommel scoort 86,65 ha (Vlaams gemiddelde: 32,10 ha, mediaan: 22,61 ha) — relatief hoog (P93).</p><p><strong>RBR woonzones:</strong> Lommel scoort 158,41 ha (Vlaams gemiddelde: 77,01 ha, mediaan: 58,45 ha) — relatief hoog (P90).</p><p><strong>RBR recreatiezones:</strong> Lommel scoort 59,38 ha (Vlaams gemiddelde: 17,99 ha, mediaan: 7,44 ha) — relatief hoog (P94).</p><p><strong>RBR overige groenzones:</strong> Lommel scoort 150,40 ha (Vlaams gemiddelde: 42,65 ha, mediaan: 20,38 ha) — relatief hoog (P96).</p><p><strong>RBR industriezones:</strong> Lommel scoort 251,63 ha (Vlaams gemiddelde: 22,70 ha, mediaan: 8,27 ha) — relatief hoog (P100).</p><p><strong>RBR gemeenschapszones:</strong> Lommel scoort 69,02 ha (Vlaams gemiddelde: 20,73 ha, mediaan: 7,31 ha) — relatief hoog (P93).</p><p><strong>RBR overige zones:</strong> Lommel scoort 0,00 ha (Vlaams gemiddelde: 0,13 ha, mediaan: 0,00 ha) — relatief hoog (P91).</p><p><strong>RBR havenzones:</strong> Lommel scoort 0,00 ha (Vlaams gemiddelde: 8,69 ha, mediaan: 0,00 ha) — relatief hoog (P96).</p><p><strong>Hoge ecosysteemdienstwaarde onder RBR 2022:</strong> Lommel scoort 376,20 ha (Vlaams gemiddelde: 67,04 ha, mediaan: 33,22 ha) — relatief hoog (P98). Deze gronden genieten prioritair bescherming in het BRV-kader. Ingebruikname ervan zou niet alleen ruimtebeslag toevoegen maar ook ecosysteemdiensten definitief vernietigen.</p><p><strong>Watergevoelig gebied onder RBR 2022:</strong> Lommel scoort 10,89 ha (Vlaams gemiddelde: 39,73 ha, mediaan: 22,73 ha) — iets onder gemiddeld (P29). Ingebruikname van watergevoelige gronden is beleidsmatig onwenselijk en juridisch aan strikte voorwaarden verbonden via de watertoets. Toch bevinden er zich nog significant oppervlakken in harde bestemmingen met watertoetsproblematiek.</p><p><strong>Bossen onder RBR 2022:</strong> Lommel scoort 146,21 ha (Vlaams gemiddelde: 38,54 ha, mediaan: 14,83 ha) — relatief hoog (P95). Bossen in harde bestemmingen genieten bescherming via de boscompensatieplicht, maar het boscompensatiemechanisme compenseert enkel de bosoppervlakte, niet de ecologische kwaliteit of lokale ecosysteemdiensten.</p></div>
     
+    <div class="tabel-wrap">
     <table>
       <thead>
         <tr>
           <th>Indicator</th>
+          <th>Definitie</th>
           <th>Waarde</th>
-          <th>Vlaams gemiddelde</th>
+          <th>Gem.</th>
           <th>Mediaan</th>
-          <th>Percentielpositie</th>
+          <th>Q1 – Q3</th>
+          <th>Percentiel</th>
           <th>Beoordeling</th>
+          <th>Benchmark</th>
         </tr>
       </thead>
       <tbody>
         
           <tr>
-            <td title="De gemeentelijke oppervlakte aan landbouwgronden of in natuurlijke staat met een harde bestemming, waar vergunningen voor ruimtebeslag kunnen afgeleverd worden.">Ruimtebeslag-risico 2022</td>
-            <td>688,84 ha</td>
-            <td>189,89 ha</td>
-            <td>125,11 ha</td>
+            <td><strong>Ruimtebeslag-risico 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De oppervlakte aan landbouwgronden of gronden in natuurlijke staat met een harde bestemming (woonzone, industriezone, recreatiezone, enz.) die nog niet effectief ingenomen is door ruimtebeslag. Dit zijn de gronden waarop in principe nog gebouwd of verhard kan worden conform de vigerende bestemmingsplannen.</td>
+            <td><strong>688,84</strong></td>
+            <td>189,89</td>
+            <td>125,11</td>
+            <td style="white-space:nowrap">70,43 – 228,13</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:97%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:97%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P97</span>
                 </div>
-                P97
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark">Drempelwaarden (Rapport 6): laag < 50 ha, gemiddeld 50–200 ha, hoog > 200 ha.</td>
           </tr>
         
           <tr>
-            <td title="De gemeentelijke oppervlakte met een hoger risico op ruimtebeslag (harde bestemmingen excl. woonreservegebieden).">Hoger Ruimtebeslag-risico 2022</td>
-            <td>479,06 ha</td>
-            <td>129,26 ha</td>
-            <td>89,43 ha</td>
+            <td><strong>Hoger Ruimtebeslag-risico 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De deeloppervlakte van het ruimtebeslag-risico in harde bestemmingen met hoger realisatierisico (woonzones, industriezones, gemeenschapsvoorzieningen), excl. woonreservegebieden. Deze gronden hebben een hogere kans op ruimtebeslag omdat ze bestemd zijn voor functies die doorgaans snel worden gerealiseerd.</td>
+            <td><strong>479,06</strong></td>
+            <td>129,26</td>
+            <td>89,43</td>
+            <td style="white-space:nowrap">49,81 – 152,58</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:97%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:97%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P97</span>
                 </div>
-                P97
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De gemeentelijke oppervlakte met een lager risico op ruimtebeslag.">Lager Ruimtebeslag-risico 2022</td>
-            <td>209,78 ha</td>
-            <td>60,64 ha</td>
-            <td>35,36 ha</td>
+            <td><strong>Lager Ruimtebeslag-risico 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De deeloppervlakte van het ruimtebeslag-risico in bestemmingen met lager realisatierisico (recreatiezones, overige groenzones, woonreservegebieden). Recreatiezones zijn gemiddeld slechts voor 63% ingenomen, wat hun lagere risicoprofiel verklaart.</td>
+            <td><strong>209,78</strong></td>
+            <td>60,64</td>
+            <td>35,36</td>
+            <td style="white-space:nowrap">13,91 – 70,36</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:96%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:96%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P96</span>
                 </div>
-                P96
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark">Referentie: recreatiezones zijn gemiddeld voor 63% ingenomen (Rapport 4).</td>
           </tr>
         
           <tr>
-            <td title="Het ruimtebeslag-risico gelegen in woonreservegebieden (woonuitbreidingsgebied e.d.).">Ruimtebeslag-risico woonreservegebieden 2022</td>
-            <td>86,65 ha</td>
-            <td>32,10 ha</td>
-            <td>22,61 ha</td>
+            <td><strong>Ruimtebeslag-risico woonreservegebieden 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">Het ruimtebeslag-risico gelegen in woonreservegebieden (woonuitbreidingsgebied e.d.).</td>
+            <td><strong>86,65</strong></td>
+            <td>32,10</td>
+            <td>22,61</td>
+            <td style="white-space:nowrap">8,52 – 47,11</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:93%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:93%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P93</span>
                 </div>
-                P93
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het ruimtebeslag-risico gelegen in woonzones.">RBR woonzones</td>
-            <td>158,41 ha</td>
-            <td>77,01 ha</td>
-            <td>58,45 ha</td>
+            <td><strong>RBR woonzones</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">Het ruimtebeslag-risico gelegen in woonzones.</td>
+            <td><strong>158,41</strong></td>
+            <td>77,01</td>
+            <td>58,45</td>
+            <td style="white-space:nowrap">33,72 – 102,43</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:90%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:90%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P90</span>
                 </div>
-                P90
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het ruimtebeslag-risico gelegen in recreatiezones.">RBR recreatiezones</td>
-            <td>59,38 ha</td>
-            <td>17,99 ha</td>
-            <td>7,44 ha</td>
+            <td><strong>RBR recreatiezones</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">Het ruimtebeslag-risico gelegen in recreatiezones.</td>
+            <td><strong>59,38</strong></td>
+            <td>17,99</td>
+            <td>7,44</td>
+            <td style="white-space:nowrap">2,31 – 19,41</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:94%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:94%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P94</span>
                 </div>
-                P94
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het ruimtebeslag-risico gelegen in overige groenzones.">RBR overige groenzones</td>
-            <td>150,40 ha</td>
-            <td>42,65 ha</td>
-            <td>20,38 ha</td>
+            <td><strong>RBR overige groenzones</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">Het ruimtebeslag-risico gelegen in overige groenzones.</td>
+            <td><strong>150,40</strong></td>
+            <td>42,65</td>
+            <td>20,38</td>
+            <td style="white-space:nowrap">6,16 – 48,90</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:96%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:96%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P96</span>
                 </div>
-                P96
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het ruimtebeslag-risico gelegen in industriezones.">RBR industriezones</td>
-            <td>251,63 ha</td>
-            <td>22,70 ha</td>
-            <td>8,27 ha</td>
+            <td><strong>RBR industriezones</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">Het ruimtebeslag-risico gelegen in industriezones.</td>
+            <td><strong>251,63</strong></td>
+            <td>22,70</td>
+            <td>8,27</td>
+            <td style="white-space:nowrap">3,49 – 27,13</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:100%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:100%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P100</span>
                 </div>
-                P100
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het ruimtebeslag-risico gelegen in gemeenschapszones e.d.">RBR gemeenschapszones</td>
-            <td>69,02 ha</td>
-            <td>20,73 ha</td>
-            <td>7,31 ha</td>
+            <td><strong>RBR gemeenschapszones</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">Het ruimtebeslag-risico gelegen in gemeenschapszones e.d.</td>
+            <td><strong>69,02</strong></td>
+            <td>20,73</td>
+            <td>7,31</td>
+            <td style="white-space:nowrap">2,51 – 22,85</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:93%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:93%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P93</span>
                 </div>
-                P93
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het ruimtebeslag-risico gelegen in overige zones.">RBR overige zones</td>
-            <td>0,00 ha</td>
-            <td>0,13 ha</td>
-            <td>0,00 ha</td>
+            <td><strong>RBR overige zones</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">Het ruimtebeslag-risico gelegen in overige zones.</td>
+            <td><strong>0,00</strong></td>
+            <td>0,13</td>
+            <td>0,00</td>
+            <td style="white-space:nowrap">0,00 – 0,00</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:91%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:91%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P91</span>
                 </div>
-                P91
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="Het ruimtebeslag-risico gelegen in havenzones.">RBR havenzones</td>
-            <td>0,00 ha</td>
-            <td>8,69 ha</td>
-            <td>0,00 ha</td>
+            <td><strong>RBR havenzones</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">Het ruimtebeslag-risico gelegen in havenzones.</td>
+            <td><strong>0,00</strong></td>
+            <td>8,69</td>
+            <td>0,00</td>
+            <td style="white-space:nowrap">0,00 – 0,00</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:96%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:96%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P96</span>
                 </div>
-                P96
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De oppervlakte aan ruimtebeslag-risico met hoge ecosysteemdienstwaarde (INBO 2019).">Hoge ecosysteemdienstwaarde onder RBR 2022</td>
-            <td>376,20 ha</td>
-            <td>67,04 ha</td>
-            <td>33,22 ha</td>
+            <td><strong>Hoge ecosysteemdienstwaarde onder RBR 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De oppervlakte aan ruimtebeslag-risico (nog niet ingenomen harde bestemming) met een hoge ecosysteemdienstwaarde, op basis van de INBO-ecosysteemdienstenkaart (2019). Een hoge ecosysteemdienstwaarde betekent dat deze gronden bijzonder waardevolle diensten leveren voor waterregulatie, koolstofopslag, bestuiving of recreatie.</td>
+            <td><strong>376,20</strong></td>
+            <td>67,04</td>
+            <td>33,22</td>
+            <td style="white-space:nowrap">13,14 – 77,29</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:98%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:98%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P98</span>
                 </div>
-                P98
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De oppervlakte aan ruimtebeslag-risico die watergevoelig is.">Watergevoelig gebied onder RBR 2022</td>
-            <td>10,89 ha</td>
-            <td>39,73 ha</td>
-            <td>22,73 ha</td>
+            <td><strong>Watergevoelig gebied onder RBR 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De oppervlakte aan ruimtebeslag-risico die watergevoelig is, op basis van de Watergevoelige Open Ruimte Gebieden (WORG) en de Overstromingsgevoelige gebieden (Watertoetskaarten). Ingebruikname van deze gronden verhoogt het overstromingsrisico stroomafwaarts.</td>
+            <td><strong>10,89</strong></td>
+            <td>39,73</td>
+            <td>22,73</td>
+            <td style="white-space:nowrap">9,11 – 48,51</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:29%; background:#4caf7d"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:29%;background:#4caf7d"></div></div>
+                  <span class="prank-lbl">P29</span>
                 </div>
-                P29
-              
             </td>
             <td><span class="badge badge-goed">iets onder gemiddeld</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De oppervlakte aan ruimtebeslag-risico die uit bos bestaat (Boswijzer 2021).">Bossen onder RBR 2022</td>
-            <td>146,21 ha</td>
-            <td>38,54 ha</td>
-            <td>14,83 ha</td>
+            <td><strong>Bossen onder RBR 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De oppervlakte aan ruimtebeslag-risico die bestaat uit bos, op basis van de Boswijzer 2021. Bossen in harde bestemmingen zijn potentieel bedreigd door ruimtebeslag, ondanks de boscompensatieplicht.</td>
+            <td><strong>146,21</strong></td>
+            <td>38,54</td>
+            <td>14,83</td>
+            <td style="white-space:nowrap">3,53 – 46,57</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:95%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:95%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P95</span>
                 </div>
-                P95
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
       </tbody>
     </table>
+    </div>
   
   
 
     <h3>Reductieopgave</h3>
-    <p>Gemeentelijk quotum 2022–2040: Lommel scoort 89,58 ha, tegenover een Vlaams gemiddelde van 39,78 ha. Dit is relatief hoog (P95) voor Vlaamse gemeenten. Minimale neutralisatie-opgave 2022: Lommel scoort 389,48 ha, tegenover een Vlaams gemiddelde van 89,48 ha. Dit is relatief hoog (P97) voor Vlaamse gemeenten. Prioritaire neutralisatie-opgave hoger risico 2020: Lommel scoort 279,40 ha, tegenover een Vlaams gemiddelde van 36,52 ha. Dit is relatief hoog (P98) voor Vlaamse gemeenten. Prioritaire neutralisatie-opgave lager risico 2020: Lommel scoort 113,12 ha, tegenover een Vlaams gemiddelde van 39,67 ha. Dit is relatief hoog (P91) voor Vlaamse gemeenten. Totale onthardingsopgave 2022: Lommel scoort 219,14 ha, tegenover een Vlaams gemiddelde van 65,23 ha. Dit is relatief hoog (P99) voor Vlaamse gemeenten. Onthardingsopgave harde bestemmingen 2022: Lommel scoort 155,77 ha, tegenover een Vlaams gemiddelde van 28,56 ha. Dit is relatief hoog (P99) voor Vlaamse gemeenten. Onthardingsdoelstelling zachte bestemmingen 2022: Lommel scoort 63,37 ha, tegenover een Vlaams gemiddelde van 36,67 ha. Dit is relatief hoog (P87) voor Vlaamse gemeenten. Onthardingsopgave scenario 2022: Lommel scoort 219,14 ha, tegenover een Vlaams gemiddelde van 65,23 ha. Dit is relatief hoog (P99) voor Vlaamse gemeenten.</p>
+    <p class="intro-text">De reductieopgave vertaalt de BRV-doelstellingen naar een gemeentelijke inspanning. Ze omvat zowel de reductie van bijkomend ruimtebeslag als de ontharding van bestaande verharding. Om ruimteneutraliteit in 2040 te bereiken zijn twee types ingrepen nodig: (1) beperking van nieuw ruimtebeslag via het gemeentelijk quotum en de minimale neutralisatie-opgave, en (2) ontharding van verharde oppervlakten. Intergemeentelijke samenwerking en compensatiemechanismen zijn wenselijk voor een rechtvaardige verdeling van de opgave (Rapport 6, HOGENT).</p>
+    <h4>Scores </h4>
+    <div class="score-tekst"><p><strong>Gemeentelijk quotum 2022–2040:</strong> Lommel scoort 89,58 ha (Vlaams gemiddelde: 39,78 ha, mediaan: 33,83 ha) — relatief hoog (P95). Het BRV-reductietraject start bij de actuele ruimtebeslagsnelheid (2022), passeert een tussentijdse mijlpaal in 2025 (max. 3 ha/dag voor heel Vlaanderen) en daalt gradueel naar ruimteneutraliteit in 2040. Een kleiner quotum betekent dat de gemeente minder ruimtebeslag kan realiseren en meer moet inzetten op verdichting of hergebruik van bestaande ruimte.</p><p><strong>Minimale neutralisatie-opgave 2022:</strong> Lommel scoort 389,48 ha (Vlaams gemiddelde: 89,48 ha, mediaan: 57,69 ha) — relatief hoog (P97). De neutralisatie-opgave vloeit voort uit het feit dat het bestaande overaanbod aan harde bestemmingen (ca. 179.000 ha voor heel Vlaanderen) de BRV-doelstelling ondermijnt. Zonder actieve omzetting van harde naar zachte bestemmingen blijft het risico op ruimtebeslag structureel te hoog. Het huidige planschadestelsel in Vlaanderen maakt grootschalige bestemmingswijzigingen financieel belastend voor overheden.</p><p><strong>Prioritaire neutralisatie-opgave hoger risico 2020:</strong> Lommel scoort 279,40 ha (Vlaams gemiddelde: 36,52 ha, mediaan: 13,65 ha) — relatief hoog (P98).</p><p><strong>Prioritaire neutralisatie-opgave lager risico 2020:</strong> Lommel scoort 113,12 ha (Vlaams gemiddelde: 39,67 ha, mediaan: 18,37 ha) — relatief hoog (P91).</p><p><strong>Totale onthardingsopgave 2022:</strong> Lommel scoort 219,14 ha (Vlaams gemiddelde: 65,23 ha, mediaan: 54,68 ha) — relatief hoog (P99). Ontharding is een sleutelmaatregel voor klimaatadaptatie (waterberging, vermindering hittestress) en biodiversiteitsherstel. De Vlaamse overheid stimuleert onthardingsprojecten via subsidies en kennisverspreiding. De onthardingsopgave maakt deel uit van de bredere verhardingsneutraliteitsambities van het Vlaamse beleid.</p><p><strong>Onthardingsopgave harde bestemmingen 2022:</strong> Lommel scoort 155,77 ha (Vlaams gemiddelde: 28,56 ha, mediaan: 18,68 ha) — relatief hoog (P99).</p><p><strong>Onthardingsdoelstelling zachte bestemmingen 2022:</strong> Lommel scoort 63,37 ha (Vlaams gemiddelde: 36,67 ha, mediaan: 32,16 ha) — relatief hoog (P87).</p><p><strong>Onthardingsopgave scenario 2022:</strong> Lommel scoort 219,14 ha (Vlaams gemiddelde: 65,23 ha, mediaan: 54,68 ha) — relatief hoog (P99).</p></div>
     
+    <div class="tabel-wrap">
     <table>
       <thead>
         <tr>
           <th>Indicator</th>
+          <th>Definitie</th>
           <th>Waarde</th>
-          <th>Vlaams gemiddelde</th>
+          <th>Gem.</th>
           <th>Mediaan</th>
-          <th>Percentielpositie</th>
+          <th>Q1 – Q3</th>
+          <th>Percentiel</th>
           <th>Beoordeling</th>
+          <th>Benchmark</th>
         </tr>
       </thead>
       <tbody>
         
           <tr>
-            <td title="De bovengrens aan bijkomend ruimtebeslag tijdens de periode 2022–2040 opdat de gemeente voldoet aan de BRV-reductiedoelstelling.">Gemeentelijk quotum 2022–2040</td>
-            <td>89,58 ha</td>
-            <td>39,78 ha</td>
-            <td>33,83 ha</td>
+            <td><strong>Gemeentelijk quotum 2022–2040</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De bovengrens aan bijkomend ruimtebeslag die de gemeente mag realiseren in de periode 2022–2040, opdat ze haar aandeel levert in de BRV-reductiedoelstelling. Het quotum wordt berekend op basis van de historische ruimtebeslagsnelheid en de vereiste afbouw conform het BRV-reductietraject.</td>
+            <td><strong>89,58</strong></td>
+            <td>39,78</td>
+            <td>33,83</td>
+            <td style="white-space:nowrap">23,45 – 49,72</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:95%; background:#4caf7d"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:95%;background:#4caf7d"></div></div>
+                  <span class="prank-lbl">P95</span>
                 </div>
-                P95
-              
             </td>
             <td><span class="badge badge-goed">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De oppervlakte aan harde bestemmingen met hoger risico die de gemeente minimaal dient te neutraliseren om de BRV-doelstelling te bereiken.">Minimale neutralisatie-opgave 2022</td>
-            <td>389,48 ha</td>
-            <td>89,48 ha</td>
-            <td>57,69 ha</td>
+            <td><strong>Minimale neutralisatie-opgave 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De oppervlakte aan harde bestemmingen met hoger risico (woonzones, industriezones, gemeenschapsvoorzieningenzones) die de gemeente minimaal dient te neutraliseren – via herbestemming, ruiling of aankoop – opdat ze de BRV-reductiedoelstelling voor ruimtebeslag kan bereiken.</td>
+            <td><strong>389,48</strong></td>
+            <td>89,48</td>
+            <td>57,69</td>
+            <td style="white-space:nowrap">20,43 – 113,07</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:97%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:97%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P97</span>
                 </div>
-                P97
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark">Drempelwaarden (Rapport 6): laag < 10 ha, gemiddeld 10–50 ha, hoog > 50 ha.</td>
           </tr>
         
           <tr>
-            <td title="De oppervlakte gronden met hoge bodemwaarde die prioritair bescherming nodig hebben via neutralisatie van de harde bestemming (hoger risico).">Prioritaire neutralisatie-opgave hoger risico 2020</td>
-            <td>279,40 ha</td>
-            <td>36,52 ha</td>
-            <td>13,65 ha</td>
+            <td><strong>Prioritaire neutralisatie-opgave hoger risico 2020</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De oppervlakte gronden met hoge bodemwaarde die prioritair bescherming nodig hebben via neutralisatie van de harde bestemming (hoger risico).</td>
+            <td><strong>279,40</strong></td>
+            <td>36,52</td>
+            <td>13,65</td>
+            <td style="white-space:nowrap">4,43 – 38,21</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:98%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:98%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P98</span>
                 </div>
-                P98
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De oppervlakte gronden met hoge bodemwaarde die prioritair bescherming nodig hebben via neutralisatie van de harde bestemming (lager risico).">Prioritaire neutralisatie-opgave lager risico 2020</td>
-            <td>113,12 ha</td>
-            <td>39,67 ha</td>
-            <td>18,37 ha</td>
+            <td><strong>Prioritaire neutralisatie-opgave lager risico 2020</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De oppervlakte gronden met hoge bodemwaarde die prioritair bescherming nodig hebben via neutralisatie van de harde bestemming (lager risico).</td>
+            <td><strong>113,12</strong></td>
+            <td>39,67</td>
+            <td>18,37</td>
+            <td style="white-space:nowrap">4,59 – 55,24</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:91%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:91%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P91</span>
                 </div>
-                P91
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De totale onthardingsopgave voor de gemeente (harde + zachte bestemmingen), opgave voor 2022.">Totale onthardingsopgave 2022</td>
-            <td>219,14 ha</td>
-            <td>65,23 ha</td>
-            <td>54,68 ha</td>
+            <td><strong>Totale onthardingsopgave 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De totale onthardingsopgave voor de gemeente in harde én zachte bestemmingen samen, als referentie ten opzichte van de verhardingssituatie in 2015. Ontharding is het omgekeerde van verharding: het verwijderen van kunstmatige oppervlakken en het herstel van waterdoorlatende bodem.</td>
+            <td><strong>219,14</strong></td>
+            <td>65,23</td>
+            <td>54,68</td>
+            <td style="white-space:nowrap">32,27 – 81,87</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:99%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:99%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P99</span>
                 </div>
-                P99
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De te ontharden oppervlakte ten opzichte van de situatie 2015 in de harde bestemmingen.">Onthardingsopgave harde bestemmingen 2022</td>
-            <td>155,77 ha</td>
-            <td>28,56 ha</td>
-            <td>18,68 ha</td>
+            <td><strong>Onthardingsopgave harde bestemmingen 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De te ontharden oppervlakte ten opzichte van de situatie 2015 in de harde bestemmingen.</td>
+            <td><strong>155,77</strong></td>
+            <td>28,56</td>
+            <td>18,68</td>
+            <td style="white-space:nowrap">6,62 – 37,46</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:99%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:99%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P99</span>
                 </div>
-                P99
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De te ontharden oppervlakte ten opzichte van de situatie 2015 in de zachte bestemmingen.">Onthardingsdoelstelling zachte bestemmingen 2022</td>
-            <td>63,37 ha</td>
-            <td>36,67 ha</td>
-            <td>32,16 ha</td>
+            <td><strong>Onthardingsdoelstelling zachte bestemmingen 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De te ontharden oppervlakte ten opzichte van de situatie 2015 in de zachte bestemmingen.</td>
+            <td><strong>63,37</strong></td>
+            <td>36,67</td>
+            <td>32,16</td>
+            <td style="white-space:nowrap">18,90 – 47,78</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:87%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:87%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P87</span>
                 </div>
-                P87
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
           <tr>
-            <td title="De totale onthardingsopgave voor de gemeente, in de harde en zachte bestemmingen samen (scenario 2022).">Onthardingsopgave scenario 2022</td>
-            <td>219,14 ha</td>
-            <td>65,23 ha</td>
-            <td>54,68 ha</td>
+            <td><strong>Onthardingsopgave scenario 2022</strong><br><small style="color:#64748b">ha</small></td>
+            <td class="td-definitie">De totale onthardingsopgave voor de gemeente, in de harde en zachte bestemmingen samen (scenario 2022).</td>
+            <td><strong>219,14</strong></td>
+            <td>65,23</td>
+            <td>54,68</td>
+            <td style="white-space:nowrap">32,27 – 81,87</td>
             <td>
               
-                <div class="prank-bar">
-                  <div class="prank-fill" style="width:99%; background:#e05c5c"></div>
+                <div class="prank-wrap">
+                  <div class="prank-bar"><div class="prank-fill" style="width:99%;background:#e05c5c"></div></div>
+                  <span class="prank-lbl">P99</span>
                 </div>
-                P99
-              
             </td>
             <td><span class="badge badge-slecht">relatief hoog</span></td>
+            <td class="td-benchmark"></td>
           </tr>
         
       </tbody>
     </table>
+    </div>
   
   
   </div>
 
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
-  <!--  DEEL 3 – VISUALS                                                     -->
-  <!-- ══════════════════════════════════════════════════════════════════════ -->
+  <!-- ══ DEEL 3 ══════════════════════════════════════════════════════════════ -->
   <div class="sectie">
-    <h2>Deel 3 – Visuals</h2>
+    <h2><span class="sectie-num">3</span> Visuals</h2>
     <div class="charts-grid">
 
-      <!-- Radar: percentielprofieel -->
-      <div class="chart-card" style="grid-column: 1 / -1;">
-        <h3>Percentielprofiel (hogere score = gunstiger dan Vlaamse mediaan)</h3>
-        <div class="chart-wrap-tall">
-          <canvas id="radarChart"></canvas>
-        </div>
+      <div class="chart-card full-width">
+        <h3>Percentielprofiel – hoe gunstig scoort Lommel per kernindicator?</h3>
+        <p class="chart-bron">Hogere score = gunstiger dan de Vlaamse mediaan. Schaal 0–100.</p>
+        <div class="chart-wrap-tall"><canvas id="radarChart"></canvas></div>
       </div>
 
-      <!-- Bar: gemeente vs gemiddelde -->
-      <div class="chart-card" style="grid-column: 1 / -1;">
+      <div class="chart-card full-width">
         <h3>Gemeente vs Vlaams gemiddelde – profielindicatoren</h3>
-        <div class="chart-wrap-tall">
-          <canvas id="barChart"></canvas>
-        </div>
+        <p class="chart-bron">Waarden genormaliseerd naar % van maximum voor onderlinge vergelijkbaarheid. Hover voor werkelijke waarden.</p>
+        <div class="chart-wrap-tall"><canvas id="barChart"></canvas></div>
       </div>
 
-      <!-- BRV Reductietraject -->
       <div class="chart-card">
-        <h3>BRV Reductietraject ruimtebeslag (m²/dag)</h3>
-        <div class="chart-wrap">
-          <canvas id="brvChart"></canvas>
-        </div>
+        <h3>BRV Reductietraject ruimtebeslag</h3>
+        <p class="chart-bron">Toegestaan bijkomend ruimtebeslag (m²/dag) conform BRV-doelstellingen. Bron: HOGENT Rapport 6.</p>
+        <div class="chart-wrap"><canvas id="brvChart"></canvas></div>
       </div>
 
-      <!-- RBR Zonepie -->
       <div class="chart-card">
-        <h3>Ruimtebeslag-risico per bestemmingszone (ha)</h3>
-        <div class="chart-wrap">
-          <canvas id="pieChart"></canvas>
-        </div>
+        <h3>Ruimtebeslag-risico per bestemmingszone</h3>
+        <p class="chart-bron">Verdeling van het niet-ingenomen harde bestemmingsareaal (ha). Bron: HOGENT Rapport 1.</p>
+        <div class="chart-wrap"><canvas id="pieChart"></canvas></div>
       </div>
 
-      <!-- Boxplots als gestapeld horizontaal bar chart -->
-      <div class="chart-card" style="grid-column: 1 / -1;">
-        <h3>Positie van Lommel in de Vlaamse spreiding (per indicator)</h3>
-        <div class="chart-wrap-tall">
-          <canvas id="boxChart"></canvas>
-        </div>
+      <div class="chart-card full-width">
+        <h3>Positie van Lommel in de Vlaamse spreiding (Q1–Q3 bereik + percentielpositie)</h3>
+        <p class="chart-bron">De balk toont het interkwartielsbereik (Q1–Q3) van alle Vlaamse gemeenten. Het driehoekje is de positie van Lommel.</p>
+        <div class="chart-wrap-tall"><canvas id="boxChart"></canvas></div>
       </div>
 
     </div>
   </div>
 
   <div class="rapport-footer">
-    Betonmeter – DRUM · Hogeschool Gent · Gegenereerd op 16/3/2026
+    Betonmeter – DRUM · Hogeschool Gent · Gegenereerd op 16/3/2026 ·
+    Bronnen: HOGENT Rapport 1, 4 &amp; 6 (PWO-project Beleidsrelevante cartografische instrumenten)
   </div>
 </div>
 
 <script>
-// ── Data ──────────────────────────────────────────────────────────────────────
 const DATA = {
   "profielChart": {
     "labels": [
@@ -756,6 +876,17 @@ const DATA = {
       39.77813333333334,
       89.4773,
       65.23352923333333
+    ],
+    "mediaan": [
+      532.57375,
+      14.4035435,
+      34.87531,
+      4.052222049999999,
+      125.11,
+      33.22,
+      33.82824995000121,
+      57.69109753901102,
+      54.680080000000004
     ],
     "units": [
       "ha",
@@ -792,7 +923,9 @@ const DATA = {
       85.6538103333907,
       57.102540222260465,
       0
-    ]
+    ],
+    "doelstelling_2025_label": "BRV-doel 2025: max. 3 ha/dag",
+    "doelstelling_2040_label": "BRV-doel 2040: 0 ha/dag"
   },
   "rbrZoneChart": {
     "labels": [
@@ -812,6 +945,15 @@ const DATA = {
       69.02,
       0,
       0
+    ],
+    "realisatiegraden": [
+      90,
+      63,
+      null,
+      83,
+      75,
+      null,
+      null
     ]
   },
   "radarChart": {
@@ -836,17 +978,6 @@ const DATA = {
       95,
       3,
       1
-    ],
-    "colors": [
-      "slecht",
-      "matig",
-      "goed",
-      "slecht",
-      "slecht",
-      "slecht",
-      "goed",
-      "slecht",
-      "slecht"
     ]
   },
   "boxplotChart": [
@@ -905,35 +1036,37 @@ const DATA = {
       "waarde": 219.13938,
       "prank": 99
     }
-  ]
+  ],
+  "brvReferentie": {
+    "doel2025_m2dag": 30000,
+    "doel2040_m2dag": 0,
+    "historisch_m2dag": 60000
+  }
 };
+const NAAM = "Lommel";
 
-const PALETTE = {
-  blauw:   '#2e6b9e',
-  lichtbl: '#7eb8d4',
-  rood:    '#e05c5c',
-  oranje:  '#f5a623',
-  groen:   '#4caf7d',
-  paars:   '#9b59b6',
-  geel:    '#f7c948',
-  grijs:   '#94a3b8',
+const PAL = {
+  blauw:   '#2e6b9e', lichtbl: '#7eb8d4', rood: '#e05c5c',
+  oranje:  '#f5a623', groen: '#4caf7d', paars: '#9b59b6',
+  geel:    '#f7c948', grijs: '#94a3b8',
 };
 
 Chart.defaults.font.family = "'Segoe UI', Arial, sans-serif";
 Chart.defaults.font.size = 12;
 
-// ── 1. Radar chart ────────────────────────────────────────────────────────────
+// ── Radar ────────────────────────────────────────────────────────────────────
 new Chart(document.getElementById('radarChart'), {
   type: 'radar',
   data: {
     labels: DATA.radarChart.labels,
     datasets: [{
-      label: 'Lommel',
+      label: NAAM,
       data: DATA.radarChart.pranks,
-      backgroundColor: 'rgba(46,107,158,0.2)',
-      borderColor: PALETTE.blauw,
-      borderWidth: 2,
-      pointBackgroundColor: PALETTE.blauw,
+      backgroundColor: 'rgba(46,107,158,0.18)',
+      borderColor: PAL.blauw,
+      borderWidth: 2.5,
+      pointBackgroundColor: PAL.blauw,
+      pointRadius: 4,
     }],
   },
   options: {
@@ -941,152 +1074,140 @@ new Chart(document.getElementById('radarChart'), {
     scales: {
       r: {
         min: 0, max: 100,
-        ticks: { stepSize: 25, font: { size: 10 } },
+        ticks: { stepSize: 25, font: { size: 10 }, backdropColor: 'transparent' },
         pointLabels: { font: { size: 11 } },
+        grid: { color: '#e2e8f0' },
       },
     },
-    plugins: { legend: { position: 'top' } },
+    plugins: { legend: { position: 'top' }, tooltip: { callbacks: {
+      label: ctx => `${ctx.dataset.label}: ${ctx.raw}/100 (gunstigheidsscore)`,
+    }}},
   },
 });
 
-// ── 2. Bar chart gemeente vs gemiddelde ───────────────────────────────────────
+// ── Bar: gemeente vs gemiddelde ───────────────────────────────────────────────
 (function() {
-  const labels = DATA.profielChart.labels;
-  const gem    = DATA.profielChart.gemeente;
-  const avg    = DATA.profielChart.gemiddelde;
-  const pranks = DATA.profielChart.pranks;
-  const units  = DATA.profielChart.units;
-
-  // Normaliseer naar percentage van maximum voor vergelijkbaarheid
-  const maxes = labels.map((_, i) => Math.max(gem[i] || 0, avg[i] || 0, 0.001));
-  const gemNorm = gem.map((v, i) => v !== null ? Math.round((v / maxes[i]) * 100) : null);
-  const avgNorm = avg.map((v, i) => v !== null ? Math.round((v / maxes[i]) * 100) : null);
+  const labels  = DATA.profielChart.labels;
+  const gem     = DATA.profielChart.gemeente;
+  const avg     = DATA.profielChart.gemiddelde;
+  const med     = DATA.profielChart.mediaan;
+  const units   = DATA.profielChart.units;
+  const maxes   = labels.map((_,i) => Math.max(gem[i]||0, avg[i]||0, 0.001));
+  const toNorm  = (arr) => arr.map((v,i) => v !== null ? Math.round((v/maxes[i])*100) : null);
 
   new Chart(document.getElementById('barChart'), {
     type: 'bar',
     data: {
       labels,
       datasets: [
-        { label: 'Lommel', data: gemNorm, backgroundColor: PALETTE.blauw },
-        { label: 'Vlaams gemiddelde', data: avgNorm, backgroundColor: PALETTE.lichtbl },
+        { label: NAAM,                data: toNorm(gem), backgroundColor: PAL.blauw   },
+        { label: 'Vlaams gemiddelde', data: toNorm(avg), backgroundColor: PAL.lichtbl  },
+        { label: 'Vlaamse mediaan',   data: toNorm(med), backgroundColor: PAL.oranje, borderWidth: 0, type: 'bar' },
       ],
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { position: 'top' },
-        tooltip: {
-          callbacks: {
-            label: function(ctx) {
-              const i = ctx.dataIndex;
-              const rawVal = ctx.datasetIndex === 0 ? gem[i] : avg[i];
-              const unit = units[i];
-              return `${ctx.dataset.label}: ${rawVal !== null ? rawVal.toLocaleString('nl-BE', {maximumFractionDigits: 2}) : '–'} ${unit}`;
-            },
-          },
+        tooltip: { callbacks: { label: (ctx) => {
+          const i = ctx.dataIndex;
+          const raw = [gem,avg,med][ctx.datasetIndex][i];
+          return `${ctx.dataset.label}: ${raw !== null ? raw.toLocaleString('nl-BE',{maximumFractionDigits:2}) : '–'} ${units[i]}`;
+        }}},
+      },
+      scales: { y: { title: { display: true, text: '% van maximum' }, ticks: { callback: v => v+'%' } } },
+    },
+  });
+})();
+
+// ── BRV lijndiagram ───────────────────────────────────────────────────────────
+(function() {
+  const jaren   = DATA.brvChart.jaren;
+  const waarden = DATA.brvChart.waarden;
+  // BRV-referentielijnen (m2/dag → convert to same unit as data)
+  const ref2025 = DATA.brvReferentie.doel2025_m2dag;
+  const ref2040 = DATA.brvReferentie.doel2040_m2dag;
+
+  new Chart(document.getElementById('brvChart'), {
+    type: 'line',
+    data: {
+      labels: jaren,
+      datasets: [
+        {
+          label: `${NAAM} – reductietraject`,
+          data: waarden,
+          borderColor: PAL.blauw, backgroundColor: 'rgba(46,107,158,0.1)',
+          borderWidth: 2.5, pointRadius: 5, fill: true, tension: 0.3,
         },
+      ],
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'top' },
+        tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.y !== null ? ctx.parsed.y.toLocaleString('nl-BE',{maximumFractionDigits:1}) : '–'} m²/dag` }},
+        annotation: undefined,
       },
       scales: {
-        y: {
-          title: { display: true, text: '% van maximum (voor vergelijkbaarheid)' },
-          ticks: { callback: v => v + '%' },
-        },
+        y: { title: { display: true, text: 'm²/dag bijkomend ruimtebeslag' } },
+        x: { title: { display: true, text: 'Jaar' } },
       },
     },
   });
 })();
 
-// ── 3. BRV Reductietraject ────────────────────────────────────────────────────
-new Chart(document.getElementById('brvChart'), {
-  type: 'line',
-  data: {
-    labels: DATA.brvChart.jaren,
-    datasets: [{
-      label: 'Toegestaan bijkomend ruimtebeslag (m²/dag)',
-      data: DATA.brvChart.waarden,
-      borderColor: PALETTE.rood,
-      backgroundColor: 'rgba(224,92,92,0.1)',
-      borderWidth: 2.5,
-      pointRadius: 5,
-      fill: true,
-      tension: 0.3,
-    }],
-  },
-  options: {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { position: 'top' } },
-    scales: {
-      y: { title: { display: true, text: 'm²/dag' } },
-      x: { title: { display: true, text: 'Jaar' } },
-    },
-  },
-});
-
-// ── 4. RBR Zone pie ───────────────────────────────────────────────────────────
+// ── Pie: RBR per zone ─────────────────────────────────────────────────────────
 (function() {
   const d = DATA.rbrZoneChart;
-  const total = d.waarden.reduce((s, v) => s + v, 0);
-  const nonZeroIdx = d.waarden.map((v, i) => v > 0 ? i : -1).filter(i => i >= 0);
-  const labels = nonZeroIdx.map(i => d.labels[i]);
-  const values = nonZeroIdx.map(i => d.waarden[i]);
-  const colors = [PALETTE.blauw, PALETTE.rood, PALETTE.groen, PALETTE.oranje, PALETTE.paars, PALETTE.geel, PALETTE.grijs];
+  const total = d.waarden.reduce((s,v) => s+v, 0);
+  const idxs  = d.waarden.map((v,i) => v > 0 ? i : -1).filter(i => i >= 0);
+  const colors = [PAL.blauw,PAL.rood,PAL.groen,PAL.oranje,PAL.paars,PAL.geel,PAL.grijs];
 
   new Chart(document.getElementById('pieChart'), {
-    type: total > 0 ? 'doughnut' : 'doughnut',
+    type: 'doughnut',
     data: {
-      labels: total > 0 ? labels : ['Geen data'],
-      datasets: [{
-        data: total > 0 ? values : [1],
-        backgroundColor: total > 0 ? colors.slice(0, labels.length) : ['#e2e8f0'],
-        borderWidth: 1,
-      }],
+      labels: total > 0 ? idxs.map(i=>d.labels[i]) : ['Geen data'],
+      datasets: [{ data: total > 0 ? idxs.map(i=>d.waarden[i]) : [1],
+        backgroundColor: total > 0 ? idxs.map((_,j)=>colors[j%colors.length]) : ['#e2e8f0'],
+        borderWidth: 1 }],
     },
     options: {
       responsive: true, maintainAspectRatio: false,
       plugins: {
         legend: { position: 'right', labels: { font: { size: 11 } } },
-        tooltip: {
-          callbacks: {
-            label: ctx => total > 0
-              ? `${ctx.label}: ${ctx.parsed.toLocaleString('nl-BE', {maximumFractionDigits:1})} ha (${Math.round(ctx.parsed/total*100)}%)`
-              : 'Geen data',
-          },
-        },
+        tooltip: { callbacks: { label: ctx => total > 0
+          ? `${ctx.label}: ${ctx.parsed.toLocaleString('nl-BE',{maximumFractionDigits:1})} ha (${Math.round(ctx.parsed/total*100)}%)`
+          : 'Geen data' }},
       },
     },
   });
 })();
 
-// ── 5. Box plot (positie in spreiding) als horizontaal bar chart ──────────────
+// ── Box chart ─────────────────────────────────────────────────────────────────
 (function() {
   const d = DATA.boxplotChart;
-  const labels = d.map(b => b.label);
-  const gemeente = d.map(b => b.waarde);
-  const q1       = d.map(b => b.q1);
-  const medians  = d.map(b => b.median);
-  const q3       = d.map(b => b.q3);
-
   new Chart(document.getElementById('boxChart'), {
     type: 'bar',
     data: {
-      labels,
+      labels: d.map(b=>b.label),
       datasets: [
         {
-          label: 'Q1–Q3 Vlaams bereik',
-          data: d.map(b => b.q3 - b.q1),
-          backgroundColor: 'rgba(126,184,212,0.4)',
-          base: d.map(b => b.q1),
-          borderColor: PALETTE.lichtbl,
-          borderWidth: 1,
+          label: 'Q1–Q3 bereik Vlaamse gemeenten',
+          data:  d.map(b => b.q3 - b.q1),
+          base:  d.map(b => b.q1),
+          backgroundColor: 'rgba(126,184,212,0.38)',
+          borderColor: PAL.lichtbl, borderWidth: 1,
         },
         {
-          label: 'Lommel',
-          data: gemeente,
-          type: 'scatter',
-          backgroundColor: PALETTE.rood,
-          pointRadius: 8,
-          pointStyle: 'triangle',
-          showLine: false,
+          label: NAAM,
+          data:  d.map(b => b.waarde),
+          backgroundColor: d.map(b => {
+            if (b.prank === null) return PAL.grijs;
+            return b.prank >= 75 ? PAL.rood : b.prank >= 25 ? PAL.oranje : PAL.groen;
+          }),
+          borderWidth: 0,
+          type: 'bar',
+          barThickness: 4,
         },
       ],
     },
@@ -1095,23 +1216,16 @@ new Chart(document.getElementById('brvChart'), {
       indexAxis: 'y',
       plugins: {
         legend: { position: 'top' },
-        tooltip: {
-          callbacks: {
-            label: function(ctx) {
-              if (ctx.datasetIndex === 0) {
-                const b = d[ctx.dataIndex];
-                return `Q1: ${b.q1.toLocaleString('nl-BE',{maximumFractionDigits:1})} · Mediaan: ${b.median.toLocaleString('nl-BE',{maximumFractionDigits:1})} · Q3: ${b.q3.toLocaleString('nl-BE',{maximumFractionDigits:1})} ${b.unit}`;
-              }
-              const b = d[ctx.dataIndex];
-              const prank = b.prank;
-              return `Lommel: ${b.waarde !== null ? b.waarde.toLocaleString('nl-BE',{maximumFractionDigits:1}) : '–'} ${b.unit} (P${prank})`;
-            },
-          },
-        },
+        tooltip: { callbacks: { label: (ctx) => {
+          if (ctx.datasetIndex === 0) {
+            const b = d[ctx.dataIndex];
+            return `Q1: ${b.q1.toLocaleString('nl-BE',{maximumFractionDigits:1})} – Mediaan: ${b.median.toLocaleString('nl-BE',{maximumFractionDigits:1})} – Q3: ${b.q3.toLocaleString('nl-BE',{maximumFractionDigits:1})} ${b.unit}`;
+          }
+          const b = d[ctx.dataIndex];
+          return `${NAAM}: ${b.waarde !== null ? b.waarde.toLocaleString('nl-BE',{maximumFractionDigits:1}) : '–'} ${b.unit} (P${b.prank})`;
+        }}},
       },
-      scales: {
-        x: { title: { display: true, text: 'Waarde (eenheden variëren per indicator)' } },
-      },
+      scales: { x: { title: { display: true, text: 'Waarde (eenheden variëren per indicator)' } } },
     },
   });
 })();
