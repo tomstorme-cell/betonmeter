@@ -73,6 +73,18 @@
     .legend-item { display: flex; align-items: center; gap: 6px; }
     .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
+    /* INTERPRETATIE BLOKKEN */
+    .interp { background: rgba(0,208,132,0.06); border-left: 3px solid #00d084; border-radius: 0 10px 10px 0; padding: 22px 26px; margin-top: 24px; }
+    .interp-titel { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #00d084; margin-bottom: 10px; }
+    .interp p { font-size: 0.85rem; color: #334155; line-height: 1.75; margin-bottom: 10px; }
+    .interp p:last-child { margin-bottom: 0; }
+    .interp strong { color: #0f1e30; font-weight: 700; }
+    .interp em { color: #64748b; font-style: normal; font-size: 0.82rem; }
+    .interp-donker { background: rgba(0,208,132,0.07); border-left-color: #00d084; }
+    .interp-donker .interp-titel { color: #00d084; }
+    .interp-donker p { color: rgba(255,255,255,0.72); }
+    .interp-donker strong { color: #fff; }
+
     /* Sectie 5: steden vergelijking */
     .stad-bar-wrap { display: flex; flex-direction: column; gap: 10px; }
 
@@ -135,6 +147,17 @@
         <p class="chart-desc">Harde bestemmingen die minimaal omgezet moeten worden · Vlaams gem. 89 ha</p>
       </div>
     </div>
+
+    <div class="interp">
+      <div class="interp-titel">Hoe lees je deze grafieken?</div>
+      <p>Elk stipje is één Vlaamse gemeente. De <strong>horizontale positie</strong> geeft de waarde op de indicator. De verticale spreiding is puur visueel (force-layout om overlap te vermijden) en heeft geen inhoudelijke betekenis. Gent is oranje gemarkeerd. Kleur van de andere stipjes: <strong style="color:#00d084">groen</strong> = gunstig, <strong style="color:#f7c948">geel</strong> = gemiddeld, <strong style="color:#cf2e2e">rood</strong> = ongunstig. De stippellijn is het Vlaamse gemiddelde.</p>
+
+      <div class="interp-titel" style="margin-top:14px">Bouwshift-context</div>
+      <p><strong>Verharding (36,8%, P98):</strong> Gent behoort tot de 2% meest verharde gemeenten van Vlaanderen. Het EU-gemiddelde voor harde oppervlakken bedraagt ~6%, het Vlaamse gemiddelde ~16,3%. Gent zit meer dan dubbel boven dit Vlaamse gemiddelde. Een hoge verhardingsgraad versterkt het stedelijk hitte-eilandeffect, belemmert waterinfiltratie en vergroot de kans op wateroverlast bij hevige neerslag — risico's die door klimaatverandering verder toenemen.</p>
+      <p><strong>Ruimtebeslag-risico (1.079 ha, P99):</strong> Dit zijn harde bestemmingen die juridisch zijn ingekleurd als bebouwbaar maar nog niet effectief ingenomen — de 'pijplijn' van potentiële toekomstige verharding. Als dit risicovolume volledig gerealiseerd zou worden, stijgt de verharding van Gent aanzienlijk verder. De bouwshift wil precies dit voorkomen: via planologische herbestemming wordt dit harde bestemmingenvolume omgezet naar zachte functies.</p>
+      <p><strong>Ruimtebeslagsnelheid (27,8 ha/jaar, P99):</strong> Gent neemt gemiddeld 27,8 hectare per jaar nieuw in aan bijkomend ruimtebeslag. Dit ritme is vrijwel onverenigbaar met de BRV-doelstelling van ruimteneutraliteit in 2040 en vereist een radicale omslag in het tempo van nieuwe innames.</p>
+      <p><strong>Minimale neutralisatie-opgave (737 ha, P99):</strong> Om ruimteneutraliteit te bereiken, moet Gent minimaal 737 ha harde bestemmingen omzetten naar zachte functies. Het gaat niet enkel om het stopzetten van nieuwe innames, maar om een actief reconversiebeleid: ontpitting, ontharding, herbestemming van onderbenutte bedrijventerreinen en woonreservegebieden.</p>
+    </div>
   </div>
 </div>
 
@@ -154,6 +177,16 @@
         <p class="chart-desc">Kernkansdichtheidschatting over alle 300 gemeenten</p>
       </div>
     </div>
+
+    <div class="interp">
+      <div class="interp-titel">Hoe lees je deze grafieken?</div>
+      <p>De curve is een <strong>kernkansdichtheidschatting (KDE)</strong>: een vloeiende benadering van hoe waarden verdeeld zijn over alle 300 Vlaamse gemeenten. Een hoge piek betekent dat veel gemeenten in dat waardebereik zitten. De <strong>blauwe band</strong> toont het interkwartielsbereik (Q1–Q3): de middelste 50% van gemeenten. De <strong>oranje lijn</strong> markeert waar Gent valt. De grijze stippellijn is het Vlaamse gemiddelde.</p>
+
+      <div class="interp-titel" style="margin-top:14px">Bouwshift-context</div>
+      <p>Beide verdelingen zijn sterk <strong>rechtsscheef</strong>: de grote massa Vlaamse gemeenten heeft een lage verhardingsgraad en een beperkt ruimtebeslag-risico. Het volume van de curve zit links geconcentreerd. Gent bevindt zich in de <strong>uiterste rechterstaart</strong> — een statistisch uitbijtergebied dat de uitzondering bevestigt, niet de regel.</p>
+      <p>Dit heeft een directe beleidsconclusie: generieke Vlaamse maatregelen voor de bouwshift zijn voor Gent onvoldoende. Een 'gemiddeld' Vlaams reductiepad vertrekt vanuit een andere startpositie dan die van Gent. De stad vereist een <strong>op maat gemaakt programma</strong> met specifieke instrumenten voor grootstedelijke reconversie, brownfieldhergebruik en systemische ontharding — maatregelen die voor landelijke gemeenten irrelevant zijn maar voor Gent cruciaal.</p>
+      <p>Dat het ruimtebeslag-risico van Gent (1.079 ha) ook in de uiterste staart zit, toont dat niet alleen de <em>bestaande</em> verharding extreem hoog is, maar ook de <em>toekomstige druk</em> — het juridisch gecreëerde harde bestemmingenvolume dat nog gerealiseerd kan worden.</p>
+    </div>
   </div>
 </div>
 
@@ -167,6 +200,16 @@
       <h3>Gemeentelijk reductietraject ruimtebeslag 2022–2040</h3>
       <p class="chart-desc">Toegestaan bijkomend ruimtebeslag voor Gent (m²/dag) conform het BRV-reductiepad · Bron: HOGENT Rapport 6</p>
       <div id="brv-chart"></div>
+
+      <div class="interp" style="margin-top:24px">
+        <div class="interp-titel">Hoe lees je deze grafiek?</div>
+        <p>De lijn toont het <strong>gemeentelijk quotum</strong> voor bijkomend ruimtebeslag van Gent (in m²/dag), conform het BRV-reductiepad. De x-as loopt van 2022 naar 2040; de y-as geeft het toegestaan volume. De stippellijnen tonen de BRV-referentiewaarden. De lijn animeert bij het laden van de pagina om het dalende traject te benadrukken.</p>
+
+        <div class="interp-titel" style="margin-top:14px">Bouwshift-context</div>
+        <p>Het BRV (Beleidsplan Ruimte Vlaanderen) legt een collectief doel op: <strong>van ~6 ha/dag in 2013–2015 naar 3 ha/dag in 2025 en 0 ha/dag in 2040</strong>. Dit Vlaamse quotum wordt proportioneel verdeeld over de 300 gemeenten op basis van historisch ruimtebeslag en gemeentelijke oppervlakte.</p>
+        <p>Voor Gent betekent ruimteneutraliteit in 2040 dat <strong>elke nieuwe vierkante meter verharding gecompenseerd moet worden door een gelijkwaardige ontharding elders in de gemeente</strong>. Gezien de historische innamesnelheid van 27,8 ha/jaar is dit een ingreep van historische omvang. Niet alleen vergunnings- en planningsprocessen moeten omgebogen worden — ook het juridische kader van harde bestemmingen uit de gewestplannen (jaren 1970–1990) moet actief ontmanteld worden.</p>
+        <p>Het 2025-mijlpaal is daarbij een eerste toets: haalt Gent het tussentijdse doel? De kloof tussen het historische ritme en het toegestane quotum in 2025 bedraagt meer dan een factor 10. Dit geeft aan dat de bouwshift voor Gent geen geleidelijke aanpassing is, maar een <strong>structurele breuk</strong> met decennia van uitbreidingsgericht ruimtegebruik.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -189,6 +232,16 @@
         <div id="treemap-eco"></div>
       </div>
     </div>
+
+    <div class="interp">
+      <div class="interp-titel">Hoe lees je deze grafieken?</div>
+      <p>Een treemap verdeelt een rechthoek proportioneel naar de grootte van categorieën. Elk vlak stelt een bestemmingszone of ecologische klasse voor; de <strong>oppervlakte van het vlak is evenredig aan het aandeel in hectare</strong>. Hover over een vlak voor exacte waarden en het procentuele aandeel. Kleinere vlakken (onder de labelgrens) tonen geen tekst, maar wel een tooltip.</p>
+
+      <div class="interp-titel" style="margin-top:14px">Bouwshift-context</div>
+      <p><strong>Bestemmingszones (links):</strong> Het totale ruimtebeslag-risico van 1.079 ha is verdeeld over harde bestemmingen die op het gewestplan of RUP zijn ingekleurd maar nog niet effectief ingenomen. Havengebied en woonreserves zijn de grootste componenten — beiden onder sterke ontwikkelingsdruk. Havenzones zijn bijzonder complex: ze zijn juridisch zwaar beschermd als economische bestemming, wat reconversie naar zachte functies bemoeilijkt.</p>
+      <p><strong>Ecologische kwaliteit (rechts):</strong> Een aanzienlijk deel van het risicovolume heeft <em>ondertussen</em> — net omdat het nog niet bebouwd is — hoge ecologische waarde gekregen. De 364 ha met hoge ecosysteemdienstwaarde, watergevoelig gebied en bossen zijn <strong>dubbel kwetsbaar</strong>: ze zijn juridisch vatbaar voor ontwikkeling, maar hebben tegelijkertijd een cruciale functie voor klimaatadaptatie, waterberging en biodiversiteit. Herbestemming van deze percelen levert een dubbele winst: minder toekomstige verharding én meer groene en blauwe infrastructuur in een sterk verharde stad.</p>
+      <p>De grootte van het donkerblauwe 'overig risico'-vlak toont dat er ook een aanzienlijk volume is zonder bijzondere ecologische waarde — gronden die eerder in aanmerking komen voor strategische verdichting of reconversie naar collectieve functies als alternatief voor verdere verharding.</p>
+    </div>
   </div>
 </div>
 
@@ -201,6 +254,16 @@
     <div class="chart-card" id="lollipop-chart">
       <h3>Percentielposities per indicator</h3>
       <p class="chart-desc">Horizontale lollipopgrafiek · Stippellijn = P50 (Vlaamse mediaan) · Kleur: groen = gunstig, rood = ongunstig</p>
+    </div>
+
+    <div class="interp interp-donker">
+      <div class="interp-titel">Hoe lees je deze grafiek?</div>
+      <p>Elke horizontale lijn (met punt) stelt één indicator voor. De <strong>positie op de x-as</strong> is het percentiel van Gent ten opzichte van alle 300 Vlaamse gemeenten: P50 = de mediaan, P99 = hogere waarde dan 99% van de gemeenten. Voor indicatoren waarbij <em>hogere waarden slechter zijn</em> (verharding, risico, snelheid), betekent rechts = ongunstig. Kleur duidt de beleidsrelevante positie aan: <strong style="color:#00d084">groen</strong> = gunstig (P≤25 voor 'hoger is slechter'), <strong style="color:#cf2e2e">rood</strong> = ongunstig (P≥75). De lollipops animeren vanuit P50 naar de werkelijke positie.</p>
+
+      <div class="interp-titel" style="margin-top:14px">Bouwshift-context</div>
+      <p>Het beeld is eenduidig: <strong>Gent scoort bijna universeel ongunstig op absolute maten</strong> — verharding, ruimtebeslag-risico, innamesnelheid, neutralisatie-opgave zitten allemaal in de P90–P99 zone. Dit bevestigt dat Gent een van de meest uitdagende profielen heeft in Vlaanderen voor de bouwshift-opgave.</p>
+      <p>De enige <strong style="color:#00d084">groene uitzondering</strong> is <em>verharding per inwoner</em> (P11 — gunstig). Gent heeft relatief weinig verharding per capita omdat het een uitzonderlijk hoge bevolkingsdichtheid heeft: de verharde oppervlakte wordt gedeeld door veel meer inwoners dan bij kleine, verspreide gemeenten. Dit is de kern van het bouwshift-debat voor steden: <strong>verdichting is ruimte-efficiënt per capita, maar vergroot de absolute druk op het ecosysteem</strong>.</p>
+      <p>Dit spanningsveld is beleidsmatig cruciaal. Beleid dat enkel naar per-capita maten kijkt, onderschat de cumulatieve ecologische impact van grootstedelijke verharding (hittestress, waterproblematiek, verlies aan biodiversiteit). Beleid dat enkel absoluut denkt, miskent de ruimtelijke efficiëntievoordelen van stedelijke compactheid tegenover verspreide bebouwing. De bouwshift voor steden zoals Gent vergt dus een <em>genuanceerd kader</em> dat beiden integreert.</p>
     </div>
   </div>
 </div>
@@ -228,6 +291,17 @@
         <h3>Minimale neutralisatie-opgave (ha)</h3>
         <p class="chart-desc">Vergelijking per stad</p>
       </div>
+    </div>
+
+    <div class="interp">
+      <div class="interp-titel">Hoe lees je deze grafieken?</div>
+      <p>Horizontale staafdiagrammen per indicator, gerangschikt van hoog naar laag. <strong>Gent is oranje</strong>, de overige steden blauw. De balklengte is evenredig aan de absolute waarde. Waarden animeren bij het laden. Hover voor exacte getallen.</p>
+
+      <div class="interp-titel" style="margin-top:14px">Bouwshift-context</div>
+      <p>De vergelijking met andere centrumsteden <strong>nuanceert én bevestigt</strong> het Gentse profiel. Ook Antwerpen kampt met hoge absolute waarden — maar Antwerpen heeft een grotere oppervlakte en bevolking. Gent springt er op meerdere dimensies uit, met name op verhardingsgraad en ruimtebeslagsnelheid.</p>
+      <p>Het verschil met kleinere centrumsteden als <strong>Hasselt en Kortrijk</strong> is significant. Dit weerspiegelt de combinatie van stedelijke schaal, historische industrialisering (zeehaven, zware industrie) en bevolkingsgroei. Hasselt en Kortrijk zijn ook groeiende steden, maar vertrekken vanuit een ander ruimtelijk profiel.</p>
+      <p>Steden als <strong>Leuven en Mechelen</strong>, die in sommige opzichten vergelijkbaar zijn met Gent maar lager scoren op beslagsnelheid en risico, bieden een beleidsmatig referentiepunt. Het verschil in ruimtebeslagsnelheid kan wijzen op een strikter vergunningsbeleid, meer actief grondbeleid of een eerder ingezette verdichtingsstrategie — aspecten die voor Gent leerrijk zijn in het kader van de bouwshift-implementatie.</p>
+      <p>De neutralisatie-opgave illustreert hoe het historische volume aan harde bestemmingen doorwerkt in de toekomstige planlast: hoe meer hard bestemmingenvolume een stad heeft gecreëerd, hoe meer ze moet compenseren om ruimteneutraal te worden. <strong>Gent heeft hier de zwaarste erfenis.</strong></p>
     </div>
   </div>
 </div>
