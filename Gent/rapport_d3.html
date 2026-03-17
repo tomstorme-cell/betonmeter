@@ -10,22 +10,22 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Montserrat', Arial, sans-serif; background: #f5f7fa; color: #0f1e30; overflow-x: hidden; }
+    body { font-family: 'Montserrat', Arial, sans-serif; background: #FAFAF8; color: #1C0F13; overflow-x: hidden; }
 
     /* NAV */
-    .nav { background: #0f1e30; padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+    .nav { background: #005344; padding: 16px 40px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
     .nav-logo { color: #fff; font-weight: 800; font-size: 1rem; }
-    .nav-logo span { color: #00d084; }
+    .nav-logo span { color: #8DC63F; }
     .nav a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.8rem; font-weight: 600; margin-left: 24px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .nav a:hover { color: #00d084; }
+    .nav a:hover { color: #8DC63F; }
 
     /* HERO */
-    .hero { background: linear-gradient(135deg, #0f1e30 0%, #1a3a5c 60%, #0f1e30 100%); color: #fff; padding: 72px 40px 56px; position: relative; overflow: hidden; }
+    .hero { background: linear-gradient(135deg, #005344 0%, #00441B 60%, #005344 100%); color: #fff; padding: 72px 40px 56px; position: relative; overflow: hidden; }
     .hero::before { content: ''; position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 28px 28px; }
     .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,208,132,0.12); border: 1px solid rgba(0,208,132,0.3); color: #00d084; padding: 6px 16px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(141,198,63,0.15); border: 1px solid rgba(141,198,63,0.4); color: #8DC63F; padding: 6px 16px; border-radius: 20px; font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
     .hero h1 { font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 900; line-height: 1.05; letter-spacing: -1px; margin-bottom: 10px; }
-    .hero h1 span { color: #00d084; }
+    .hero h1 span { color: #8DC63F; }
     .hero-sub { font-size: 1rem; color: rgba(255,255,255,0.65); margin-bottom: 40px; }
     .hero-kpi { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
     .kpi-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px; padding: 20px 18px; }
@@ -36,17 +36,17 @@
     /* SECTIES */
     .sectie { padding: 72px 40px; }
     .sectie-inner { max-width: 1100px; margin: 0 auto; }
-    .sectie-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #00d084; margin-bottom: 8px; }
-    .sectie-titel { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: #0f1e30; line-height: 1.15; margin-bottom: 8px; }
+    .sectie-tag { font-size: 0.68rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: #8DC63F; margin-bottom: 8px; }
+    .sectie-titel { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: #1C0F13; line-height: 1.15; margin-bottom: 8px; }
     .sectie-sub { font-size: 0.88rem; color: #64748b; line-height: 1.65; max-width: 680px; margin-bottom: 40px; }
-    .sectie-grijs { background: #eef2f7; }
-    .sectie-donker { background: #0f1e30; }
+    .sectie-grijs { background: #FDE4B6; }
+    .sectie-donker { background: #005344; }
     .sectie-donker .sectie-titel { color: #fff; }
     .sectie-donker .sectie-sub { color: rgba(255,255,255,0.55); }
 
     /* CHART CONTAINERS */
     .chart-card { background: #fff; border-radius: 14px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 28px 32px; margin-bottom: 24px; }
-    .chart-card h3 { font-size: 0.95rem; font-weight: 700; color: #0f1e30; margin-bottom: 4px; }
+    .chart-card h3 { font-size: 0.95rem; font-weight: 700; color: #1C0F13; margin-bottom: 4px; }
     .chart-card .chart-desc { font-size: 0.8rem; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
     .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
     @media (max-width: 860px) { .chart-row { grid-template-columns: 1fr; } }
@@ -60,13 +60,13 @@
 
     /* Tooltip */
     .d3-tooltip {
-      position: fixed; background: #0f1e30; color: #fff;
+      position: fixed; background: #005344; color: #fff;
       padding: 10px 14px; border-radius: 8px; font-size: 12px;
       pointer-events: none; z-index: 9999; max-width: 220px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.25); line-height: 1.5;
       display: none;
     }
-    .d3-tooltip strong { color: #00d084; display: block; margin-bottom: 3px; }
+    .d3-tooltip strong { color: #8DC63F; display: block; margin-bottom: 3px; }
 
     /* Legenda */
     .legend { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; color: #64748b; margin-top: 12px; }
@@ -74,14 +74,14 @@
     .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
 
     /* INTERPRETATIE BLOKKEN */
-    .interp { background: rgba(0,208,132,0.06); border-left: 3px solid #00d084; border-radius: 0 10px 10px 0; padding: 22px 26px; margin-top: 24px; }
-    .interp-titel { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #00d084; margin-bottom: 10px; }
+    .interp { background: rgba(141,198,63,0.08); border-left: 3px solid #8DC63F; border-radius: 0 10px 10px 0; padding: 22px 26px; margin-top: 24px; }
+    .interp-titel { font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #8DC63F; margin-bottom: 10px; }
     .interp p { font-size: 0.85rem; color: #334155; line-height: 1.75; margin-bottom: 10px; }
     .interp p:last-child { margin-bottom: 0; }
-    .interp strong { color: #0f1e30; font-weight: 700; }
+    .interp strong { color: #1C0F13; font-weight: 700; }
     .interp em { color: #64748b; font-style: normal; font-size: 0.82rem; }
-    .interp-donker { background: rgba(0,208,132,0.07); border-left-color: #00d084; }
-    .interp-donker .interp-titel { color: #00d084; }
+    .interp-donker { background: rgba(141,198,63,0.09); border-left-color: #8DC63F; }
+    .interp-donker .interp-titel { color: #8DC63F; }
     .interp-donker p { color: rgba(255,255,255,0.72); }
     .interp-donker strong { color: #fff; }
 
@@ -93,7 +93,7 @@
     .back-link:hover { background: rgba(255,255,255,0.2); color: #fff; }
 
     /* Footer */
-    .footer { background: #0f1e30; color: rgba(255,255,255,0.45); padding: 32px 40px; text-align: center; font-size: 0.78rem; line-height: 1.7; }
+    .footer { background: #005344; color: rgba(255,255,255,0.45); padding: 32px 40px; text-align: center; font-size: 0.78rem; line-height: 1.7; }
     .footer a { color: rgba(255,255,255,0.6); }
   </style>
 </head>
@@ -150,7 +150,7 @@
 
     <div class="interp">
       <div class="interp-titel">Hoe lees je deze grafieken?</div>
-      <p>Elk stipje is één Vlaamse gemeente. De <strong>horizontale positie</strong> geeft de waarde op de indicator. De verticale spreiding is puur visueel (force-layout om overlap te vermijden) en heeft geen inhoudelijke betekenis. Gent is oranje gemarkeerd. Kleur van de andere stipjes: <strong style="color:#00d084">groen</strong> = gunstig, <strong style="color:#f7c948">geel</strong> = gemiddeld, <strong style="color:#cf2e2e">rood</strong> = ongunstig. De stippellijn is het Vlaamse gemiddelde.</p>
+      <p>Elk stipje is één Vlaamse gemeente. De <strong>horizontale positie</strong> geeft de waarde op de indicator. De verticale spreiding is puur visueel (force-layout om overlap te vermijden) en heeft geen inhoudelijke betekenis. Gent is oranje gemarkeerd. Kleur van de andere stipjes: <strong style="color:#8DC63F">groen</strong> = gunstig, <strong style="color:#f7c948">geel</strong> = gemiddeld, <strong style="color:#D73027">rood</strong> = ongunstig. De stippellijn is het Vlaamse gemiddelde.</p>
 
       <div class="interp-titel" style="margin-top:14px">Bouwshift-context</div>
       <p><strong>Verharding (36,8%, P98):</strong> Gent behoort tot de 2% meest verharde gemeenten van Vlaanderen. Het EU-gemiddelde voor harde oppervlakken bedraagt ~6%, het Vlaamse gemiddelde ~16,3%. Gent zit meer dan dubbel boven dit Vlaamse gemiddelde. Een hoge verhardingsgraad versterkt het stedelijk hitte-eilandeffect, belemmert waterinfiltratie en vergroot de kans op wateroverlast bij hevige neerslag — risico's die door klimaatverandering verder toenemen.</p>
@@ -258,11 +258,11 @@
 
     <div class="interp interp-donker">
       <div class="interp-titel">Hoe lees je deze grafiek?</div>
-      <p>Elke horizontale lijn (met punt) stelt één indicator voor. De <strong>positie op de x-as</strong> is het percentiel van Gent ten opzichte van alle 300 Vlaamse gemeenten: P50 = de mediaan, P99 = hogere waarde dan 99% van de gemeenten. Voor indicatoren waarbij <em>hogere waarden slechter zijn</em> (verharding, risico, snelheid), betekent rechts = ongunstig. Kleur duidt de beleidsrelevante positie aan: <strong style="color:#00d084">groen</strong> = gunstig (P≤25 voor 'hoger is slechter'), <strong style="color:#cf2e2e">rood</strong> = ongunstig (P≥75). De lollipops animeren vanuit P50 naar de werkelijke positie.</p>
+      <p>Elke horizontale lijn (met punt) stelt één indicator voor. De <strong>positie op de x-as</strong> is het percentiel van Gent ten opzichte van alle 300 Vlaamse gemeenten: P50 = de mediaan, P99 = hogere waarde dan 99% van de gemeenten. Voor indicatoren waarbij <em>hogere waarden slechter zijn</em> (verharding, risico, snelheid), betekent rechts = ongunstig. Kleur duidt de beleidsrelevante positie aan: <strong style="color:#8DC63F">groen</strong> = gunstig (P≤25 voor 'hoger is slechter'), <strong style="color:#D73027">rood</strong> = ongunstig (P≥75). De lollipops animeren vanuit P50 naar de werkelijke positie.</p>
 
       <div class="interp-titel" style="margin-top:14px">Bouwshift-context</div>
       <p>Het beeld is eenduidig: <strong>Gent scoort bijna universeel ongunstig op absolute maten</strong> — verharding, ruimtebeslag-risico, innamesnelheid, neutralisatie-opgave zitten allemaal in de P90–P99 zone. Dit bevestigt dat Gent een van de meest uitdagende profielen heeft in Vlaanderen voor de bouwshift-opgave.</p>
-      <p>De enige <strong style="color:#00d084">groene uitzondering</strong> is <em>verharding per inwoner</em> (P11 — gunstig). Gent heeft relatief weinig verharding per capita omdat het een uitzonderlijk hoge bevolkingsdichtheid heeft: de verharde oppervlakte wordt gedeeld door veel meer inwoners dan bij kleine, verspreide gemeenten. Dit is de kern van het bouwshift-debat voor steden: <strong>verdichting is ruimte-efficiënt per capita, maar vergroot de absolute druk op het ecosysteem</strong>.</p>
+      <p>De enige <strong style="color:#8DC63F">groene uitzondering</strong> is <em>verharding per inwoner</em> (P11 — gunstig). Gent heeft relatief weinig verharding per capita omdat het een uitzonderlijk hoge bevolkingsdichtheid heeft: de verharde oppervlakte wordt gedeeld door veel meer inwoners dan bij kleine, verspreide gemeenten. Dit is de kern van het bouwshift-debat voor steden: <strong>verdichting is ruimte-efficiënt per capita, maar vergroot de absolute druk op het ecosysteem</strong>.</p>
       <p>Dit spanningsveld is beleidsmatig cruciaal. Beleid dat enkel naar per-capita maten kijkt, onderschat de cumulatieve ecologische impact van grootstedelijke verharding (hittestress, waterproblematiek, verlies aan biodiversiteit). Beleid dat enkel absoluut denkt, miskent de ruimtelijke efficiëntievoordelen van stedelijke compactheid tegenover verspreide bebouwing. De bouwshift voor steden zoals Gent vergt dus een <em>genuanceerd kader</em> dat beiden integreert.</p>
     </div>
   </div>
@@ -325,11 +325,19 @@ const VERGELIJK   = [{"naam":"Gent","verh_perc":36.760506,"rbr_opp":1079.12,"jaa
 const INDICATORS  = [{"key":"verh_opp","label":"Oppervlakte verharding 2022","unit":"ha","category":"BETONTOESTAND","subcategory":"Verharding","higherIsBad":true},{"key":"verh_perc","label":"Aandeel verharding 2022","unit":"%","category":"BETONTOESTAND","subcategory":"Verharding","higherIsBad":true},{"key":"verh_percap","label":"Verharding per inwoner 2022","unit":"m²/inwoner","category":"BETONTOESTAND","subcategory":"Verharding","higherIsBad":true},{"key":"verh_perc_hb","label":"Aandeel verharding in harde bestemmingen 2022","unit":"%","category":"BETONTOESTAND","subcategory":"Verharding","higherIsBad":true},{"key":"verh_perc_zb","label":"Aandeel verharding in zachte bestemmingen 2022","unit":"%","category":"BETONTOESTAND","subcategory":"Verharding","higherIsBad":true},{"key":"rbs_perc_zb","label":"Aandeel ruimtebeslag in zachte bestemmingen 2022","unit":"%","category":"BETONTOESTAND","subcategory":"Ruimtebeslag","higherIsBad":true},{"key":"jaar_rbsnel_13","label":"Jaarlijkse ruimtebeslagsnelheid 2013–2022","unit":"ha/jaar","category":"BETONEVOLUTIE","subcategory":"Ruimtebeslag","higherIsBad":true},{"key":"jaar_rbsnel_19","label":"Jaarlijkse ruimtebeslagsnelheid 2019–2022","unit":"ha/jaar","category":"BETONEVOLUTIE","subcategory":"Ruimtebeslag","higherIsBad":true},{"key":"rel_rbsnel","label":"Relatieve ruimtebeslagsnelheid 2013–2022","unit":"m²/inwoner/jaar","category":"BETONEVOLUTIE","subcategory":"Ruimtebeslag","higherIsBad":true},{"key":"rbr_opp","label":"Ruimtebeslag-risico 2022","unit":"ha","category":"BETONRISICO","subcategory":"Ruimtebeslag-risico","higherIsBad":true},{"key":"h_rbr_opp","label":"Hoger Ruimtebeslag-risico 2022","unit":"ha","category":"BETONRISICO","subcategory":"Ruimtebeslag-risico","higherIsBad":true},{"key":"l_rbr_opp","label":"Lager Ruimtebeslag-risico 2022","unit":"ha","category":"BETONRISICO","subcategory":"Ruimtebeslag-risico","higherIsBad":true},{"key":"rbr_opp_wug","label":"Ruimtebeslag-risico woonreservegebieden 2022","unit":"ha","category":"BETONRISICO","subcategory":"Ruimtebeslag-risico","higherIsBad":true},{"key":"rbr_woon","label":"RBR woonzones","unit":"ha","category":"BETONRISICO","subcategory":"RBR per zone","higherIsBad":true},{"key":"rbr_recr","label":"RBR recreatiezones","unit":"ha","category":"BETONRISICO","subcategory":"RBR per zone","higherIsBad":true},{"key":"rbr_groen","label":"RBR overige groenzones","unit":"ha","category":"BETONRISICO","subcategory":"RBR per zone","higherIsBad":true},{"key":"rbr_ind","label":"RBR industriezones","unit":"ha","category":"BETONRISICO","subcategory":"RBR per zone","higherIsBad":true},{"key":"rbr_gem","label":"RBR gemeenschapszones","unit":"ha","category":"BETONRISICO","subcategory":"RBR per zone","higherIsBad":true},{"key":"rbr_ov","label":"RBR overige zones","unit":"ha","category":"BETONRISICO","subcategory":"RBR per zone","higherIsBad":true},{"key":"rbr_haven","label":"RBR havenzones","unit":"ha","category":"BETONRISICO","subcategory":"RBR per zone","higherIsBad":true},{"key":"rbr_eco","label":"Hoge ecosysteemdienstwaarde onder RBR 2022","unit":"ha","category":"BETONRISICO","subcategory":"Samenstelling RBR","higherIsBad":true},{"key":"rbr_water","label":"Watergevoelig gebied onder RBR 2022","unit":"ha","category":"BETONRISICO","subcategory":"Samenstelling RBR","higherIsBad":true},{"key":"rbr_bos","label":"Bossen onder RBR 2022","unit":"ha","category":"BETONRISICO","subcategory":"Samenstelling RBR","higherIsBad":true},{"key":"gem_quot","label":"Gemeentelijk quotum 2022–2040","unit":"ha","category":"REDUCTIEOPGAVE","subcategory":"Reductieopgave ruimtebeslag","higherIsBad":false},{"key":"min_neutr","label":"Minimale neutralisatie-opgave 2022","unit":"ha","category":"REDUCTIEOPGAVE","subcategory":"Reductieopgave ruimtebeslag","higherIsBad":true},{"key":"h_rbr_uo","label":"Prioritaire neutralisatie-opgave hoger risico 2020","unit":"ha","category":"REDUCTIEOPGAVE","subcategory":"Reductieopgave ruimtebeslag","higherIsBad":true},{"key":"l_rbr_uo","label":"Prioritaire neutralisatie-opgave lager risico 2020","unit":"ha","category":"REDUCTIEOPGAVE","subcategory":"Reductieopgave ruimtebeslag","higherIsBad":true},{"key":"tot_onth","label":"Totale onthardingsopgave 2022","unit":"ha","category":"REDUCTIEOPGAVE","subcategory":"Reductieopgave verharding","higherIsBad":true},{"key":"verh_neutr_hb","label":"Onthardingsopgave harde bestemmingen 2022","unit":"ha","category":"REDUCTIEOPGAVE","subcategory":"Reductieopgave verharding","higherIsBad":true},{"key":"onth_zb","label":"Onthardingsdoelstelling zachte bestemmingen 2022","unit":"ha","category":"REDUCTIEOPGAVE","subcategory":"Reductieopgave verharding","higherIsBad":true},{"key":"onth_opgave_22","label":"Onthardingsopgave scenario 2022","unit":"ha","category":"REDUCTIEOPGAVE","subcategory":"Reductieopgave verharding","higherIsBad":true}];
 
 const PAL = {
-  navy: '#0f1e30', green: '#00d084', orange: '#ff6900',
-  purple: '#9b51e0', red: '#cf2e2e', cyan: '#0693e3',
-  yellow: '#f7c948', gray: '#94a3b8',
-  gent: '#ff6900',
-  gunstig: '#00d084', matig: '#f7c948', ongunstig: '#cf2e2e', neutral: '#cbd5e1',
+  navy:      '#005344',  // Brunswick Green
+  green:     '#8DC63F',  // Yellow Green
+  orange:    '#F6AE2D',  // Hunyadi Yellow
+  purple:    '#86BBD8',  // Carolina Blue
+  red:       '#D73027',  // diverging red
+  cyan:      '#86BBD8',  // Carolina Blue
+  yellow:    '#F6AE2D',  // Hunyadi Yellow
+  gray:      '#94a3b8',
+  gent:      '#F6AE2D',  // Gent highlight – Hunyadi Yellow
+  gunstig:   '#8DC63F',  // Yellow Green
+  matig:     '#86BBD8',  // Carolina Blue (neutrale middenpositie)
+  ongunstig: '#D73027',  // rood
+  neutral:   '#cbd5e1',
 };
 
 const tooltip = document.getElementById('tooltip');
@@ -531,22 +539,22 @@ function drawKDE(containerId, key, unit) {
     g.append('rect')
       .attr('x', x(q1)).attr('width', x(q3) - x(q1))
       .attr('y', 0).attr('height', ih)
-      .attr('fill', '#e8f4fd').attr('opacity', 0.8);
+      .attr('fill', '#FFFFBF').attr('opacity', 0.9);
     g.append('text').attr('x', x(q1) + 4).attr('y', ih - 4)
-      .attr('fill', '#0693e3').attr('font-size', 9).text('Q1');
+      .attr('fill', '#86BBD8').attr('font-size', 9).text('Q1');
     g.append('text').attr('x', x(q3) - 18).attr('y', ih - 4)
-      .attr('fill', '#0693e3').attr('font-size', 9).text('Q3');
+      .attr('fill', '#86BBD8').attr('font-size', 9).text('Q3');
   }
 
   // Density area
   const area = d3.area().x(d => x(d[0])).y0(ih).y1(d => y(d[1])).curve(d3.curveBasis);
   g.append('path').datum(density)
-    .attr('fill', '#0693e3').attr('opacity', 0.15)
+    .attr('fill', '#86BBD8').attr('opacity', 0.15)
     .attr('d', area);
 
   const line = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveBasis);
   g.append('path').datum(density)
-    .attr('fill', 'none').attr('stroke', '#0693e3').attr('stroke-width', 2)
+    .attr('fill', 'none').attr('stroke', '#86BBD8').attr('stroke-width', 2)
     .attr('d', line);
 
   // Mean line
@@ -609,8 +617,8 @@ function drawKDE(containerId, key, unit) {
 
   // BRV referentielijnen
   const refs = [
-    { y: 30000, label: 'BRV-doel 2025: 30.000 m²/dag', col: '#ff6900', dash: '6,3' },
-    { y: 0, label: 'Ruimteneutraliteit 2040: 0 m²/dag', col: '#00d084', dash: '6,3' },
+    { y: 30000, label: 'BRV-doel 2025: 30.000 m²/dag', col: '#F6AE2D', dash: '6,3' },
+    { y: 0, label: 'Ruimteneutraliteit 2040: 0 m²/dag', col: '#1A9850', dash: '6,3' },
   ];
   refs.forEach(r => {
     if (y(r.y) >= 0 && y(r.y) <= ih) {
@@ -632,13 +640,13 @@ function drawKDE(containerId, key, unit) {
     .x(d => x(d.jaar)).y0(ih).y1(d => y(d.val))
     .curve(d3.curveMonotoneX);
   g.append('path').datum(rawData)
-    .attr('fill', '#0693e3').attr('opacity', 0.08)
+    .attr('fill', '#86BBD8').attr('opacity', 0.08)
     .attr('d', area);
 
   // Line – animated
   const lineGen = d3.line().x(d => x(d.jaar)).y(d => y(d.val)).curve(d3.curveMonotoneX);
   const path = g.append('path').datum(rawData)
-    .attr('fill', 'none').attr('stroke', '#0693e3')
+    .attr('fill', 'none').attr('stroke', '#86BBD8')
     .attr('stroke-width', 3).attr('d', lineGen);
 
   const totalLength = path.node().getTotalLength();
@@ -653,7 +661,7 @@ function drawKDE(containerId, key, unit) {
     .data(rawData)
     .join('circle').attr('class', 'node')
     .attr('cx', d => x(d.jaar)).attr('cy', d => y(d.val))
-    .attr('r', 6).attr('fill', '#fff').attr('stroke', '#0693e3').attr('stroke-width', 2.5)
+    .attr('r', 6).attr('fill', '#fff').attr('stroke', '#86BBD8').attr('stroke-width', 2.5)
     .on('mouseover', (e, d) => showTip(e,
       `<strong>${milestoneLabels[d.jaar] || d.jaar}</strong>${fmtNL(d.val, 0)} m²/dag`))
     .on('mousemove', moveTip).on('mouseout', hideTip);
@@ -661,7 +669,7 @@ function drawKDE(containerId, key, unit) {
   rawData.forEach(d => {
     g.append('text')
       .attr('x', x(d.jaar)).attr('y', y(d.val) - 12)
-      .attr('text-anchor', 'middle').attr('fill', '#0f1e30')
+      .attr('text-anchor', 'middle').attr('fill', '#005344')
       .attr('font-size', 10).attr('font-weight', 700)
       .text(fmtNL(d.val, 0));
   });
@@ -731,7 +739,7 @@ drawTreemap('treemap-zones', [
   { label: 'Recreatiezones',    value: GENT.ind.rbr_recr  || 0 },
   { label: 'Overige zones',     value: GENT.ind.rbr_ov    || 0 },
 ].filter(d => d.value > 0),
-  i => [PAL.navy,'#1a3a5c','#2e6b9e',PAL.cyan,PAL.purple,'#7eb8d4','#475569'][i]);
+  i => [PAL.navy,'#00441B','#1A9850',PAL.cyan,'#8DC63F','#86BBD8','#475569'][i]);
 
 // Ecologisch treemap
 drawTreemap('treemap-eco', [
@@ -740,7 +748,7 @@ drawTreemap('treemap-eco', [
   { label: 'Bossen',                value: GENT.ind.rbr_bos   || 0 },
   { label: 'Overig risico',         value: Math.max(0, (GENT.ind.rbr_opp || 0) - (GENT.ind.rbr_eco||0) - (GENT.ind.rbr_water||0) - (GENT.ind.rbr_bos||0)) },
 ].filter(d => d.value > 0),
-  i => [PAL.purple, PAL.cyan, PAL.green, '#e2e8f0'][i]);
+  i => ['#1A9850', PAL.cyan, PAL.green, '#e2e8f0'][i]);
 
 // ╔══════════════════════════════════════════════════════════════════════════╗
 // ║  LOLLIPOP – PERCENTIEL RANKING                                          ║
@@ -859,7 +867,7 @@ function drawStadBar(containerId, key, unit) {
     .attr('x', 0).attr('width', 0)
     .attr('y', d => y(d.naam))
     .attr('height', y.bandwidth())
-    .attr('fill', d => d.naam === 'Gent' ? PAL.gent : '#7eb8d4')
+    .attr('fill', d => d.naam === 'Gent' ? PAL.gent : '#86BBD8')
     .attr('rx', 3)
     .on('mouseover', (e, d) => showTip(e,
       `<strong>${d.naam}</strong>${fmtNL(d[key], 1)} ${unit}`))
